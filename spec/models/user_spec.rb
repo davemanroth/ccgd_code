@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "is valid with username, firstname, lastname, phone, and email"
+  it "is invalid with a duplicate email address"
 end
