@@ -9,6 +9,7 @@
 config/database.yml
 config/secrets.yml
 .*.swp
+fiddling
 
 # Ignore all logfiles and tempfiles.
 /log/*
