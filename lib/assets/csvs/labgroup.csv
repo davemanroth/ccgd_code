@@ -1,0 +1,203 @@
+name,code,location_id
+CCGD Administration,CCGD,1
+CCGD Genotyping,CCGD,1
+Freedman Lab,FRDMAN,3
+Garraway Lab,GARRWY,2
+Golub Broad Lab,GOLBBI,4
+Golub DFCI Lab,GOLUB,2
+Hahn Lab,HAHN,2
+Loda Lab,LODA,2
+Kinome,MRSNBI,4
+Meyerson DFCI Lab,MYRSON,2
+Polyak Lab,POLYAK,2
+ramesh shivdasani,SHIV,3
+Janne Lab,JANNE,5
+Rani George,GEORGE,6
+Thomas Roberts,RBERTS,7
+Thomas Look,LOOK,8
+Jerome Ritz,RITZ,10
+Matthew Kulke,KULKE,11
+Margaret Shipp,SHIPP,12
+Philip Kantoff,KNTOFF,13
+Robert Ross,ROSS,13
+Myles Brown,BROWN,14
+Jennifer R. Brown,JRBRWN,15
+Rollins,ROLLNS,16
+Stiles Lab,STILES,21
+Chirieac,CHIRI,22
+CCGD Pilot,CCGD,1
+Microarray Core,CHPLAB,23
+Sarcoma Lab,DUAN,24
+Ebert Lab,EBERT,22
+Gilliland,GLLLND,22
+Hezel,HEZEL,24
+Kim,KIM,25
+Henske,HENSKE,22
+Chin Lab,CHIN,26
+Hornicek,HRNCEK,27
+Fletcher lab,FLTCHR,28
+Ng,NG,30
+Ribas,RIBAS,31
+Christopher Walsh,WALSH,32
+BIACS,BIACS,33
+Ligon Lab,LIGON,35
+Monahan,MONHAN,36
+Chung Lab,CHUNG,40
+Koon lab,KOON,42
+Infinity,INFI,43
+Infinity,INFI,43
+Ovarian Cancer Genomics,LEVEL3,45
+Rosenberg,RSNBRG,13
+Tenen Lab,TENEN,46
+Segal lab,Segallab,47
+4th floor,Kinome,48
+Cancer Program,GOLUB,2
+BJ Rollins,BJR grou,50
+Armstrong Lab,SAA,51
+HIV Therapeutics,kuritzke,52
+Garraway Lab,Garraway,53
+genetics,Kwiatkow,54
+Thyroid Cancer,214741,55
+Panc Adeno Project, Ferrone Lab,Ferrone,56
+Fredenburgh Lab,FREDEN,57
+Kwiatkowski Lab,RB06005A,58
+15th floor,Meyerson,59
+Medical Oncology - 8th floor, Ghobrial lab,123456,60
+Ghobrial lab,1234567,60
+Oncology,ONC,62
+CAMD,CAMD,22
+Thyroid Surgery Lab Thier 603 Parangi Lab,1151983,63
+ORF and RNAi work,HahnLab,64
+Kirsch Lab, ,65
+Dana 15,Garraway,53
+Bowtell Lab,LEVEL3,45
+Cancer,zonlab,67
+Dyson Lab,NDYSON,68
+DePinho lab,depinho1,69
+Mayer 4,DeCaprio,70
+Kuritzkes Lab,87654321,71
+Lab of Benjamin L. Ebert,ebert201,72
+Pathology Dpt.,EHL305,73
+Ribas Lab,31262,74
+Translational Research,Fleming,75
+Chin-Lee Wu,Wu Lab,76
+Pediatric Oncology,KSteg,77
+Cancer cytogenetics,JSOVCA,78
+Nanomed,Nanomed,79
+Antoni Ribas,RIBAS,31
+Mark Kieran,Kieran,6
+Ligon Lab,Ligon208,83
+Leiomyosarcoma,EHL305,73
+15th floor,prostate,84
+Infinity,Infinity,85
+Heme Malignancies,BrownCLL,86
+Cancer Program,BSP,90
+CCCB,CCCB,91
+DeCaprio,DcCaprio,70
+Gastroenterology,Kokkotou,92
+Meyerson Lab,Meyerson,59
+Cancer Bio,YUG310J,94
+CMOP,CMOP,35
+Choueiri-Signoretti,Choueiri,22
+Swanson Research,Swanson,95
+Cancer Biology,unknown,96
+Saurin Lab,1234,22
+Wong,7644,97
+Pedi Onc,unknown,96
+Beroukhim Lab,rameen,100
+Pedatric Oncology,snf5,101
+Cantley Lab,NA,102
+Makrigiorgos,coldpcr,103
+AML,1,8
+Jeff Krane, Head and Neck Pathology,11911,22
+Breast Oncology,none,107
+Shipp Lab,Shipp La,108
+Santagata Lab,103964,110
+Hematologic Neoplasia,D512WEIN,111
+GI Genomics,Hsu_lab,112
+Hsu lab,hsu,113
+medulloblastoma,Segallab,47
+OBSGYN,GYNONCOL,123
+Choueiri-Signoretti,12345,124
+Wagers Lab,Jos630 ,125
+HIM346,MITSIAD,126
+C-NExT,Ligonext,127
+Weinstock lab,weinstoc,128
+Meyerson,??,131
+Mitsiades lab,Mitsiade,132
+BIDMC Cancer Center Cantley,none,107
+Thyroid Cancer Translational,212354,134
+Conrad,WRN-4-40,135
+Human Thyroid Cancers Translational Research,CNUCERA,136
+Gyn Rad Onc,GynRO,137
+Choueiri-Signoretti,522,138
+JF5,DANDREA,139
+Belfer,Belfer,140
+Bass Laboratory,Bass,66
+Shipp lab,lymphoma,142
+Keith Ligon Lab @ DFCI,1234567,60
+Ghobrial Lab,HUM237,144
+Keith Ligon's Lab,1234567,60
+Division of Gynecologic Oncology,RSBLAB,146
+Barbie Lab,dana819,147
+none,123,148
+Beckman,Beckman,149
+Garraway Lab,LAG,150
+Thyroid,WASS,151
+Bass Lab DFCI/MCO Dana 8,Bass,66
+Bradner Lab,BRADNER,153
+Beroukhim Lab,Berouk,154
+Genomics,9617589,155
+Gyn Oncology,LIU,156
+Meyerson Cancer Program Lab,1111,157
+Bioinformatics,000,158
+PedOnc,PellmanM,159
+MPS,BTP,160
+Haining Lab,Haining,161
+Cancer Program, Broad,unknown,96
+T-ALL,aglab,163
+Long Lab Group,CFCE,164
+Sorger Lab Group,plx4032,165
+CMOP,JF208,166
+Kaelin,Kaelin,167
+Medical Oncology,........,2
+Stem Cell Group,BGTDSCL,168
+Hahn Lab,HahnLab,64
+Stegmaier 6th Floor Group,STEGLAB,170
+Kidney Cancer,GU Oncol,171
+Biostatistics and Computational Biology DFCI Group,BCB,91
+Polyak Lab Group,POLYAK,2
+Brown PDX Group,BROWN,14
+15th floor,HAHN,2
+Medical Oncology,Ghobrial,177
+Pediatric Oncology,76325281,178
+Griffin, J,Griffin,179
+Bladder Cancer Center,40888,180
+Meyerson Lab Group,Meyerson,59
+Joaquim Bellmunt,40888,180
+Amatruda lab group,UTAMAT,182
+Daley,Daley,183
+Collaboration with Weinstock Lab,002a,184
+Dana15,HahnLab,64
+Med Onc - Hematologic Malignancies,TBD,186
+Celebi,Celebi,187
+GlenDranoff,524,188
+Weinstock lab,510B,128
+Medical Oncology,HER2,189
+Chin Lab Group,Chinlab1,190
+Department for Gynecologic Oncology,""GynOnc_,191
+Beroukhim Lab Group ,N/A,192
+Lane Lab Group,Lane,97
+Cancer Biology,N/A,192
+D'Andrea Lab Genomics,D'Andrea,195
+Egles Group,LIMCR,196
+Gutierrez Lab,aglab,163
+Target Discovery,Belfer,140
+tbd,TBD,186
+PTCL,D512,200
+Blank Lab Group,cncmaf,201
+GYN mesenchymal tumors group,BHMNBQ,203
+BWH Hematology,EbertLab,204
+CMOP,LIGON,35
+Ped Onc 6th floor,PedOnc,206
+CFCE,CFCE,164

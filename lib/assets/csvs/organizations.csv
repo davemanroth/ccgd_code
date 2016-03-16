@@ -1,0 +1,49 @@
+name,phone,email,address_id
+Dana-Farber Cancer Institute,,,1
+Broad Institute,,,2
+Massachusetts Eye and Ear Infirmary,617 573 3367,inetwebmaster@meei.harvard.edu,6
+N-Of-One,617 669 1706,jkinoshita@n-of-one.com,9
+UCLA,3108259111,somwebmaster@mednet.ucla.edu,11
+Novartis NIBR,6178718000,nibr@novartis.com,13
+Case Western Reserve University,,Henry.Koon@UHhospitals.org,18
+Peter MacCallum Cancer Centre,NULL,NULL,21
+BIDMC,NULL,NULL,75
+Brigham and Women's Hospital,NULL,NULL,34
+Samsung Medical Center,NULL,NULL,29
+Massachusetts General Hospital,NULL,NULL,5
+Duke University Medical Center,NULL,NULL,31
+Partners Healthcare-Virology,NULL,NULL,34
+NYU School of Medicine,NULL,NULL,36
+Children's Hospital Boston,NULL,NULL,38
+Queen's University,NULL,NULL,39
+Infinity Pharmaceuticals,NULL,NULL,44
+Harvard University,NULL,NULL,75
+Sanofi-Aventis,NULL,NULL,49
+DFCI /HCC,NULL,NULL,12
+Duke University,NULL,NULL,57
+Center for Novel Exp Therapeutics,NULL,NULL,70
+Beth Israel Deaconess Medical Center Harvard Medical School,NULL,NULL,76
+DFCI,NULL,NULL,77
+Dana Farber Cancer Institute,NULL,NULL,78
+BWH,NULL,NULL,82
+Beckman Coulter,NULL,NULL,84
+Hospital For Sick CHildren,NULL,NULL,86
+DFCI/Harvard,NULL,NULL,1
+The Broad Institute of Harvard and MIT,NULL,NULL,2
+Janssen Pharmaceutica,NULL,NULL,90
+Boston Children's Hospital,NULL,NULL,91
+Harvard Medical School,NULL,NULL,92
+Health Canada,NULL,NULL,93
+DFCI/Broad/BCH,NULL,NULL,94
+Dana Farber,NULL,NULL,99
+University of Texas Southwestern Medical Center,NULL,NULL,102
+University of Munich,NULL,NULL,104
+Mount Sinai,NULL,NULL,105
+BIDMC, Harvard Medical School,NULL,NULL,75
+Kliniken Essen-Mitte,NULL,NULL,106
+DFCI / BWH,NULL,NULL,107
+Salzburg Cancer Research Institute,NULL,NULL,109
+Lady Davis Institute,NULL,NULL,112
+BWH Pathology,NULL,NULL,113
+DFCI/BWH,NULL,NULL,114
+DFCI-MO,NULL,NULL,77
