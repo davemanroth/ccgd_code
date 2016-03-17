@@ -25,3 +25,12 @@ File.open( File.join(path, 'addresses.csv'), 'r') do |file|
     Address.create!(street: street, city: city, country: country, state_id: state_id)
   end
 end
+
+# Seeding Location data
+Location.delete_all
+File.open( File.join(path, 'locations.csv'), 'r') do |file|
+  file.read.each_line do |location|
+    building, room, address_id = location.chomp.split(',')
+    Location.create!(building: building, room: room, address_id: address_id)
+  end
+end
