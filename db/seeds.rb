@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 path = File.join(Rails.root, 'app', 'csvs')
+
 # Seeding States data
 State.delete_all
-
 File.open( File.join(path, 'states.csv'), 'r') do |file|
   file.read.each_line do |state|
     name, code = state.chomp.split(',')
@@ -32,5 +32,23 @@ File.open( File.join(path, 'locations.csv'), 'r') do |file|
   file.read.each_line do |location|
     building, room, address_id = location.chomp.split(',')
     Location.create!(building: building, room: room, address_id: address_id)
+  end
+end
+
+# Seeding Organization data
+Organization.delete_all
+File.open( File.join(path, 'organizations.csv'), 'r') do |file|
+  file.read.each_line do |org|
+    name, phone, email, address_id = org.chomp.split(',')
+    Organization.create!(name: name, phone: phone, email: email, address_id: address_id)
+  end
+end
+
+# Seeding LabGroup data
+LabGroup.delete_all
+File.open( File.join(path, 'labgroups.csv'), 'r') do |file|
+  file.read.each_line do |labgroup|
+    name, code, location_id = labgroup.chomp.split(',')
+    LabGroup.create!(name: name, code: code, location_id: location_id)
   end
 end
