@@ -51,3 +51,12 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+# Configure shoulda-matchers for association testing
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    # Ensure matchers work with all Rails components
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
