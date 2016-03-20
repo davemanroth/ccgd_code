@@ -52,3 +52,23 @@ File.open( File.join(path, 'labgroups.csv'), 'r') do |file|
     LabGroup.create!(name: name, code: code, location_id: location_id)
   end
 end
+
+# Seeding User data
+User.delete_all
+File.open( File.join(path, 'users.csv'), 'r') do |file|
+  file.read.each_line do |user|
+    username, firstname, lastname, email, phone, password, org_id, loc_id, status = user.chomp.split(',')
+    User.create!(
+      username: username, 
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      phone: phone,
+      password: password,
+      password_confirmation: password,
+      organization_id: org_id,
+      location_id: loc_id,
+      status: status
+    )
+  end
+end

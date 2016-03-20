@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :location do
-    building Faker::Company.name
-    room Faker::Address.building_number
+    building { Faker::Company.name }
+    room { Faker::Address.building_number }
     address_id 12
   end
 end
