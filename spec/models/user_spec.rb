@@ -62,14 +62,18 @@ RSpec.describe User, :type => :model do
     expect(user).to be_invalid
   end
 
-  /
-  it "belongs to the Address model" do
-    expect(user).to belong_to(:address)
+  it "belongs to the Location model" do
+    expect(user).to belong_to(:location)
   end
 
-  it "is associated with many lab_groups" do
-    expect(user).to have_many(:lab_groups)
+  it "belongs to the Organization  model" do
+    expect(user).to belong_to(:organization)
   end
+
+  it "can have many labgroups" do
+    expect(user).to have_and_belong_to_many(:lab_groups)
+  end
+  /
 /
 
 end
