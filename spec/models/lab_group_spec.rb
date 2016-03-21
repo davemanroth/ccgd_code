@@ -7,13 +7,13 @@ RSpec.describe LabGroup, :type => :model do
     expect(labgroup).to be_valid
   end
 
-  it "is invalid without a name" do
-    labgroup.name = ''
-    expect(labgroup).to be_invalid
+  it "is valid without a code" do
+    labgroup.code = ''
+    expect(labgroup).to be_valid
   end
 
-  it "is invalid without a code" do
-    labgroup.code = ''
+  it "is invalid without a name" do
+    labgroup.name = ''
     expect(labgroup).to be_invalid
   end
 
