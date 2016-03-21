@@ -5,8 +5,12 @@ FactoryGirl.define do
     username { Faker::Internet.user_name }
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }
+    email { Faker::Internet.email }
     phone { Faker::PhoneNumber.phone_number }
     password 'password'
     password_confirmation 'password'
+    organization_id 1
+    location_id 1
+    status "A"
   end
 end
