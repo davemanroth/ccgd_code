@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320233537) do
+ActiveRecord::Schema.define(version: 20160321220211) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -66,6 +66,11 @@ ActiveRecord::Schema.define(version: 20160320233537) do
     t.integer  "organization_id", limit: 4
     t.integer  "location_id",     limit: 4
     t.string   "status",          limit: 2
+  end
+
+  create_table "users_lab_groups", id: false, force: :cascade do |t|
+    t.integer "users_id",      limit: 4, null: false
+    t.integer "lab_groups_id", limit: 4, null: false
   end
 
 end
