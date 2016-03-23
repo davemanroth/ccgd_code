@@ -84,3 +84,21 @@ File.open( File.join(path, 'memberships.csv'), 'r') do |file|
 end
 /
 
+# Seeding Roles data
+Role.delete_all
+File.open( File.join(path, 'roles.csv'), 'r') do |file|
+  file.read.each_line do |role|
+    name, description = role.chomp.split(',')
+    Role.create!(name: name, description: description)
+  end
+end
+
+# Seeding Privileges data
+Privilege.delete_all
+File.open( File.join(path, 'privileges.csv'), 'r') do |file|
+  file.read.each_line do |priv|
+    role_id, user_id = priv.chomp.split(',')
+    Privilege.create!(role_id: role_id, user_id: user_id)
+  end
+end
+

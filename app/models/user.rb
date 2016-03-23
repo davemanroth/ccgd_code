@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :organization
   has_many :memberships
   has_many :lab_groups, through: :memberships
+  has_many :privileges
+  has_many :roles, through: :privileges
   has_secure_password
 end

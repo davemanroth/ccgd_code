@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323152512) do
+ActiveRecord::Schema.define(version: 20160323193614) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -52,6 +52,23 @@ ActiveRecord::Schema.define(version: 20160323152512) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "address_id", limit: 4
+  end
+
+  create_table "privileges", force: :cascade do |t|
+    t.integer  "role_id",    limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "privileges", ["role_id"], name: "index_privileges_on_role_id", using: :btree
+  add_index "privileges", ["user_id"], name: "index_privileges_on_user_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "states", force: :cascade do |t|
