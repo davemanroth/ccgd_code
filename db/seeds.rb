@@ -8,6 +8,7 @@
 
 path = File.join(Rails.root, 'app', 'csvs')
 
+/
 # Seeding States data
 State.delete_all
 File.open( File.join(path, 'states.csv'), 'r') do |file|
@@ -74,12 +75,11 @@ File.open( File.join(path, 'users.csv'), 'r') do |file|
 end
 
 # Seeding UserLabGroup data
-/
-UserLabGroup.delete_all
-File.open( File.join(path, 'users_labgroup.csv'), 'r') do |file|
-  file.read.each_line do |ulg|
-    user_id, labgroup_id = ulg.chomp.split(',')
-    UserLabGroup.create!(user_id: user_id, labgroup_id: labgroup_id)
+Membership.delete_all
+File.open( File.join(path, 'memberships.csv'), 'r') do |file|
+  file.read.each_line do |member|
+    user_id, labgroup_id = member.chomp.split(',')
+    Membership.create!(user_id: user_id, labgroup_id: labgroup_id)
   end
 end
 /

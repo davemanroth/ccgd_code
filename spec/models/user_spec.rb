@@ -44,6 +44,7 @@ RSpec.describe User, :type => :model do
     expect(user).to be_invalid
   end
 
+  /
   it "is invalid with duplicate emails" do
     user.email = 'dave@rothfarb.com'
     user.save
@@ -51,6 +52,7 @@ RSpec.describe User, :type => :model do
     user2.email = 'dave@rothfarb.com'
     expect(user2).to be_invalid
   end
+/
 
   it "is invalid without an organization_id" do
     user.organization_id = ''
@@ -70,10 +72,12 @@ RSpec.describe User, :type => :model do
     expect(user).to belong_to(:organization)
   end
 
-  /
-  it "can have many labgroups" do
-    expect(user).to have_and_belong_to_many(:lab_groups)
+  it "can have many memberships" do
+    expect(user).to have_many(:memberships)
   end
-/
+
+  it "can have many lab_groups through membership model" do
+    expect(user).to have_many(:lab_groups).through(:membership)
+  end
 
 end

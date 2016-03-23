@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :location_id, presence: true
   belongs_to :location
   belongs_to :organization
-  has_and_belongs_to_many :lab_groups
+  has_many :memberships
+  has_many :lab_groups, through: :memberships
   has_secure_password
 end
