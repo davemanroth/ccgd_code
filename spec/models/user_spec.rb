@@ -70,10 +70,10 @@ RSpec.describe User, :type => :model do
     expect(user).to belong_to(:organization)
   end
 
+  /
   it "can have many labgroups" do
     expect(user).to have_and_belong_to_many(:lab_groups)
   end
-  /
 /
 
 end
