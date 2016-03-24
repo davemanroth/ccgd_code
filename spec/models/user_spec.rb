@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
 
   it "is valid with username, firstname, lastname, email, phone, password, prganization_id, user_id, and status" do
     expect(user).to be_valid
@@ -76,8 +76,12 @@ RSpec.describe User, :type => :model do
     expect(user).to have_many(:memberships)
   end
 
-  it "has at least one role" do
-    expect(user.roles.count).to eq 1
+  it "can have many privileges" do
+    expect(user).to have_many(:privileges)
+  end
+
+  it "has 2 roles" do
+    expect(user.roles.count).to eq 2
   end
 
 end

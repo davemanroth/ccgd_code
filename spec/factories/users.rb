@@ -14,7 +14,9 @@ FactoryGirl.define do
     status "A"
 
     after(:create) do |user|
-      user.roles << :role
+      [:role, :role].each do |role|
+        user.roles << create(role)
+      end
     end
   end
 end

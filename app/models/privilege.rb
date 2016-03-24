@@ -1,4 +1,5 @@
 class Privilege < ActiveRecord::Base
-  belongs_to :users
-  belongs_to :roles
+  belongs_to :user
+  belongs_to :role
+  # validates :user, :role, presence: true
 end

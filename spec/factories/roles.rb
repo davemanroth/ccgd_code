@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :role do
     name { Faker::Name.title }
-    description { Faker::name.title.downcase }
+    description { Faker::Name.title.downcase }
   end
 end
