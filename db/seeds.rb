@@ -82,7 +82,6 @@ File.open( File.join(path, 'memberships.csv'), 'r') do |file|
     Membership.create!(user_id: user_id, labgroup_id: labgroup_id)
   end
 end
-/
 
 # Seeding Roles data
 Role.delete_all
@@ -92,6 +91,7 @@ File.open( File.join(path, 'roles.csv'), 'r') do |file|
     Role.create!(name: name, description: description)
   end
 end
+/
 
 # Seeding Privileges data
 Privilege.delete_all

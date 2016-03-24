@@ -12,5 +12,9 @@ FactoryGirl.define do
     organization_id 1
     location_id 1
     status "A"
+
+    after(:create) do |user|
+      user.roles << :role
+    end
   end
 end

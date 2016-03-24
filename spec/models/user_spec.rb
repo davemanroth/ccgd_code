@@ -76,8 +76,8 @@ RSpec.describe User, :type => :model do
     expect(user).to have_many(:memberships)
   end
 
-  it "can have many lab_groups through membership model" do
-    expect(user).to have_many(:lab_groups).through(:membership)
+  it "has at least one role" do
+    expect(user.roles.count).to eq 1
   end
 
 end

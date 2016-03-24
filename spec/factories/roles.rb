@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :role do
-    name "MyString"
-    description "MyString"
+    name { Faker::Name.title }
+    description { Faker::name.title.downcase }
   end
 end

@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :lab_groups, through: :memberships
   has_many :privileges
-  has_many :roles, through: :privileges
+  has_many :roles, :through => :privileges
   has_secure_password
 end
