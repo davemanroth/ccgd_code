@@ -84,4 +84,8 @@ RSpec.describe User, :type => :model do
     expect(user.roles.count).to eq 2
   end
 
+  it "has a status of pending when first created" do
+    expect(user.status).to eq 'P'
+  end
+
 end

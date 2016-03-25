@@ -13,4 +13,7 @@ class User < ActiveRecord::Base
   has_many :privileges
   has_many :roles, :through => :privileges
   has_secure_password
+
+  after_create { self.status = 'P' }
+
 end
