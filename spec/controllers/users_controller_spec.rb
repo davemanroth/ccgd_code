@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
+  let(:user) { create(:user) }
 
   describe "GET index" do
     it "returns http success" do
@@ -11,7 +12,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "GET show" do
     it "returns http success" do
-      get :show
+      get :show, id: user
       expect(response).to have_http_status(:success)
     end
   end
@@ -23,31 +24,49 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  describe "GET create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+  /
+  /
+  describe "POST create" do
+    it "adds a new user" do
+      expect{
+        post :create, id: user
+      }.to change(User, :count).by(+1)
     end
   end
 
   describe "GET edit" do
     it "returns http success" do
-      get :edit
+      get :edit, id: user
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET update" do
+  describe "PATCH update" do
     it "returns http success" do
-      get :update
+      patch :update, id: user
       expect(response).to have_http_status(:success)
     end
-  end
 
-  describe "GET destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+    it "updates a user's information" do
+      patch :update, id: user,
+      user: attributes_for(:user,
+        firstname: 'Bruce',
+        lasname: 'Wayne'
+      )
+      user.reload
+      expect(user.firstname).to eq('Bruce')
+      expect(user.lastname).to eq('Wayne')
+    end 
+  end
+  /
+  /
+
+  describe "DELETE destroy" do
+    user = FactoryGirl.create(:user)
+    it "deletes the user" do
+      expect{
+        delete :destroy, id: user
+      }.to change(User, :count).by(-1)
     end
   end
 
