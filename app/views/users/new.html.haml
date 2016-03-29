@@ -38,7 +38,7 @@
       -# LabGroups
       .form-group
         = f.label :labgroups, "Select your lab or group"
-        = f.select :labgroup_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name, lg.id] }, { include_blank: true }, { class: 'form-control' }
+        = f.select :lab_groups, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: true }, { class: 'form-control' }
 
   = f.submit "Create user account", class: 'btn btn-default'
 

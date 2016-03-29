@@ -4,4 +4,8 @@ class LabGroup < ActiveRecord::Base
   belongs_to :location
   has_many :memberships
   has_many :users, through: :memberships
+
+  def name_code
+    [name, code].join(', ')
+  end
 end
