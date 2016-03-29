@@ -1,4 +1,4 @@
 class Membership < ActiveRecord::Base
-  belongs_to :users
-  belongs_to :lab_groups
+  belongs_to :user
+  belongs_to :lab_group
 end

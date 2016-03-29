@@ -25,9 +25,20 @@
         = f.label :password_confirmation, "Password confirmation"
         = f.password_field :password_confirmation, class: 'form-control', required: true
     .col-md-4
-      %ul
-      - @locations.each do |loc|
-        %li #{loc.building_room}
+      -# Locations
+      .form-group
+        = f.label :locations, "Select your location"
+        = f.select :location_id, Location.all.order(building: :asc).collect { |loc| [loc.building_room, loc.id] }, { include_blank: true }, { class: 'form-control' }
 
-    = f.submit "Create user account", class: 'btn btn-default'
+      -# Organizations
+      .form-group
+        = f.label :organizations, "Select your organization"
+        = f.select :organization_id, Organization.all.order(name: :asc).collect { |org| [org.name, org.id] }, { include_blank: true }, { class: 'form-control' }
+
+      -# LabGroups
+      .form-group
+        = f.label :labgroups, "Select your lab or group"
+        = f.select :labgroup_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name, lg.id] }, { include_blank: true }, { class: 'form-control' }
+
+  = f.submit "Create user account", class: 'btn btn-default'
 
