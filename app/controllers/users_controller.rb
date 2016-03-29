@@ -7,6 +7,10 @@ class UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
+    @locations = Location.all.order(building: :asc)
+    @organizations = Organization.all
+    @labgroups = LabGroup.all
   end
 
   def create

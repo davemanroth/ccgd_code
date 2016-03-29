@@ -1,2 +1,33 @@
-%h1 Users#new
-%p Find me in app/views/users/new.html.haml
+%h1 Create a CCGD user account
+%p Please complete all form fields below and click the "Submit" button. You will receive an email from the CCGD admin about the status of your user account.
+= form_for(@user) do |f|
+  .row
+    .col-md-4
+      .form-group
+        = f.label :firstname
+        = f.text_field :firstname, class: 'form-control', placeholder: 'First name', required: true
+      .form-group
+        = f.label :lastname
+        = f.text_field :lastname, class: 'form-control', placeholder: 'Last name', required: true
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: 'form-control', placeholder: 'Email address', required: true
+      .form-group
+        = f.label :phone
+        = f.text_field :phone, class: 'form-control', placeholder: 'Phone number'
+      .form-group
+        = f.label :username, "Enter your desired username"
+        = f.text_field :username, class: 'form-control', placeholder: 'Username', required: true
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control', required: true
+      .form-group
+        = f.label :password_confirmation, "Password confirmation"
+        = f.password_field :password_confirmation, class: 'form-control', required: true
+    .col-md-4
+      %ul
+      - @locations.each do |loc|
+        %li #{loc.building_room}
+
+    = f.submit "Create user account", class: 'btn btn-default'
+
