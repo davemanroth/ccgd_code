@@ -24,21 +24,24 @@
       .form-group
         = f.label :password_confirmation, "Password confirmation"
         = f.password_field :password_confirmation, class: 'form-control', required: true
-    .col-md-4
+    #select-lists.col-md-4
       -# Locations
       .form-group
         = f.label :locations, "Select your location"
-        = f.select :location_id, Location.all.order(building: :asc).collect { |loc| [loc.building_room, loc.id] }, { include_blank: true }, { class: 'form-control' }
+        = f.select :location_id, Location.all.order(building: :asc).collect { |loc| [loc.building_room, loc.id] }, { include_blank: '-Location-' }, { class: 'form-control' }
+        %button.add-btn.btn.btn-default Add location
 
       -# Organizations
       .form-group
         = f.label :organizations, "Select your organization"
-        = f.select :organization_id, Organization.all.order(name: :asc).collect { |org| [org.name, org.id] }, { include_blank: true }, { class: 'form-control' }
+        = f.select :organization_id, Organization.all.order(name: :asc).collect { |org| [org.name, org.id] }, { include_blank: '-Organization-' }, { class: 'form-control' }
+        %button.add-btn.btn.btn-default Add organization
 
       -# LabGroups
       .form-group
         = f.label :labgroups, "Select your lab or group"
-        = f.select :lab_groups, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: true }, { class: 'form-control' }
+        = f.select :lab_groups, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Lab or group-' }, { multiple: true, class: 'form-control' }
+        %button.add-btn.btn.btn-default Add Lab or group
 
   = f.submit "Create user account", class: 'btn btn-default'
 

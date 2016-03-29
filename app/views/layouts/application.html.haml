@@ -7,12 +7,14 @@
   = csrf_meta_tags
   %body
     .container
-      = render 'layouts/header'
-      .row
-        .col-md-3
-          = render 'layouts/nav'
-        .col-md-9
-          .main
-            %article
-              = yield
-      = render 'layouts/footer'
+      .wrap-color
+        = render 'layouts/header'
+        .white
+          .row
+            .col-md-3
+              = render 'layouts/nav'
+            .col-md-9
+              .main-content
+                %article
+                  = yield
+        = render 'layouts/footer'
