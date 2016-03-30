@@ -47,6 +47,7 @@ RSpec.describe UsersController, :type => :controller do
       expect(response).to have_http_status(:success)
     end
 
+  /
     it "updates a user's information" do
       patch :update, id: user,
       user: attributes_for(:user,
@@ -57,9 +58,8 @@ RSpec.describe UsersController, :type => :controller do
       expect(user.firstname).to eq('Bruce')
       expect(user.lastname).to eq('Wayne')
     end 
+  /
   end
-  /
-  /
 
   describe "DELETE destroy" do
     user = FactoryGirl.create(:user)
