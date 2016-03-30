@@ -1,2 +1,17 @@
-%h1 Users#show
-%p Find me in app/views/users/show.html.haml
+%h1 #{@user.full_name}'s user page
+%h2 User information
+%ul.no-list
+  %li <span class="lt-txt">Name:</span> #{@user.full_name}
+  %li <span class="lt-txt">Username:</span> #{@user.username}
+  %li <span class="lt-txt">Email:</span> #{@user.email}
+  %li <span class="lt-txt">Phone:</span> #{@user.phone}
+  %li <span class="lt-txt">Location:</span> #{@user.location.building_room}
+  %li <span class="lt-txt">Organization:</span> #{@user.organization.name}
+  <li> <span class="lt-txt">Lab/group(s):</span>
+  - @user.lab_groups.each_with_index do |lg, i|
+    - semi = i == @user.lab_groups.size ? '; ' : '' 
+    = lg.name_code + semi
+  </li>
+%button.btn.btn-default Update user information
+%h2 Proposals
+%button.btn.btn-default Submit a proposal

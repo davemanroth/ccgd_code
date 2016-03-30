@@ -16,4 +16,7 @@ class User < ActiveRecord::Base
 
   after_create { self.status = 'P' }
 
+  def full_name
+    [firstname.downcase.capitalize, lastname.downcase.capitalize].join(' ')
+  end
 end
