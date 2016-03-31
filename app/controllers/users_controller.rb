@@ -38,7 +38,7 @@ class UsersController < ApplicationController
         :firstname, :lastname, 
         :email, :phone, :username, 
         :password, :password_confirmation,
-        :location, :organization, :lab_groups
+        :location_id, :organization_id, :lab_groups
       )
     end
 end
