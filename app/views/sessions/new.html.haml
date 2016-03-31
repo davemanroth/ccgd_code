@@ -1,2 +1,16 @@
-%h1 Sessions#new
-%p Find me in app/views/sessions/new.html.haml
+%h1 Welcome to the CCGD proposal submission website
+%p Please log in to proceed into the site.
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-body
+        = form_for(:session, url: login_path) do |f|
+          .form-group
+            = f.label :username
+            = f.text_field :username, placeholder: "Username", class: 'form-control', required: true 
+
+          .form-group
+            = f.label :password
+            = f.password_field :password, placeholder: "Password", class: 'form-control', required: true 
+          = f.submit "Log in", class: 'btn btn-primary btn-lg'
+          %p.small Don't have an account yet? #{link_to "Create an account", signup_path}
