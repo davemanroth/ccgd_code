@@ -64,6 +64,10 @@ RSpec.describe User, :type => :model do
     expect(user).to be_invalid
   end
 
+  it "has a valid location" do
+    expect(user.location_id).not_to be(nil)
+  end
+
   it "belongs to the Location model" do
     expect(user).to belong_to(:location)
   end
@@ -96,5 +100,12 @@ RSpec.describe User, :type => :model do
   it "has a status of pending when first created" do
     expect(user.status).to eq 'P'
   end
+
+  /
+  it "displays the location's building and room" do
+    building_room = [user.location.building, user.location.room].join(', ')
+    expect(user.building_room).to eq(building_room)
+  end
+  /
 
 end

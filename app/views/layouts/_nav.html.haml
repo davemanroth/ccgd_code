@@ -5,6 +5,6 @@
     - if logged_in?
       %li.dropdown
         %a(href="#" class="dropdown-toggle" data-toggle="dropdown") User menu <b class="caret"></b>
-          %ul.dropdown-menu
-            %li= link_to "My profile", current_user
-            %li= link_to "Logout", logout_path, method: "delete"
+        %ul.dropdown-menu
+          %li= link_to "My profile", current_user
+          %li= link_to "Logout", logout_path, method: "delete"
