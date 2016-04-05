@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       
     if @user.save
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
+      log_in(@user)
       redirect_to @user
     else
       render 'new'
