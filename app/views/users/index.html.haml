@@ -1,24 +1,26 @@
 %h1 User administration
-%table.table.table-hover.table-striped.table-responsive
-  %thead
-    %tr
-      %th Last name
-      %th First name
-      %th Organization
-      %th Actions
-      %th Confirm
-  %tbody
-  - @users.each do |user|
-    - rowclass = user.status == 'P' ? 'warning' : ''
-    %tr(class="#{rowclass}")
-      %td= user.lastname
-      %td= user.firstname
-      %td= user.organization.name unless user.organization.nil?
-      %td
-        %select.form-control
-          %option --Select action--
-          %option(value="approve") Approve user
-          %option(value="edit") Edit user
-      %td
-        %button.btn.btn-default Confirm
+- @all_users.each do |status, users|
+  - if !users.nil?
+    %h2 #{status.capitalize} users
+    %table.table.table-hover.table-striped.table-responsive
+      %thead
+        %tr
+          %th Last name
+          %th First name
+          %th Organization
+          %th Actions
+          %th Confirm
+      %tbody
+      - users.each do |user|
+        %tr
+          %td= user.lastname
+          %td= user.firstname
+          %td= user.organization.name unless user.organization.nil?
+          %td
+            %select.form-control
+              %option --Select action--
+              %option(value="approve") Approve user
+              %option(value="edit") Edit user
+          %td
+            %button.btn.btn-default Confirm
 

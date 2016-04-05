@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-  scope :pending, -> { where(status: 'P') }
-  scope :approved, -> { where(status: 'A') }
+  scope :pending, -> { where(status: 'P').order(lastname: :asc) }
+  scope :approved, -> { where(status: 'A').order(lastname: :asc) }
 
   validates :username, presence: true 
   validates :firstname, presence: true

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @all_users = { pending: User.pending, approved: User.approved }
   end
 
   def show
