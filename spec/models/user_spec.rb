@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  let(:user) { create(:user) }
+  let(:user) { build(:user) }
 
   it "is valid with username, firstname, lastname, email, phone, password, prganization_id, user_id, and status" do
     expect(user).to be_valid
@@ -44,7 +44,7 @@ RSpec.describe User, :type => :model do
     expect(user).to be_invalid
   end
 
-  /
+=begin
   it "is invalid with duplicate emails" do
     user.email = 'dave@rothfarb.com'
     user.save
@@ -52,7 +52,7 @@ RSpec.describe User, :type => :model do
     user2.email = 'dave@rothfarb.com'
     expect(user2).to be_invalid
   end
-/
+=end
 
   it "is invalid without an organization_id" do
     user.organization_id = ''
@@ -81,7 +81,8 @@ RSpec.describe User, :type => :model do
   end
 
   it "has 1 labgroup" do
-    lg = FactoryGirl.create(:lab_group)
+    user.save
+    lg = FactoryGirl.build(:lab_group)
     user.lab_groups << lg
     expect(user.lab_groups.count).to eq 1
   end
@@ -91,6 +92,7 @@ RSpec.describe User, :type => :model do
   end
 
   it "has 2 roles" do
+    user.save
     [:role, :role].each do |role|
       user.roles << FactoryGirl.create(:role)
     end
@@ -98,14 +100,25 @@ RSpec.describe User, :type => :model do
   end
 
   it "has a status of pending when first created" do
+    user.save
     expect(user.status).to eq 'P'
   end
 
-  /
+  it "has a status of pending when using the pending scope" do
+    users = User.pending
+    expect(users.first.status).to eq 'P'
+  end
+
+  it "has a status of approved when using the approved scope" do
+    users = User.approved
+    expect(users.first.status).to eq 'A'
+  end
+
+=begin
   it "displays the location's building and room" do
     building_room = [user.location.building, user.location.room].join(', ')
     expect(user.building_room).to eq(building_room)
   end
-  /
+=end
 
 end

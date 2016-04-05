@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  scope :pending, -> { where(status: 'P') }
+  scope :approved, -> { where(status: 'A') }
+
   validates :username, presence: true 
   validates :firstname, presence: true
   validates :lastname, presence: true
@@ -19,4 +23,15 @@ class User < ActiveRecord::Base
   def full_name
     [firstname.downcase.capitalize, lastname.downcase.capitalize].join(' ')
   end
+
+  def all_roles
+    roles = ''
+    self.roles.each_with_index do |role, i|
+      roles += role.description
+      comma = i == self.roles.size - 1 ? '' : ', ' 
+      roles += comma
+    end
+    roles
+  end
+
 end
