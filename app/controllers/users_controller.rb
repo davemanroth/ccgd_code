@@ -14,14 +14,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if !lab_group_params.nil?
-      lab_group_params.each do |key, lgp|
-        if !lgp.empty?
-          lg = LabGroup.find(lgp)
-          @user.lab_groups << lg
-        end
-      end
+      add_lab_groups(@user)
     end
-
+      
     if @user.save
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
       redirect_to @user
@@ -52,7 +47,20 @@ class UsersController < ApplicationController
       )
     end
 
+    # Separate out labgroups array
     def lab_group_params
       params.require(:user).permit(lab_groups:[])
     end
+
+    # Add labgroup records to user object
+    def add_lab_groups(user)
+      vals = lab_group_params.values.first
+      vals.each do |id|
+        if !id.empty?
+          lg = LabGroup.find(id)
+          user.lab_groups << lg
+        end
+      end
+    end
+
 end
