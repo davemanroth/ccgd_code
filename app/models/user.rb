@@ -37,13 +37,13 @@ class User < ActiveRecord::Base
 
   def status_name
     if !self.status.nil?
-      names = { p: 'pending', i: 'inactive', a: 'approved' }
+      names = { p: 'pending', i: 'inactive', a: 'active' }
       status = names[self.status.downcase.to_sym]
       status.capitalize
     end
   end
 
-  def is_approved?
+  def is_active?
     self.status == 'A'
   end
 

@@ -1,13 +1,12 @@
 %h1 User administration
-%table.table.table-hover.table-striped.table-responsive
+%table.table.table-hover.table-striped.table-responsive.admin-table
   %thead
     %tr
-      %th Last name
-      %th First name
-      %th Organization
-      %th Status
-      %th Actions
-      %th Confirm
+      %th.last-name Last name
+      %th.first-name First name
+      %th.org Organization
+      %th.status Status
+      %th.actions Actions
   %tbody
   - @users.each do |user|
     - rowclass = user.is_pending? ? 'warning' : ''
@@ -17,14 +16,9 @@
       %td= user.organization.name unless user.organization.nil?
       %td= user.status_name
       %td
-        %select.form-control
-          %option --Select action--
-          %option(value="edit") Edit
-          - if user.is_approved?
-            %option(value="deactivate") Deactivate
-          - else
-            %option(value="approve") Approve
-            %option(value="reject") Reject
-      %td
-        %button.btn.btn-default Confirm
-
+        = link_to 'Edit', '#', class: 'btn btn-default'
+        - if user.is_active?
+          = link_to 'Deactivate', '#', class: 'btn btn-warning', remote: true
+        - else
+          = link_to 'Approve', '#', class: 'btn btn-success', remote: true
+          = link_to 'Reject', '#', class: 'btn btn-primary', remote: true
