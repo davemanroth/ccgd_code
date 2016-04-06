@@ -1,5 +1,5 @@
 %h1 User administration
-%table.table.table-hover.table-striped.table-responsive.admin-table
+%table#users.table.table-hover.table-striped.table-responsive.admin-table
   %thead
     %tr
       %th.last-name Last name
@@ -7,7 +7,6 @@
       %th.org Organization
       %th.status Status
       %th.actions Actions
-  %tbody
   - @users.each do |user|
     - rowclass = user.is_pending? ? 'warning' : ''
     %tr(class="#{rowclass}")
