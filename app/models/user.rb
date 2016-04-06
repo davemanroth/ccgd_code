@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   scope :pending, -> { where(status: 'P').order(lastname: :asc) }
   scope :approved, -> { where(status: 'A').order(lastname: :asc) }
+  scope :non_inactive, -> { where(status: ['A', 'P']).order(lastname: :asc) }
 
   validates :username, presence: true 
   validates :firstname, presence: true
@@ -32,6 +33,22 @@ class User < ActiveRecord::Base
       roles += comma
     end
     roles
+  end
+
+  def status_name
+    if !self.status.nil?
+      names = { p: 'pending', i: 'inactive', a: 'approved' }
+      status = names[self.status.downcase.to_sym]
+      status.capitalize
+    end
+  end
+
+  def is_approved?
+    self.status == 'A'
+  end
+
+  def is_pending?
+    self.status == 'P'
   end
 
 end

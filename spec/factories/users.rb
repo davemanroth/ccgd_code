@@ -11,6 +11,7 @@ FactoryGirl.define do
     password_confirmation 'password'
     organization_id 1
     location_id 1
+    status 'A'
 
     /
     after(:create) do |user|
