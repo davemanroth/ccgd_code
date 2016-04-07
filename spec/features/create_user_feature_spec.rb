@@ -35,6 +35,7 @@ RSpec.feature 'User creation', :type=> :feature do
 
     # Verify submitted location, organization, and labgroup display correctly
     within '.no-list' do
+      expect(page).to have_content 'Pending'
       expect(page).to have_content '020, 0G4'
       expect(page).to have_content 'Beckman Coulter'
       expect(page).to have_content '15th floor, Meyerson'
@@ -43,4 +44,5 @@ RSpec.feature 'User creation', :type=> :feature do
 =begin
 =end
   end
+
 end

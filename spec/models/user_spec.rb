@@ -114,15 +114,4 @@ RSpec.describe User, :type => :model do
     expect(users.first.status).to eq 'A'
   end
 
-  it "has a status of active" do
-    expect(user.status_name).to eq('Approved')
-  end
-
-=begin
-  it "displays the location's building and room" do
-    building_room = [user.location.building, user.location.room].join(', ')
-    expect(user.building_room).to eq(building_room)
-  end
-=end
-
 end

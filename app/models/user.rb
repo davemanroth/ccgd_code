@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :privileges
   has_secure_password
 
-  after_create { self.status = 'P' }
+  before_create :set_status
 
   def full_name
     [firstname.downcase.capitalize, lastname.downcase.capitalize].join(' ')
@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
       roles += comma
     end
     roles
+  end
+
+  def set_status
+    self.status = 'P'
   end
 
   def status_name
