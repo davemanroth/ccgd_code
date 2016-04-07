@@ -15,7 +15,7 @@
       %td= user.organization.name unless user.organization.nil?
       %td= user.status_name
       %td
-        = link_to 'Edit', '#', class: 'btn btn-default'
+        = link_to 'Edit', edit_user_path(user), class: 'btn btn-default'
         - if user.is_active?
           = link_to 'Deactivate', '#', class: 'btn btn-warning', remote: true
         - else

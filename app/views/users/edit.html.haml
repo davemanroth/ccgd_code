@@ -1,2 +1,6 @@
-%h1 Users#edit
-%p Find me in app/views/users/edit.html.haml
+%h1 #{@user.full_name}'s user page
+%h2 User information
+%p Update any of the fields below and click the "Update user information" button
+=form_for(@user) do |f|
+  = render 'user_fields', f: f
+  = f.submit "Update user information", class: 'btn btn-primary btn-lg'

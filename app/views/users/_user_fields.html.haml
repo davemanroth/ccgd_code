@@ -1,0 +1,43 @@
+.row
+  .col-md-4
+    .form-group
+      = f.label :firstname, "First name"
+      = f.text_field :firstname, class: 'form-control', placeholder: 'First name', required: true
+    .form-group
+      = f.label :lastname, "Last name"
+      = f.text_field :lastname, class: 'form-control', placeholder: 'Last name', required: true
+    .form-group
+      = f.label :email
+      = f.text_field :email, class: 'form-control', placeholder: 'Email address', required: true
+    .form-group
+      = f.label :phone
+      = f.text_field :phone, class: 'form-control', placeholder: 'Phone number'
+    .form-group
+      = f.label :username, "Enter your desired username"
+      = f.text_field :username, class: 'form-control', placeholder: 'Username', required: true
+    .form-group
+      = f.label :password
+      = f.password_field :password, class: 'form-control', required: true
+    .form-group
+      = f.label :password_confirmation, "Password confirmation"
+      = f.password_field :password_confirmation, class: 'form-control', required: true
+  #select-lists.col-md-4
+    -# Locations
+    .form-group
+      = f.label :locations, "Select your location"
+      = f.select :location_id, Location.all.order(building: :asc).collect { |loc| [loc.building_room, loc.id] }, { include_blank: '-Location-' }, { class: 'form-control' }
+      %button.add-btn.btn.btn-default Add location
+
+    -# Organizations
+    .form-group
+      = f.label :organizations, "Select your organization"
+      = f.select :organization_id, Organization.all.order(name: :asc).collect { |org| [org.name, org.id] }, { include_blank: '-Organization-' }, { class: 'form-control' }
+      %button.add-btn.btn.btn-default Add organization
+
+    -# LabGroups
+    .form-group
+      = f.label :labgroups, "Select your lab or group"
+      = f.select :lab_groups, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Lab or group-' }, { multiple: true, class: 'form-control' }
+      %button.add-btn.btn.btn-default Add Lab or group
+
+
