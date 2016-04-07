@@ -46,6 +46,8 @@ File.open( File.join(path, 'organizations.csv'), 'r') do |file|
   end
 end
 
+/
+/
 # Seeding LabGroup data
 LabGroup.delete_all
 File.open( File.join(path, 'labgroups.csv'), 'r') do |file|

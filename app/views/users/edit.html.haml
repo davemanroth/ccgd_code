@@ -3,4 +3,10 @@
 %p Update any of the fields below and click the "Update user information" button
 =form_for(@user) do |f|
   = render 'user_fields', f: f
+  .panel.panel-default
+    .panel-heading For admin use
+    .panel-body
+      .form-group
+        = f.label :status
   = f.submit "Update user information", class: 'btn btn-primary btn-lg'
+

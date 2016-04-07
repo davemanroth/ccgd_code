@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :privileges
   has_secure_password
 
-  before_create :set_status
+  # before_create :set_status
 
   def full_name
     [firstname.downcase.capitalize, lastname.downcase.capitalize].join(' ')

@@ -6,6 +6,7 @@ Dana,820,1
 Dana,D3-JFC,1
 Smith,970,1
 Mayer,630,1
+foo,55,1
 Mayer,530,1
 Dana,1220,1
 Mayer,513,1
@@ -13,6 +14,10 @@ Dana,1230,1
 Dana,730,1
 Dana,1B30,1
 Mayer,430,1
+foo,55,1
+foo,55,1
+foo,55,1
+foo,55,1
 Smith,1070,1
 BWH,,3
 21-27 Burlington Ave.,464,4
@@ -26,9 +31,14 @@ BWH,BLI-449A,10
 Factor,,11
 Neurology,,12
 21-27 Burlington Ave.,B452A,4
+foo,55,1
 Jimmy Fund,JF215,1
 NIBR,,13
+foo,55,1
+foo,55,1
+foo,55,1
 50 Blossom Street,GRJ 825,17
+foo,55,1
 WRB,2-143,18
 Infinity Pharmaceuticals,,19
 375 Longwood,226,20
@@ -67,13 +77,16 @@ WRN,3-324,5
 Dana,640A,1
 Richardson Laboratory,401,39
 Samsung Cancer Center,188 B4,41
+foo,55,1
 Factor,14-638,42
+foo,55,1
 JF,208,1
 Dana,1516,1
 780 Memorial Drive,780 Memorial Drive,44
 Mayer,1B29,1
 Dana,1210,1
 Dana,740,1
+foo,55,1
 B301,5019,46
 Smith,824,1
 BIDMC Dana,536,74
@@ -90,12 +103,22 @@ CLS ,417,12
 Jimmy Fund,614,50
 Dana,1526,1
 Mayer,457,50
+foo,55,1
 Yawkey,1257,50
 Mayer,563,1
+foo,55,1
 Amory,360U,3
 Dana,D512,1
 CIEMAS,2323,57
 CIEMAS,2323,57
+foo,55,1
+foo,55,1
+foo,55,1
+foo,55,1
+foo,55,1
+foo,55,1
+foo,55,1
+foo,55,1
 Smith,1052,50
 BLI,449B,10
 Dana,1230,1
@@ -103,6 +126,8 @@ Joslin,630,68
 Harvard Institutes of Medicine Building (4 Blackfan Circle),HIM346,50
 27 Drydock,DD466S,70
 Dana,510B,50
+foo,55,1
+foo,55,1
 7CC,4027,2
 HIM,309,74
 Center for Life Sciences,CLS441,75
