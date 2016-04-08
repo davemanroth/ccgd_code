@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
     roles
   end
 
+  def role_ids
+    ids = []
+    self.roles.each do |role|
+      ids.push(role.id)
+    end
+    ids
+  end
+
   def set_status
     self.status = 'P'
   end

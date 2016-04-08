@@ -1,40 +1,32 @@
 %h1 #{@user.full_name}'s user page
 %h2 User information
 %p Update any of the fields below and click the "Update user information" button
-
 =form_for(@user) do |f|
   = render 'user_fields', f: f
-  .panel.panel-danger
-    .panel-heading
-      %h3.panel-title For admin use
-    .panel-body.bg-warning
-      %h4 Status
-      .form-inline
-        .form-group
-          = f.radio_button :status, "p", class: "form-control"
-          = f.label :status, "Pending"
-        .form-group
-          = f.radio_button :status, "a", class: "form-control"
-          = f.label :status, "Active"
-        .form-group
-          = f.radio_button :status, "i", class: "form-control"
-          = f.label :status, "Inactive"
-      %h4 Roles
-      .form-inline
-        .form-group
-          = f.check_box :roles, { class: "form-control", multiple: true }, "1"
-          = f.label :roles, "Admin"
-        .form-group
-          = f.check_box :roles, { class: "form-control", multiple: true }, "2"
-          = f.label :roles, "Faculty"
-        .form-group
-          = f.check_box :roles, { class: "form-control", multiple: true },"3"
-          = f.label :roles, "Staff"
-        .form-group
-          = f.check_box :roles, { class: "form-control", multiple: true },"4"
-          = f.label :roles, "Advisor"
-        .form-group
-          = f.check_box :roles, { class: "form-control", multiple: true },"5"
-          = f.label :roles, "Submitter"
-  = f.submit "Update user information", class: 'btn btn-primary btn-lg'
+  .row
+    .col-md-9
+      .panel.panel-danger
+        .panel-heading
+          %h3.panel-title For admin use
+        .panel-body.bg-warning
+          %h4 Status
+          .form-inline
+            .form-group
+              = f.radio_button :status, "p", class: "form-control"
+              = f.label :status, "Pending"
+            .form-group
+              = f.radio_button :status, "a", class: "form-control"
+              = f.label :status, "Active"
+            .form-group
+              = f.radio_button :status, "i", class: "form-control"
+              = f.label :status, "Inactive"
+          %h4 Roles
+          .form-inline
+            .form-group
+              = f.collection_check_boxes :roles, Role.all, :id, :name do |b|
+                - checked = @user.role_ids.any? { |id| id == b.value }
+                = b.check_box(class: "form-control", checked: checked)
+                = b.label
+                %br
+      = f.submit "Update user information", class: 'btn btn-primary btn-lg'
 
