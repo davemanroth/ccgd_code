@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
 
   before_create :set_status
 
+  def self.all_statuses
+    ['P', 'A', 'I']
+  end
+
   def full_name
     [firstname.downcase.capitalize, lastname.downcase.capitalize].join(' ')
   end
@@ -61,6 +65,10 @@ class User < ActiveRecord::Base
 
   def is_pending?
     self.status == 'P'
+  end
+
+  def is_inactive?
+    self.status == 'I'
   end
 
 end

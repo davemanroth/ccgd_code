@@ -12,13 +12,13 @@
           %h4 Status
           .form-inline
             .form-group
-              = f.radio_button :status, "p", class: "form-control"
+              = f.radio_button :status, "P", class: "form-control", checked: @user.is_pending?
               = f.label :status, "Pending"
             .form-group
-              = f.radio_button :status, "a", class: "form-control"
+              = f.radio_button :status, "A", class: "form-control", checked: @user.is_active?
               = f.label :status, "Active"
             .form-group
-              = f.radio_button :status, "i", class: "form-control"
+              = f.radio_button :status, "I", class: "form-control", checked: @user.is_inactive?
               = f.label :status, "Inactive"
           %h4 Roles
           .form-inline
