@@ -19,5 +19,5 @@
         - if user.is_active?
           = link_to 'Deactivate', '#', class: 'btn btn-warning', remote: true
         - else
-          = link_to 'Approve', [user_path(user), 'status', 'approve'].join('/'), class: 'btn btn-success', remote: true, method: :patch
+          = link_to 'Approve', [user_path(user), 'status', 'a'].join('/'), class: 'btn btn-success', remote: true, method: :patch
           = link_to 'Reject', '#', class: 'btn btn-primary', remote: true

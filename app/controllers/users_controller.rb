@@ -42,7 +42,17 @@ class UsersController < ApplicationController
 
   def status_update
     @user = User.find(params[:id])
-    @user.status = params[:status]
+    @user.status = params[:status].upcase
+    if @user.save
+      respond_to do |f|
+        # f.js
+      end
+      flash.now[:success] = "#{@user.firstname}'s status was updated"
+      /
+        /
+    else
+      flash[:error] = "Could not update status"
+    end
   end
 
   private
