@@ -40,6 +40,11 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
   end
 
+  def status_update
+    @user = User.find(params[:id])
+    @user.status = params[:status]
+  end
+
   private
     def user_params
       params.require(:user).permit(
