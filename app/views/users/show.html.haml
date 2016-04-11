@@ -8,17 +8,12 @@
   %li <span class="lt-txt">Location:</span> #{@user.location.building_room}
   %li <span class="lt-txt">Organization:</span> #{@user.organization.name}
   %li <span class="lt-txt">Status:</span> #{@user.status_name}
+  %li <span class="lt-txt">Roles:</span> #{@user.all_roles}
   <li> <span class="lt-txt">Lab/group(s):</span>
   - @user.lab_groups.each_with_index do |lg, i|
     - semi = i == @user.lab_groups.size ? '; ' : '' 
     = lg.name_code + semi
   </li>
-  <li> <span class="lt-txt">Role(s):</span>
-  - @user.roles.each_with_index do |role, i|
-    - semi = i == @user.roles.size ? '; ' : '' 
-    = role.name + semi
-  </li>
-
 = link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
 %h2 Proposals
 %button.btn.btn-default Submit a proposal

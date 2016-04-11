@@ -2,32 +2,22 @@ module UsersHelper
 
   def apply_admin_updates(user)
     status = admin_update_params[:status]
-    roles = admin_update_params[:roles]
+    roles = admin_update_params[:roles].delete_if { |role| role.empty? }
     user.status = status unless user.status == status
-    add_roles(user, roles)
-    # Rails.logger.info("PARAMS: #{status}")
+    add_roles(user, roles) unless roles.empty?
   end
 
   def add_roles(user, roles)
-    roles.each do |r|
-      if !r.empty? && !duplicates?(user, r)
-        role = Role.find(r)
+    # Rails.logger.info("ROLES: #{roles}")
+    roles = roles.map { |role| role.to_i }
+    new_roles = roles - user.role_ids
+    if !new_roles.empty?
+      new_roles.each do |nr|
+        role = Role.find(nr)
         user.roles << role
       end
     end
   end
-
-  def duplicates?(user, role_id)
-    dup = false
-    user.roles.each do |role|
-      if role.id == role_id
-        dup = true
-        break
-      end
-    end
-    dup
-  end
-
 
   # Add labgroup records to user object
   def add_lab_groups(user)

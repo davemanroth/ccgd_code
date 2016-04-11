@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   def all_roles
     roles = ''
     self.roles.each_with_index do |role, i|
-      roles += role.description
+      roles += role.name
       comma = i == self.roles.size - 1 ? '' : ', ' 
       roles += comma
     end

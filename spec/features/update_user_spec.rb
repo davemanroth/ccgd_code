@@ -26,7 +26,7 @@ RSpec.feature 'Update user information', :type=> :feature do
     end
   end
 
-  scenario "Admin using edit page for admin features" do
+  scenario "Admin using edit page to update status and roles" do
     visit edit_user_path(user)
     expect(page).to have_content('Update any of the fields below')
     within '#admin-user-update' do
@@ -35,7 +35,11 @@ RSpec.feature 'Update user information', :type=> :feature do
     end
 
     within '#admin-user-update' do
+
+      # Make the user active
       choose('user_status_a')
+
+      # Give user Scientific Advisor role
       check('user_roles_4')
     end
     click_on 'Update user information'
@@ -43,7 +47,7 @@ RSpec.feature 'Update user information', :type=> :feature do
 
     within '.no-list' do
       expect(page).to have_content('Status: Active')
-      expect(page).to have_content('Role(s): CCGD Submitter, CCGD Scientific Advisor')
+      expect(page).to have_content('CCGD Submitter, CCGD Scientific Advisor')
     end
 
   end
