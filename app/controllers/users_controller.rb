@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper
 
   def index
     @users = User.non_inactive
@@ -34,6 +35,23 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
+    if !lab_group_params.nil?
+      add_lab_groups(@user)
+    end
+
+    if !admin_update_params.nil?
+      apply_admin_updates(@user)
+    end
+
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile successfully updated"
+      redirect_to @user
+    else
+      flash[:error] = "There was a problem, profile could not be updated"
+      render 'edit'
+    end
+
   end
 
   def destroy
@@ -42,7 +60,7 @@ class UsersController < ApplicationController
 
   def status_update
     @user = User.find(params[:id])
-    @user.status = params[:status].upcase
+    @user.status = params[:status]
     if @user.save
       respond_to do |f|
         # f.js
@@ -70,15 +88,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(lab_groups:[])
     end
 
-    # Add labgroup records to user object
-    def add_lab_groups(user)
-      vals = lab_group_params.values.first
-      vals.each do |id|
-        if !id.empty?
-          lg = LabGroup.find(id)
-          user.lab_groups << lg
-        end
-      end
+    # Separate out admin update privileges
+    def admin_update_params
+      params.require(:user).permit(:status, roles:[])
     end
-
 end

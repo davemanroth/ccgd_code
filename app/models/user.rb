@@ -19,14 +19,14 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :privileges
   has_secure_password
 
-  before_create :set_status
+  before_create :initialize_user
 
   def self.all_statuses
     ['P', 'A', 'I']
   end
 
   def full_name
-    [firstname.downcase.capitalize, lastname.downcase.capitalize].join(' ')
+    [firstname, lastname].join(' ')
   end
 
   def all_roles
@@ -47,8 +47,10 @@ class User < ActiveRecord::Base
     ids
   end
 
-  def set_status
+  def initialize_user
     self.status = 'P'
+    submitter = Role.find(5)
+    self.roles << submitter
   end
 
   def status_name
