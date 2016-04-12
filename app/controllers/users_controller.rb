@@ -60,10 +60,11 @@ class UsersController < ApplicationController
 
   def status_update
     @user = User.find(params[:id])
-    @user.status = params[:status]
+    # @user.status = params[:status]
+    @id = params[:link_id]
     if @user.save
       respond_to do |f|
-        # f.js
+        f.js
       end
       flash.now[:success] = "#{@user.firstname}'s status was updated"
       /

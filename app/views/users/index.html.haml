@@ -17,7 +17,7 @@
       %td
         = link_to 'Edit', edit_user_path(user), class: 'btn btn-default'
         - if user.is_active?
-          = link_to 'Deactivate', '#', class: 'btn btn-warning', remote: true
+          = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'btn btn-warning', remote: true, id: ["deactivate-", user.id].join('')
         - else
-          = link_to 'Approve', [user_path(user), 'status', 'a'].join('/'), class: 'btn btn-success', remote: true, method: :patch
-          = link_to 'Reject', '#', class: 'btn btn-primary', remote: true
+          = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'btn btn-success', remote: true, method: :patch, id: ["approve-", user.id].join('')
+          = link_to 'Reject', '#', class: 'btn btn-primary', remote: true, id: ["reject-", user.id].join('')
