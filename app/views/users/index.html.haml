@@ -13,11 +13,11 @@
       %td= user.lastname
       %td= user.firstname
       %td= user.organization.name unless user.organization.nil?
-      %td= user.status_name
-      %td
-        = link_to 'Edit', edit_user_path(user), class: 'btn btn-default'
+      %td.user-status= user.status_name
+      %td.user-actions
+        = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-default'
         - if user.is_active?
-          = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'btn btn-warning', remote: true, id: ["deactivate-", user.id].join('')
+          = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'user-deactivate btn btn-warning', remote: true, method: :patch
         - else
-          = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'btn btn-success', remote: true, method: :patch, id: ["approve-", user.id].join('')
-          = link_to 'Reject', '#', class: 'btn btn-primary', remote: true, id: ["reject-", user.id].join('')
+          = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
+          = link_to 'Reject', '#', class: 'user-reject btn btn-primary', remote: true

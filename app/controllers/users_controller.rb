@@ -35,7 +35,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if !lab_group_params.nil?
       add_lab_groups(@user)
     end
@@ -60,16 +59,11 @@ class UsersController < ApplicationController
 
   def status_update
     @user = User.find(params[:id])
-    # @user.status = params[:status]
-    @id = params[:link_id]
+    @user.status = params[:status]
     if @user.save
       respond_to do |f|
-        f.js
+        f.html
       end
-      flash.now[:success] = "#{@user.firstname}'s status was updated"
-      /
-        /
-    else
       flash[:error] = "Could not update status"
     end
   end
