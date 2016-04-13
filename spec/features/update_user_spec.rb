@@ -26,7 +26,7 @@ RSpec.feature 'Update user information', :type=> :feature do
     end
   end
 
-  scenario "Admin using edit page to update status and roles" do
+  scenario "Admin using edit page to update status and grant new roles" do
     visit edit_user_path(user)
     expect(page).to have_content('Update any of the fields below')
     within '#admin-user-update' do
@@ -50,6 +50,34 @@ RSpec.feature 'Update user information', :type=> :feature do
       expect(page).to have_content('CCGD Submitter, CCGD Scientific Advisor')
     end
 
+  end
+
+  scenario "Admin using edit page to remove roles from user" do
+    many_roles = create(:many_roles)
+    expect(many_roles.roles.size).to eq(5)
+    visit edit_user_path(many_roles)
+    expect(page).to have_content('Update any of the fields below')
+
+    within '#admin-user-update' do
+      expect(find('#user_roles_1')).to be_checked
+      expect(find('#user_roles_2')).to be_checked
+      expect(find('#user_roles_3')).to be_checked
+      expect(find('#user_roles_4')).to be_checked
+      expect(find('#user_roles_5')).to be_checked
+    end
+
+    within '#admin-user-update' do
+      page.uncheck('CCGD Administrator')
+      page.uncheck('CCGD Scientific Advisor')
+    end
+    click_on 'Update user information'
+    many_roles.reload
+
+    expect(many_roles.roles.size).to eq(3)
+
+    within '.no-list' do
+      expect(page).to have_content('CCGD Faculty, CCGD Lab Staff, CCGD Submitter')
+    end
   end
 
 end

@@ -4,17 +4,32 @@ module UsersHelper
     status = admin_update_params[:status]
     roles = admin_update_params[:roles].delete_if { |role| role.empty? }
     user.status = status unless user.status == status
-    add_roles(user, roles) unless roles.empty?
+    if !roles.empty?
+      roles = roles.map { |role| role.to_i }
+      if roles.size > user.role_ids.size
+        add_roles(user, roles)
+      else
+        remove_roles(user, roles)
+      end
+    end
   end
 
   def add_roles(user, roles)
-    # Rails.logger.info("ROLES: #{roles}")
-    roles = roles.map { |role| role.to_i }
-    new_roles = roles - user.role_ids
-    if !new_roles.empty?
-      new_roles.each do |nr|
-        role = Role.find(nr)
+    to_add = roles - user.role_ids
+    if !to_add.empty?
+      to_add.each do |t|
+        role = Role.find(t)
         user.roles << role
+      end
+    end
+  end
+
+  def remove_roles(user, roles)
+    to_remove = user.role_ids - roles
+    if !to_remove.empty?
+      to_remove.each do |t|
+        role = Role.find(t)
+        user.roles.delete(role)
       end
     end
   end

@@ -12,12 +12,14 @@ FactoryGirl.define do
     organization_id 1
     location_id 1
 
-    /
-    after(:create) do |user|
-      [:role, :role].each do |role|
-        user.roles << create(role)
+    factory :many_roles do
+      roles []
+      after(:create) do |user|
+        (1..4).each do |num|
+          user.roles << Role.find(num)
+        end
       end
     end
-    /
+
   end
 end
