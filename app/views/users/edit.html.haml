@@ -25,8 +25,7 @@
             .form-group
               = f.collection_check_boxes :roles, Role.all, :id, :name do |b|
                 - checked = @user.role_ids.any? { |id| id == b.value }
-                - disabled = b.value == 5
-                = b.check_box(class: "form-control", checked: checked, disabled: disabled)
+                = b.check_box(class: "form-control", checked: checked)
                 = b.label
                 %br
       = f.submit "Update user information", class: 'btn btn-primary btn-lg'
