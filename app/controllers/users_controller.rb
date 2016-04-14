@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include UsersHelper
 
   def index
-    @users = User.non_inactive
+    @users = User.all
   end
 
   def show

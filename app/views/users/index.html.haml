@@ -1,4 +1,5 @@
 %h1 User administration
+= link_to 'Show inactive', '#', id: 'user-table-toggle-show', class: 'btn btn-default', data: { show_inactive: 0 }
 %table#users.table.table-hover.table-striped.table-responsive.admin-table
   %thead
     %tr
@@ -8,7 +9,9 @@
       %th.status Status
       %th.actions Actions
   - @users.each do |user|
-    - rowclass = user.is_pending? ? 'warning' : ''
+    - rowclass = ''
+    - rowclass = 'warning' if user.is_pending?
+    - rowclass = 'info' if user.is_inactive?
     %tr(class="#{rowclass}")
       %td= user.lastname
       %td= user.firstname
@@ -18,6 +21,8 @@
         = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-default'
         - if user.is_active?
           = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'user-deactivate btn btn-warning', remote: true, method: :patch
+        - elsif user.is_inactive?
+          = link_to 'Reactivate', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
         - else
           = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
           = link_to 'Reject', '#', class: 'user-reject btn btn-primary', remote: true
