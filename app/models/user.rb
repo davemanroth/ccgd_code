@@ -39,6 +39,14 @@ class User < ActiveRecord::Base
     roles
   end
 
+  def roles_symbols
+    roles = []
+    self.roles.each do |role|
+      roles.push(role.desciption.to_sym)
+    end
+    roles
+  end
+
   def role_ids
     ids = []
     self.roles.each do |role|
@@ -46,6 +54,11 @@ class User < ActiveRecord::Base
     end
     ids
   end
+
+=begin
+  def has_role?(sym)
+    roles_symbols.any?(sym)
+=end
 
   def initialize_user
     self.status = 'P'
