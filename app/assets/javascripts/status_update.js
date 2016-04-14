@@ -25,7 +25,7 @@
         type: 'deactivate',
         remove: false,
         text: 'Inactive',
-        btn_stat: 'I',
+        btn_stat: 'A',
         btn_type: 'success',
         btn_text: 'Reactivate',
         row_style: 'info'
