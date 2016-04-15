@@ -5,28 +5,29 @@
   = render 'user_fields', f: f
   .row
     .col-md-9
-      #admin-user-update.panel.panel-danger
-        .panel-heading
-          %h3.panel-title For admin use
-        .panel-body.bg-warning
-          %h4 Status
-          .form-inline
-            .form-group
-              = f.radio_button :status, "P", class: "form-control", checked: @user.is_pending?
-              = f.label :status, "Pending"
-            .form-group
-              = f.radio_button :status, "A", class: "form-control", checked: @user.is_active?
-              = f.label :status, "Active"
-            .form-group
-              = f.radio_button :status, "I", class: "form-control", checked: @user.is_inactive?
-              = f.label :status, "Inactive"
-          %h4 Roles
-          .form-inline
-            .form-group
-              = f.collection_check_boxes :roles, Role.all, :id, :name do |b|
-                - checked = @user.role_ids.any? { |id| id == b.value }
-                = b.check_box(class: "form-control", checked: checked)
-                = b.label
-                %br
-      = f.submit "Update user information", class: 'btn btn-primary btn-lg'
+      - if can? :manage, User
+        #admin-user-update.panel.panel-danger
+          .panel-heading
+            %h3.panel-title For admin use
+          .panel-body.bg-warning
+            %h4 Status
+            .form-inline
+              .form-group
+                = f.radio_button :status, "P", class: "form-control", checked: @user.is_pending?
+                = f.label :status, "Pending"
+              .form-group
+                = f.radio_button :status, "A", class: "form-control", checked: @user.is_active?
+                = f.label :status, "Active"
+              .form-group
+                = f.radio_button :status, "I", class: "form-control", checked: @user.is_inactive?
+                = f.label :status, "Inactive"
+            %h4 Roles
+            .form-inline
+              .form-group
+                = f.collection_check_boxes :roles, Role.all, :id, :name do |b|
+                  - checked = @user.role_ids.any? { |id| id == b.value }
+                  = b.check_box(class: "form-control", checked: checked)
+                  = b.label
+                  %br
+        = f.submit "Update user information", class: 'btn btn-primary btn-lg'
 

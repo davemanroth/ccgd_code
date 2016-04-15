@@ -1,7 +1,31 @@
 class Ability
   include CanCan::Ability
 
+  # Role key
+  #
+  # 1: Administrator
+  # 2: Faculty
+  # 3: Staff
+  # 4: Advisor
+  # 5: Submitter
+
   def initialize(user)
+
+    user ||= User.new
+
+    def submitter
+      #can [:read, :update], User, id: user.id
+    end
+
+    # admin
+    can :manage, :all if user.has_role?(1)
+
+    #submitter
+    #submitter if user.has_role?(5)
+
+    #anonymous
+    can :create, User
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

@@ -47,23 +47,16 @@ class User < ActiveRecord::Base
     roles
   end
 
-  def role_ids
-    ids = []
-    self.roles.each do |role|
-      ids.push(role.id)
-    end
-    ids
+  def has_role?(id)
+    self.role_ids.include?(id)
   end
-
-=begin
-  def has_role?(sym)
-    roles_symbols.any?(sym)
-=end
 
   def initialize_user
     self.status = 'P'
-    submitter = Role.find(5)
-    self.roles << submitter
+    if Role.count > 0
+      submitter = Role.find(5)
+      self.roles << submitter
+    end
   end
 
   def status_name
