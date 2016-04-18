@@ -2,5 +2,10 @@
 %p Please complete all form fields below and click the "Submit" button. You will receive an email from the CCGD admin about the status of your user account.
 = form_for(@user) do |f|
   = render 'user_fields', f: f
+  .form-group
+    = f.label :agree, "I have read accept CCGD's policy statement"
+    = check_box_tag :agree, class: "form-control"
+    %br
+    = link_to "Read policy statement", policy_statement_path 
   = f.submit "Create user account", class: 'btn btn-primary btn-lg'
 

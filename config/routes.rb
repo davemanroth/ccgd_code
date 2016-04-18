@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'signup'    => 'users#new'
 
+  get 'policy-statement'    => 'static_pages#policy'
+
   patch 'users/:id/status/:status'  => 'users#status_update'
 
   resources :users
