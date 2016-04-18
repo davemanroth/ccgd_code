@@ -22,12 +22,6 @@
       = f.label :password_confirmation, "Password confirmation"
       = f.password_field :password_confirmation, class: 'form-control'
   #select-lists.col-md-4
-    -# Locations
-    .form-group
-      = f.label :locations, "Select your location"
-      = f.select :location_id, Location.all.order(building: :asc).collect { |loc| [loc.building_room, loc.id] }, { include_blank: '-Location-' }, { class: 'form-control' }
-      %button.add-btn.btn.btn-default Add location
-
     -# Organizations
     .form-group
       = f.label :organizations, "Select your organization"

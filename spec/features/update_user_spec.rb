@@ -19,7 +19,6 @@ RSpec.feature 'Update user information', :type=> :feature do
       expect(page).to have_content('Update any of the fields below')
       fill_in "First name", with: 'Chiwitel'
       fill_in "Last name", with: 'Ejiofor'
-      select "Mayer, 630", from: "user_location_id"
       select "Mount Sinai", from: "user_organization_id"
       select "CCCB, CCCB", from: "user_lab_groups"
       click_on 'Update user information'
@@ -31,7 +30,6 @@ RSpec.feature 'Update user information', :type=> :feature do
 
       within '.no-list' do
         expect(page).to have_content('Chiwitel Ejiofor')
-        expect(page).to have_content('Mayer, 630')
         expect(page).to have_content('Mount Sinai')
         expect(page).to have_content('CCCB, CCCB')
       end
@@ -69,7 +67,7 @@ RSpec.feature 'Update user information', :type=> :feature do
       expect(many_roles.roles.size).to eq(4)
 
       within '.no-list' do
-        expect(page).to have_content('CCGD Administrator, CCGD Faculty, CCGD Lab Staff, CCGD Submitter')
+        expect(page).to have_content('CCGD Submitter, CCGD Administrator, CCGD Faculty, CCGD Lab Staff')
       end
     end
 

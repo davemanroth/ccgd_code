@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   let(:user) { build(:user) }
 
-  it "is valid with username, firstname, lastname, email, phone, password, prganization_id, user_id, and status" do
+  it "is valid with username, firstname, lastname, email, phone, password, organization_id, user_id, and status" do
     expect(user).to be_valid
   end
 
@@ -59,19 +59,6 @@ RSpec.describe User, :type => :model do
     expect(user).to be_invalid
   end
 
-  it "is invalid without an location_id" do
-    user.location_id = ''
-    expect(user).to be_invalid
-  end
-
-  it "has a valid location" do
-    expect(user.location_id).not_to be(nil)
-  end
-
-  it "belongs to the Location model" do
-    expect(user).to belong_to(:location)
-  end
-
   it "belongs to the Organization  model" do
     expect(user).to belong_to(:organization)
   end
@@ -96,7 +83,7 @@ RSpec.describe User, :type => :model do
     [:role, :role].each do |role|
       user.roles << FactoryGirl.create(:role)
     end
-    expect(user.roles.count).to eq 2
+    expect(user.roles.count).to eq 3
   end
 
   it "has a status of pending when first created" do

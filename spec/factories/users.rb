@@ -10,7 +10,6 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     organization_id 1
-    location_id 1
 
     factory :many_roles do
       roles []
@@ -21,5 +20,11 @@ FactoryGirl.define do
       end
     end
 
+    factory :admin do
+      roles []
+      after(:create) do |user|
+        user.roles << Role.find(1)
+      end
+    end
   end
 end

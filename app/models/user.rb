@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   # validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :organization_id, presence: true
-  validates :location_id, presence: true
-  belongs_to :location
   belongs_to :organization
   has_many :memberships
   has_many :lab_groups, through: :memberships
