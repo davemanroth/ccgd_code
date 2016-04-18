@@ -10,12 +10,12 @@
       .wrap-color
         = render 'layouts/header'
         .white
-          - flash.each do |mssg_type, mssg|
-            %div(class="alert alert-#{mssg_type}") #{mssg}
           .row
             .col-md-3
               = render 'layouts/nav'
             .col-md-9
+              - flash.each do |mssg_type, mssg|
+                %div(class="alert alert-#{mssg_type}") #{mssg}
               .main-content
                 %article
                   = yield

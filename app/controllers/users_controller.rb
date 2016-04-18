@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   include UsersHelper
-  load_and_authorize_resource except: [:show, :new, :create]
+  load_and_authorize_resource except: [:new, :create]
 
   def index
     @users = User.all
+    authorize! :index, @users
   end
 
   def show
@@ -67,6 +68,7 @@ class UsersController < ApplicationController
       end
       flash[:error] = "Could not update status"
     end
+    authorize! :status_update, @user
   end
 
   private

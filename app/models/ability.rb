@@ -13,15 +13,31 @@ class Ability
 
     user ||= User.new
 
-    def submitter
-      #can [:read, :update], User, id: user.id
+    # Admin
+    if user.has_role?(1)
+      can :manage, :all
     end
 
-    # admin
-    can :manage, :all if user.has_role?(1)
+=begin
+    # faculty
+    if user.has_role?(2)
+    end
 
-    #submitter
-    #submitter if user.has_role?(5)
+    # Staff
+    if user.has_role?(3)
+    end
+
+    # Advisor
+    if user.has_role?(4)
+    end
+=end
+
+    # Submitter
+    if user.has_role?(5)
+      can [:read, :update], User do |us|
+        us == user
+      end
+    end
 
     #anonymous
     can :create, User

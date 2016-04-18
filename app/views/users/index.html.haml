@@ -7,7 +7,8 @@
       %th.first-name First name
       %th.org Organization
       %th.status Status
-      %th.actions Actions
+      - if can? :manage, @user
+        %th.actions Actions
   - @users.each do |user|
     - rowclass = ''
     - rowclass = 'warning' if user.is_pending?
@@ -17,12 +18,13 @@
       %td= user.firstname
       %td= user.organization.name unless user.organization.nil?
       %td.user-status= user.status_name
-      %td.user-actions
-        = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-default'
-        - if user.is_active?
-          = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'user-deactivate btn btn-warning', remote: true, method: :patch
-        - elsif user.is_inactive?
-          = link_to 'Reactivate', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
-        - else
-          = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
-          = link_to 'Reject', '#', class: 'user-reject btn btn-primary', remote: true
+      - if can? :manage, @user
+        %td.user-actions
+          = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-default'
+          - if user.is_active?
+            = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'user-deactivate btn btn-warning', remote: true, method: :patch
+          - elsif user.is_inactive?
+            = link_to 'Reactivate', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
+          - else
+            = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
+            = link_to 'Reject', '#', class: 'user-reject btn btn-primary', remote: true
