@@ -2,9 +2,10 @@ module UsersHelper
 
   def apply_admin_updates(user)
     status = admin_update_params[:status]
-    roles = admin_update_params[:roles].delete_if { |role| role.empty? }
+    roles = admin_update_params[:roles]
     user.status = status unless user.status == status
-    if !roles.empty?
+    if !roles.nil?
+      roles.delete_if { |role| role.empty? }
       roles = roles.map { |role| role.to_i }
       if roles.size > user.role_ids.size
         add_roles(user, roles)
