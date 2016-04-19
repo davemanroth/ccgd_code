@@ -41,6 +41,7 @@ class Ability
 
     #anonymous
     can :create, User
+    can :create, Session
 
     # Define abilities for the passed in user here. For example:
     #

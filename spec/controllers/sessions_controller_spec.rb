@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, :type => :controller do
+  let(:user) { create(:user) }
 
   describe "GET new" do
     it "returns http success" do
@@ -9,16 +10,16 @@ RSpec.describe SessionsController, :type => :controller do
     end
   end
 
-  describe "GET create" do
+  describe "POST create" do
     it "returns http success" do
-      get :create
+      post :create, session: { user_id: user.id }
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET destroy" do
+  describe "DELETE destroy" do
     it "returns http success" do
-      get :destroy
+      delete :destroy, session: { user_id: user.id }
       expect(response).to have_http_status(:success)
     end
   end
