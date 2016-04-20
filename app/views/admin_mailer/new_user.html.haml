@@ -1,0 +1,9 @@
+%p A new user has registered on the CCGD website. Here are the details:
+%p
+  First name: #{ @user.firstname }<br />
+  Last name: #{ @user.lastname }<br />
+  Email: #{ @user.email }<br />
+  Phone: #{ @user.phone }<br />
+  Organization: #{ @user.organization.name }<br />
+  - labgroups = @user.all_lab_groups.inject { |lgs, lg| lgs + ', ' + lg }
+  Lab/group(s): #{ labgroups }<br />

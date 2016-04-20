@@ -96,6 +96,13 @@ RSpec.describe User, :type => :model do
     expect(users.first.status).to eq 'P'
   end
 
+  it "shows all lab groups of a particular user" do
+    labgroup = LabGroup.find(1)
+    user.lab_groups << labgroup
+    user.save
+    expect(user.all_lab_groups.first).to eq 'CCGD Administration'
+  end
+
   it "has a status of approved when using the approved scope" do
     users = User.approved
     expect(users.first.status).to eq 'A'

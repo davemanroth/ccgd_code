@@ -37,12 +37,8 @@ class User < ActiveRecord::Base
     roles
   end
 
-  def roles_symbols
-    roles = []
-    self.roles.each do |role|
-      roles.push(role.desciption.to_sym)
-    end
-    roles
+  def all_lab_groups
+    self.lab_groups.pluck(:name)
   end
 
   def has_role?(id)

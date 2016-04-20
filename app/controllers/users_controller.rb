@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     end
       
     if @user.save
+      AdminMailer.new_user(@user).deliver_now
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
       log_in(@user)
       redirect_to @user

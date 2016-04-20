@@ -1,0 +1,9 @@
+A new user has registered on the CCGD website. Here are the details:
+
+First name: <%= @user.firstname %>
+Last name: <%= @user.lastname %>
+Email: <%= @user.email %>
+Phone: <%= @user.phone %>
+Organization: <%= @user.organization.name %>
+<% labgroups = @user.all_lab_groups.inject { |lgs, lg| lgs + ', ' + lg } %>
+Lab/group(s): <%= labgroups %>
