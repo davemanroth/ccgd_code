@@ -4,7 +4,7 @@
   = render 'user_fields', f: f
   .form-group
     = f.label :agree, "I have read accept CCGD's policy statement"
-    = check_box_tag :agree, class: "form-control"
+    = check_box_tag :agree
     %br
     = link_to "Read policy statement", policy_statement_path 
   = f.submit "Create user account", class: 'btn btn-primary btn-lg'

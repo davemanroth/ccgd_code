@@ -21,6 +21,10 @@ class UsersController < ApplicationController
     if !lab_group_params.nil?
       add_lab_groups(@user)
     end
+
+    if params[:agree].empty?
+      @user.errors.add(:agree, "You must agree to CCGD's policy")
+    end
       
     if @user.save
       AdminMailer.new_user(@user).deliver_now
@@ -28,6 +32,7 @@ class UsersController < ApplicationController
       log_in(@user)
       redirect_to @user
     else
+      flash[:error] = "There was a problem with your form submission. See errors below"
       render 'new'
     end
   end
@@ -78,7 +83,7 @@ class UsersController < ApplicationController
         :firstname, :lastname, 
         :email, :phone, :username, 
         :password, :password_confirmation,
-        :location_id, :organization_id
+        :organization_id
       )
     end
 
