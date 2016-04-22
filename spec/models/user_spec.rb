@@ -14,7 +14,8 @@ RSpec.describe User, :type => :model do
 
   it "is invalid without a username" do
     user.username = ''
-    expect(user).to be_invalid
+    user.valid?
+    expect(user.errors.messages[:username]).to include("can't be blank")
   end
 
   it "is invalid without a password" do

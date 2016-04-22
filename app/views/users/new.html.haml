@@ -3,9 +3,9 @@
 = form_for(@user) do |f|
   = render 'user_fields', f: f
   .form-group
-    = f.label :agree, "I have read accept CCGD's policy statement"
-    = check_box_tag :agree
+    = f.label :ccgd_policy, "I have read accept CCGD's policy statement"
+    = f.check_box :ccgd_policy, {}, 'yes'
     %br
-    = link_to "Read policy statement", policy_statement_path 
+    = link_to "Read policy statement", policy_statement_path, target: '_blank'
   = f.submit "Create user account", class: 'btn btn-primary btn-lg'
 

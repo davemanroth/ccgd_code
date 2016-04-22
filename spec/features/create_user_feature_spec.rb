@@ -30,7 +30,7 @@ RSpec.feature 'User creation', :type=> :feature do
       select "Beckman Coulter", from: "user_organization_id"
       select "15th floor, Meyerson", from: "user_lab_groups"
       select "Beckman, Beckman", from: "user_lab_groups"
-      check('agree')
+      check('user_ccgd_policy')
       click_on 'Create user account'
     }.to change(User, :count).by(+1)
 
@@ -53,14 +53,20 @@ RSpec.feature 'User creation', :type=> :feature do
       fill_in "Phone", with: '555-555-5555'
       fill_in "Username", with: 'davemanroth'
       fill_in "Password", with: 'password'
+      fill_in "Password confirmation", with: 'password'
       select "Beckman Coulter", from: "user_organization_id"
       select "15th floor, Meyerson", from: "user_lab_groups"
       select "Beckman, Beckman", from: "user_lab_groups"
       click_on 'Create user account'
-    }.to raise_error
+    }.to change(User, :count).by(0)
 
-    expect(page).to have_current_path(new_user_path)
-    expect(page).to have_css('#error-listing')
+    # expect(page).to have_current_path(new_user_path)
+    expect(page).to have_css('#errors-list')
+
+    within '#errors-list' do
+      expect(page).to have_content "Firstname can't be blank"
+      expect(page).to have_content "Ccgd policy must be accepted"
+    end
   end
 
 end

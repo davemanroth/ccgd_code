@@ -22,10 +22,6 @@ class UsersController < ApplicationController
       add_lab_groups(@user)
     end
 
-    if params[:agree].empty?
-      @user.errors.add(:agree, "You must agree to CCGD's policy")
-    end
-      
     if @user.save
       AdminMailer.new_user(@user).deliver_now
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
@@ -83,7 +79,7 @@ class UsersController < ApplicationController
         :firstname, :lastname, 
         :email, :phone, :username, 
         :password, :password_confirmation,
-        :organization_id
+        :organization_id, :ccgd_policy
       )
     end
 

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   # validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :organization_id, presence: true
+  validates :ccgd_policy, acceptance: { accept: 'yes' }, on: :create, allow_nil: false
   belongs_to :organization
   has_many :memberships
   has_many :lab_groups, through: :memberships
