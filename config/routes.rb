@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'sessions#new'
 
   post 'login'    => 'sessions#create'
@@ -13,6 +14,8 @@ Rails.application.routes.draw do
   patch 'users/:id/status/:status'  => 'users#status_update'
 
   resources :users
+
+  resource :password_resets
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
