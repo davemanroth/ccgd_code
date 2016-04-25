@@ -1,8 +1,5 @@
 - if @user.errors.any?
-  #errors-list.panel.panel-primary
-    %ul
-      - @user.errors.full_messages.each do |mssg| 
-        %li.text-danger= mssg
+  =render 'errors'
 .row
   .col-md-4
     .form-group

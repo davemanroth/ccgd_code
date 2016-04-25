@@ -1,0 +1,13 @@
+%h1 Reset password
+.row
+  .col-md-6
+    -if @user.errors.any?
+      =render 'errors'
+    =form_for(@user, url: password_reset_path(params[:id]) do |f|
+      .form-group
+        =f.label :password
+        =f.password_field :password, class: 'form-control'
+      .form-group
+        =f.label :password_confirmation
+        =f.password_field :password_confirmation, class: 'form-control'
+      =f.submit "Update password", class: 'btn btn-primary btn-lg'

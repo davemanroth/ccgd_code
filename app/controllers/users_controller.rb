@@ -61,18 +61,6 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
   end
 
-  def send_password_reset
-    generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now
-    save!
-  end
-
-  def generate_token(col)
-    begin
-      self[col] = SecureRandom.urlsafe_base64
-    end while User.exists?(column: self[col])
-  end
-
   def status_update
     @user = User.find(params[:id])
     @user.status = params[:status]

@@ -43,6 +43,8 @@ Rails.application.configure do
   # reroute Action Mailer previews to spec diretory
   config.action_mailer.preview_path = "#{ Rails.root } /spec/mailers/previews"
 
+  config.action_mailer.default_url_options  = { host: "ccgd.hccdev.org" }
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.

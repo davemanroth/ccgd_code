@@ -20,6 +20,20 @@ class User < ActiveRecord::Base
 
   before_create :initialize_user
 
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def generate_token(col)
+    begin
+      self[col] = SecureRandom.urlsafe_base64
+    end while User.exists?(col => self[col])
+  end
+
   def self.all_statuses
     ['P', 'A', 'I']
   end

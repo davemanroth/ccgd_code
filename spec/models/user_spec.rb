@@ -109,4 +109,10 @@ RSpec.describe User, :type => :model do
     expect(users.first.status).to eq 'A'
   end
 
+  it "generates a password reset token" do
+    user.generate_token(:password_reset_token)
+    user.save
+    expect(user.password_reset_token).to be_a(String)
+  end
+
 end
