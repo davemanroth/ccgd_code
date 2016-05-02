@@ -61,7 +61,7 @@ end
 User.delete_all
 File.open( File.join(path, 'users.csv'), 'r') do |file|
   file.read.each_line do |user|
-    username, firstname, lastname, email, phone, password, org_id, loc_id, status = user.chomp.split(',')
+    username, firstname, lastname, email, phone, password, org_id, status, password_reset_token, password_reset_sent_at, user_custom_labgroup_id, user_custom_organization_id = user.chomp.split(',')
     User.create!(
       username: username, 
       firstname: firstname,
@@ -71,8 +71,11 @@ File.open( File.join(path, 'users.csv'), 'r') do |file|
       password: password,
       password_confirmation: password,
       organization_id: org_id,
-      location_id: loc_id,
-      status: status
+      status: status,
+      password_reset_token: nil,
+      password_reset_sent_at: nil,
+      user_custom_labgroup_id: nil,
+      user_custom_organization_id: nil
     )
   end
 end

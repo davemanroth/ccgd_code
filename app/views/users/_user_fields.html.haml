@@ -31,7 +31,14 @@
     .panel.panel-info
       .panel-body
         %p.text-info Can't find your organization?
-        =link_to 'Add an organization', '#', class: 'btn btn-info'
+        -# =link_to 'Add an organization', '#', class: 'btn btn-info'
+        =label_tag :custom_org, "Add a new organizaiton"
+        =check_box_tag :custom_org, 'yes', false, data: { toggle: 'collapse', target: '#custom-org' }
+        #custom-org.collapse
+          %p Please enter the following information
+          =label_tag :custom_org_name, "Organization name"
+          =text_field_tag :custom_org_name, '', class: 'form-control', placeholder: 'Organization name'
+
 
     -# LabGroups
     .form-group
@@ -40,4 +47,4 @@
     .panel.panel-info
       .panel-body
         %p.text-info Can't find your lab or group?
-        =link_to 'Add a lab or group', '#', class: 'btn btn-info'
+        -# =link_to 'Add a lab or group', '#', class: 'btn btn-info'
