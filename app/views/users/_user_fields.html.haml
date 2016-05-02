@@ -32,13 +32,30 @@
       .panel-body
         %p.text-info Can't find your organization?
         -# =link_to 'Add an organization', '#', class: 'btn btn-info'
-        =label_tag :custom_org, "Add a new organizaiton"
-        =check_box_tag :custom_org, 'yes', false, data: { toggle: 'collapse', target: '#custom-org' }
+        %button.btn.btn-info(data-toggle="collapse" data-target="#custom-org" type="button") Add a new organization
         #custom-org.collapse
-          %p Please enter the following information
-          =label_tag :custom_org_name, "Organization name"
-          =text_field_tag :custom_org_name, '', class: 'form-control', placeholder: 'Organization name'
-
+          %p Please enter the following information about your organization
+          .form-group
+            =label_tag :custom_org_name, "Organization name"
+            =text_field_tag :custom_org_name, '', class: 'form-control', placeholder: 'Organization name'
+          .form-group
+            =label_tag :custom_org_phone, "Organization phone"
+            =text_field_tag :custom_org_phone, '', class: 'form-control', placeholder: 'Organization phone'
+          .form-group
+            =label_tag :custom_org_email, "Organization email"
+            =text_field_tag :custom_org_email, '', class: 'form-control', placeholder: 'Organization email'
+          .form-group
+            =label_tag :custom_org_street, "Street"
+            =text_field_tag :custom_org_street, '', class: 'form-control', placeholder: 'Street'
+          .form-group
+            =label_tag :custom_org_city, "City"
+            =text_field_tag :custom_org_city, '', class: 'form-control', placeholder: 'City'
+          .form-group
+            = label_tag :state_id, "State (if applicable)"
+            = select_tag :state_id, options_for_select(State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' } ), class: 'form-control'
+          .form-group
+            =label_tag :custom_org_country, "Country"
+            =text_field_tag :custom_org_country, '', class: 'form-control', placeholder: 'Country'
 
     -# LabGroups
     .form-group
@@ -47,4 +64,32 @@
     .panel.panel-info
       .panel-body
         %p.text-info Can't find your lab or group?
-        -# =link_to 'Add a lab or group', '#', class: 'btn btn-info'
+        %button.btn.btn-info(data-toggle="collapse" data-target="#custom-labgroup" type="button") Add a new Lab/group
+        #custom-labgroup.collapse
+          %p Please enter the following information about your lab or group
+          .form-group
+            =label_tag :custom_labgroup_name, "Lab/group name"
+            =text_field_tag :custom_labgroup_name, '', class: 'form-control', placeholder: 'Lab/group name'
+          .form-group
+            =label_tag :custom_labgroup_code, "Lab/group code"
+            =text_field_tag :custom_labgroup_code, '', class: 'form-control', placeholder: 'Lab/group code'
+          .form-group
+            =label_tag :custom_labgroup_building, "Building"
+            =text_field_tag :custom_labgroup_building, '', class: 'form-control', placeholder: 'Building'
+          .form-group
+            =label_tag :custom_labgroup_room, "Room"
+            =text_field_tag :custom_labgroup_room, '', class: 'form-control', placeholder: 'Room'
+          .form-group
+            =label_tag :custom_labgroup_street, "Street"
+            =text_field_tag :custom_labgroup_street, '', class: 'form-control', placeholder: 'Street'
+          .form-group
+            =label_tag :custom_org_city, "City"
+            =text_field_tag :custom_org_city, '', class: 'form-control', placeholder: 'City'
+          .form-group
+            = label_tag :state_id, "State (if applicable)"
+            = select_tag :state_id, options_for_select(State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' } ), class: 'form-control'
+          .form-group
+            =label_tag :custom_org_country, "Country"
+            =text_field_tag :custom_org_country, '', class: 'form-control', placeholder: 'Country'
+
+

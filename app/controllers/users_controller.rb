@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
+      # Rails.logger.debug(params)
       AdminMailer.new_user(@user).deliver_now
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
       log_in(@user)
@@ -92,4 +93,13 @@ class UsersController < ApplicationController
     def admin_update_params
       params.require(:user).permit(:status, roles:[])
     end
+
+    def custom_org_params
+      params.require(:user).permit(
+        :custom_org_name, :custom_org_phone,
+        :custom_org_email, :custom_org_street,
+        :custom_org_city, :custom_org_country, :state_id
+      )
+    end
+
 end
