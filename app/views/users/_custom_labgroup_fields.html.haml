@@ -1,0 +1,27 @@
+-f.fields_for :user_custom_labgroup do |ucl|
+  .form-group
+    =ucl.label :custom_labgroup_name, "Lab/group name"
+    =ucl.text_field :custom_labgroup_name, class: 'form-control', placeholder: 'Lab/group name'
+  .form-group
+    =ucl.label :custom_labgroup_code, "Lab/group code"
+    =ucl.text_field :custom_labgroup_code, class: 'form-control', placeholder: 'Lab/group code'
+  .form-group
+    =ucl.label :custom_labgroup_building, "Building"
+    =ucl.text_field :custom_labgroup_building, class: 'form-control', placeholder: 'Building'
+  .form-group
+    =ucl.label :custom_labgroup_room, "Room"
+    =ucl.text_field :custom_labgroup_room, class: 'form-control', placeholder: 'Room'
+  .form-group
+    =ucl.label :custom_labgroup_street, "Street"
+    =ucl.text_field :custom_labgroup_street, class: 'form-control', placeholder: 'Street'
+  .form-group
+    =ucl.label :custom_labgroup_city, "City"
+    =ucl.text_field :custom_labgroup_city, class: 'form-control', placeholder: 'City'
+  .form-group
+    = ucl.label :state_id, "State (if applicable)"
+    = ucl.select :state_id, State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' }, { class: 'form-control' }
+  .form-group
+    =ucl.label :custom_labgroup_country, "Country"
+    =ucl.text_field :custom_labgroup_country, class: 'form-control', placeholder: 'Country'
+
+

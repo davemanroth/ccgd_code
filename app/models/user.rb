@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   belongs_to :organization
   belongs_to :user_custom_labgroup
   belongs_to :user_custom_organization
+  accepts_nested_attributes_for :user_custom_labgroup, :user_custom_organization, allow_destroy: true
   has_many :memberships
   has_many :lab_groups, through: :memberships
   has_many :privileges

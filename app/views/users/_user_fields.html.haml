@@ -35,27 +35,7 @@
         %button.btn.btn-info(data-toggle="collapse" data-target="#custom-org" type="button") Add a new organization
         #custom-org.collapse
           %p Please enter the following information about your organization
-          .form-group
-            =label_tag :custom_org_name, "Organization name"
-            =text_field_tag :custom_org_name, '', class: 'form-control', placeholder: 'Organization name'
-          .form-group
-            =label_tag :custom_org_phone, "Organization phone"
-            =text_field_tag :custom_org_phone, '', class: 'form-control', placeholder: 'Organization phone'
-          .form-group
-            =label_tag :custom_org_email, "Organization email"
-            =text_field_tag :custom_org_email, '', class: 'form-control', placeholder: 'Organization email'
-          .form-group
-            =label_tag :custom_org_street, "Street"
-            =text_field_tag :custom_org_street, '', class: 'form-control', placeholder: 'Street'
-          .form-group
-            =label_tag :custom_org_city, "City"
-            =text_field_tag :custom_org_city, '', class: 'form-control', placeholder: 'City'
-          .form-group
-            = label_tag :state_id, "State (if applicable)"
-            = select_tag :state_id, options_for_select(State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' } ), class: 'form-control'
-          .form-group
-            =label_tag :custom_org_country, "Country"
-            =text_field_tag :custom_org_country, '', class: 'form-control', placeholder: 'Country'
+          = render 'custom_organization_fields', f: f
 
     -# LabGroups
     .form-group
@@ -67,29 +47,5 @@
         %button.btn.btn-info(data-toggle="collapse" data-target="#custom-labgroup" type="button") Add a new Lab/group
         #custom-labgroup.collapse
           %p Please enter the following information about your lab or group
-          .form-group
-            =label_tag :custom_labgroup_name, "Lab/group name"
-            =text_field_tag :custom_labgroup_name, '', class: 'form-control', placeholder: 'Lab/group name'
-          .form-group
-            =label_tag :custom_labgroup_code, "Lab/group code"
-            =text_field_tag :custom_labgroup_code, '', class: 'form-control', placeholder: 'Lab/group code'
-          .form-group
-            =label_tag :custom_labgroup_building, "Building"
-            =text_field_tag :custom_labgroup_building, '', class: 'form-control', placeholder: 'Building'
-          .form-group
-            =label_tag :custom_labgroup_room, "Room"
-            =text_field_tag :custom_labgroup_room, '', class: 'form-control', placeholder: 'Room'
-          .form-group
-            =label_tag :custom_labgroup_street, "Street"
-            =text_field_tag :custom_labgroup_street, '', class: 'form-control', placeholder: 'Street'
-          .form-group
-            =label_tag :custom_org_city, "City"
-            =text_field_tag :custom_org_city, '', class: 'form-control', placeholder: 'City'
-          .form-group
-            = label_tag :state_id, "State (if applicable)"
-            = select_tag :state_id, options_for_select(State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' } ), class: 'form-control'
-          .form-group
-            =label_tag :custom_org_country, "Country"
-            =text_field_tag :custom_org_country, '', class: 'form-control', placeholder: 'Country'
-
+          = render 'custom_labgroup_fields', f: f
 

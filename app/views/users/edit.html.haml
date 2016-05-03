@@ -10,6 +10,10 @@
           .panel-heading
             %h3.panel-title For admin use
           .panel-body.bg-warning
+            - if !@user.user_custom_organization.nil?
+              %h4 Add organization
+              %p This user has added an organization. Review the details below and make any necessary edits. Once everything is valid, use the "Add organization" button to add it to the database
+              = render 'custom_organization_fields', f: f
             %h4 Status
             .form-inline
               .form-group
