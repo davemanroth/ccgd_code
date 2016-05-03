@@ -71,7 +71,7 @@ RSpec.feature 'User creation', :type=> :feature do
 
 =begin
 =end
-  scenario "goes to create user page andt fills in custom labgroup/org fields instead of using preselect values" do
+  scenario "goes to create user page and fills in custom labgroup/org fields instead of using preselect values" do
     expect {
       fill_in "First name", with: 'Dave'
       fill_in "Last name", with: 'Rothfarb'
@@ -80,7 +80,7 @@ RSpec.feature 'User creation', :type=> :feature do
       fill_in "Username", with: 'davemanroth'
       fill_in "Password", with: 'password'
       fill_in "Password confirmation", with: 'password'
-      check('custom_org')
+      click_on('Add a new organization')
       fill_in "Organization name", with: 'Test organization'
       check('user_ccgd_policy')
       click_on 'Create user account'

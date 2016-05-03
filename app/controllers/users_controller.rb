@@ -22,9 +22,25 @@ class UsersController < ApplicationController
       add_lab_groups(@user)
     end
 
+    if !custom_org_params.empty?
+      if organization_selected?(user_params)
+        @user.errors.add(:user_custom_organization_id, "If you've already selected an organization, you cannot add new one")
+      else
+        uco = UserCustomOrganization.create(custom_org_params)
+        @user.user_custom_organization_id = uco.id
+      end
+    end
+
+=begin
+    if !custom_org_params.nil?
+      uco = UserCustomOrganization.create(custom_org_params)
+      @user.user_custom_organization_id = uco
+    end
+=end
+
     if @user.save
       # Rails.logger.debug(params)
-      AdminMailer.new_user(@user).deliver_now
+      #AdminMailer.new_user(@user).deliver_now
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
       log_in(@user)
       redirect_to @user
@@ -95,11 +111,14 @@ class UsersController < ApplicationController
     end
 
     def custom_org_params
-      params.require(:user).permit(
+      params.permit(
         :custom_org_name, :custom_org_phone,
         :custom_org_email, :custom_org_street,
         :custom_org_city, :custom_org_country, :state_id
       )
+    end
+
+    def custom_labgroup_params
     end
 
 end

@@ -48,6 +48,10 @@ module UsersHelper
     end
   end
 
+  def organization_selected?(params)
+    !params[:organization_id].empty?
+  end
+
 
 
 end
