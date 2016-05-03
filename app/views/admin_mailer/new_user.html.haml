@@ -4,6 +4,8 @@
   Last name: #{ @user.lastname }<br />
   Email: #{ @user.email }<br />
   Phone: #{ @user.phone }<br />
-  Organization: #{ @user.organization.name }<br />
-  - labgroups = @user.all_lab_groups.inject { |lgs, lg| lgs + ', ' + lg }
-  Lab/group(s): #{ labgroups }<br />
+  -if !@user.organization_id.nil?
+    Organization: #{ @user.organization.name }<br />
+  -if !@user.lab_groups.nil?
+    - labgroups = @user.all_lab_groups.inject { |lgs, lg| lgs + ', ' + lg }
+    Lab/group(s): #{ labgroups }<br />

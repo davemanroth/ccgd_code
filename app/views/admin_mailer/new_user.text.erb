@@ -4,6 +4,10 @@ First name: <%= @user.firstname %>
 Last name: <%= @user.lastname %>
 Email: <%= @user.email %>
 Phone: <%= @user.phone %>
-Organization: <%= @user.organization.name %>
-<% labgroups = @user.all_lab_groups.inject { |lgs, lg| lgs + ', ' + lg } %>
-Lab/group(s): <%= labgroups %>
+<% if !@user.organization_id.nil? %>
+  Organization: <%= @user.organization.name %>
+<% end %>
+<% if !@user.lab_groups.nil? %>
+  <% labgroups = @user.all_lab_groups.inject { |lgs, lg| lgs + ', ' + lg } %>
+  Lab/group(s): <%= labgroups %>
+<% end %>

@@ -24,7 +24,7 @@ RSpec.feature 'User creation', :type=> :feature do
       fill_in "Last name", with: 'Rothfarb'
       fill_in "Email", with: 'dave@rothfarb.com'
       fill_in "Phone", with: '555-555-5555'
-      fill_in "Username", with: 'davemanroth'
+      fill_in "Username", with: 'davemanroth-test'
       fill_in "Password", with: 'password'
       fill_in "Password confirmation", with: 'password'
       select "Beckman Coulter", from: "user_organization_id"
@@ -51,7 +51,7 @@ RSpec.feature 'User creation', :type=> :feature do
       fill_in "Last name", with: 'Rothfarb'
       fill_in "Email", with: 'dave@rothfarb.com'
       fill_in "Phone", with: '555-555-5555'
-      fill_in "Username", with: 'davemanroth'
+      fill_in "Username", with: 'davemanroth-test'
       fill_in "Password", with: 'password'
       fill_in "Password confirmation", with: 'password'
       select "Beckman Coulter", from: "user_organization_id"
@@ -71,20 +71,28 @@ RSpec.feature 'User creation', :type=> :feature do
 
 =begin
 =end
-  scenario "goes to create user page and fills in custom labgroup/org fields instead of using preselect values" do
+  scenario "goes to create user page, fills in custom labgroup/org fields instead of using preselect values" do
     expect {
       fill_in "First name", with: 'Dave'
       fill_in "Last name", with: 'Rothfarb'
       fill_in "Email", with: 'dave@rothfarb.com'
       fill_in "Phone", with: '555-555-5555'
-      fill_in "Username", with: 'davemanroth'
+      fill_in "Username", with: 'davemanroth-test'
       fill_in "Password", with: 'password'
       fill_in "Password confirmation", with: 'password'
       click_on('Add a new organization')
       fill_in "Organization name", with: 'Test organization'
+      click_on('Add a new Lab/group')
+      fill_in "Lab/group name", with: 'Test lab'
       check('user_ccgd_policy')
       click_on 'Create user account'
     }.to change(User, :count).by(1)
+
+    user = User.find_by(username: 'davemanroth-test')
+    expect(user.user_custom_organization.custom_org_name).to eq('Test organization')
+    expect(user.user_custom_labgroup.custom_labgroup_name).to eq('Test lab')
+
+
   end
 
 end
