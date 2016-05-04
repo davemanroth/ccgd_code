@@ -92,7 +92,6 @@ RSpec.feature 'User creation', :type=> :feature do
     expect(user.user_custom_organization.custom_org_name).to eq('Test organization')
     expect(user.user_custom_labgroup.custom_labgroup_name).to eq('Test lab')
 
-
   end
 
 end
