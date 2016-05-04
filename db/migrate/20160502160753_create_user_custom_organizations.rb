@@ -8,6 +8,7 @@ class CreateUserCustomOrganizations < ActiveRecord::Migration
       t.string :custom_org_city
       t.string :custom_org_country
       t.integer :state_id
+      t.integer :user_id
 
       t.timestamps null: false
     end

@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
   # validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :ccgd_policy, acceptance: { accept: 'yes' }, on: :create, allow_nil: false
   belongs_to :organization
-  belongs_to :user_custom_labgroup
-  belongs_to :user_custom_organization
+  has_one :user_custom_labgroup
+  has_one :user_custom_organization
   accepts_nested_attributes_for :user_custom_labgroup, :user_custom_organization, allow_destroy: true
   has_many :memberships
   has_many :lab_groups, through: :memberships

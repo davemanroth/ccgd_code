@@ -52,6 +52,10 @@ module UsersHelper
     !params[:organization_id].empty?
   end
 
+  def initialize_custom_fields(user)
+    user.user_custom_organization ||= UserCustomOrganization.new
+    user.user_custom_labgroup ||= UserCustomLabgroup.new
+  end
 
 
 end

@@ -9,6 +9,7 @@ class CreateUserCustomLabgroups < ActiveRecord::Migration
       t.string :custom_labgroup_city
       t.string :custom_labgroup_country
       t.integer :state_id
+      t.integer :user_id
 
       t.timestamps null: false
     end
