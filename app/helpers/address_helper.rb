@@ -8,7 +8,7 @@ module AddressHelper
       state_id: data.state_id
     )
     if address.save
-      address.id
+      address
     end
   end
 end
