@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'organizations/create'
+
+  get 'organizations_controller/create'
+
   root 'sessions#new'
 
   post 'login'    => 'sessions#create'
@@ -12,6 +16,10 @@ Rails.application.routes.draw do
   get 'policy-statement'    => 'static_pages#policy'
 
   patch 'users/:id/status/:status'  => 'users#status_update'
+
+  resources :organizations, only: [:create]
+
+  resources :labgroups, only: [:create]
 
   resources :users
 

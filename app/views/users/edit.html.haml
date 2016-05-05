@@ -6,14 +6,11 @@
   .row
     .col-md-9
       - if can? :manage, User
-        #admin-user-update.panel.panel-danger
+        %h2 Administrator
+        .panel.panel-danger
           .panel-heading
-            %h3.panel-title For admin use
-          .panel-body.bg-warning
-            - if !@user.user_custom_organization.nil?
-              %h4 Add organization
-              %p This user has added an organization. Review the details below and make any necessary edits. Once everything is valid, use the "Add organization" button to add it to the database
-              = render 'custom_organization_fields', f: f
+            %h3.panel-title Status and roles
+          .panel-body
             %h4 Status
             .form-inline
               .form-group
@@ -33,5 +30,23 @@
                   = b.check_box(class: "form-control", checked: checked)
                   = b.label
                   %br
-      = f.submit "Update user information", class: 'btn btn-primary btn-lg'
+      = f.submit "Update user information", class: 'btn btn-info btn-lg'
+.row
+  .col-md-9
+    - if can? :manage, User
+      - if !@user.user_custom_organization.nil? || !@user.user_custom_labgroup.nil?
+        .panel.panel-danger
+          .panel-heading
+            %h3.panel-title User added labs and organizations
+          .panel-body
+            %p This user has added a new organization and/or lab. Review the details below and use the "Add organization" and "Add lab" buttons to add them to the database
+            - if !@user.user_custom_organization.nil?
+              -#= render 'custom_organization_fields', f: f
+              = button_to 'Add organization', organizations_path(org_id: @user.user_custom_organization), class: 'btn btn-info', remote: true
+      .panel.panel-danger
+        .panel-heading
+          %h3.panel-title Delete user account
+        .panel-body
+          %p If this is a bogus user account or the user needs to be deleted, use the "Delete user account" button below.
+          = link_to 'Delete user', user_path(@user), class: 'btn btn-primary', remote: true, method: :delete
 

@@ -27,5 +27,12 @@ FactoryGirl.define do
         user.roles << Role.find(1)
       end
     end
+
+    factory :custom_fields_user do
+      after(:create) do |user|
+        user.user_custom_organization = FactoryGirl.build(:user_custom_organization, user: user)
+        user.user_custom_labgroup = FactoryGirl.build(:user_custom_labgroup, user: user)
+      end
+    end
   end
 end
