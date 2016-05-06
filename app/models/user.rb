@@ -57,11 +57,11 @@ class User < ActiveRecord::Base
       attrs = custom_fields.attributes.delete_if do |key, val|
         key.split('_').first != 'custom'
       end
+      if !custom_fields.state_id.nil?
+        attrs['state'] = State.find(custom_fields.state_id).code
+      end
     end
-    if !custom_fields.state_id.nil?
-      attrs['state'] = State.find(custom_fields.state_id).code
-    end
-    attrs
+    attrs.all? { |key, val| val.nil? } ? nil : attrs
   end
 
 

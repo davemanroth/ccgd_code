@@ -34,20 +34,20 @@
 .row
   .col-md-9
     - if can? :manage, User
-      - if !@user.user_custom_organization.nil? || !@user.user_custom_labgroup.nil?
+      - if @user.org_attributes || @user.lab_attributes
         #labs_and_orgs.panel.panel-default
           .panel-heading
             %h3.panel-title Add user-contributed labs and organizations
           .panel-body
             %p This user has added a new organization and/or lab. Review the details below and use the "Add organization" and "Add lab" buttons to add them to the database
-            - if !@user.user_custom_organization.nil?
+            - if @user.org_attributes
               #org.col-md-6
                 %h4 Organization
                 %ul
                   - @user.org_attributes.each do |key, val|
                     %li= [key.split('_').last.capitalize, val].join(': ')
                 = button_to 'Add', organizations_path(org_id: @user.user_custom_organization), class: 'btn btn-info', remote: true
-            - if !@user.user_custom_labgroup.nil?
+            - if @user.lab_attributes
               #lab.col-md-6
                 %h4 Lab/group
                 %ul
