@@ -3,11 +3,14 @@ class OrganizationsController < ApplicationController
 
   def create
     uco = UserCustomOrganization.find(org_params[:org_id])
+    user = User.find(uco.user_id)
     if !uco.nil?
       address = add_address(uco)
       org = load_org(uco, address.id)
       if org.save
         flash[:success] = 'Organization added'
+        user.update(organization: org)
+        uco.destroy
       else
         flash[:error] = 'An error occurred'
       end

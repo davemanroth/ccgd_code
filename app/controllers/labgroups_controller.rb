@@ -3,10 +3,14 @@ class LabgroupsController < ApplicationController
 
   def create
     ucl = UserCustomLabgroup.find(lab_params[:lab_id])
+    user = User.find(ucl.user_id)
     if !ucl.nil?
       lab = load_lab(ucl)
       if lab.save
         flash[:success] = 'Lab/group added'
+        user.lab_groups << lab
+        user.save
+        ucl.destroy
       else
         flash[:error] = 'An error occurred'
       end

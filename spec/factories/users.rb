@@ -30,6 +30,7 @@ FactoryGirl.define do
 
     factory :custom_fields_user do
       after(:create) do |user|
+        user.organization_id = nil
         user.user_custom_organization = FactoryGirl.build(:user_custom_organization, user: user)
         user.user_custom_labgroup = FactoryGirl.build(:user_custom_labgroup, user: user)
       end
