@@ -53,12 +53,12 @@ RSpec.describe User, :type => :model do
     user2.email = 'dave@rothfarb.com'
     expect(user2).to be_invalid
   end
-=end
 
   it "is invalid without an organization_id" do
     user.organization_id = ''
     expect(user).to be_invalid
   end
+=end
 
   it "belongs to the Organization  model" do
     expect(user).to belong_to(:organization)
@@ -95,6 +95,13 @@ RSpec.describe User, :type => :model do
   it "has a status of pending when using the pending scope" do
     users = User.pending
     expect(users.first.status).to eq 'P'
+  end
+
+  it "outputs custom organization fields hash" do
+    cf_user = create(:custom_fields_user)
+    pp cf_user.org_attributes
+    #pp cf_user.user_custom_organization.attributes
+    expect(cf_user.org_attributes).to be_an_instance_of(Hash)
   end
 
   it "shows all lab groups of a particular user" do

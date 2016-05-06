@@ -44,6 +44,27 @@ class User < ActiveRecord::Base
     [firstname, lastname].join(' ')
   end
 
+  def org_attributes
+    clean_attributes(self.user_custom_organization)
+  end
+
+  def lab_attributes
+    clean_attributes(self.user_custom_labgroup)
+  end
+
+  def clean_attributes(custom_fields)
+    if !custom_fields.nil?
+      attrs = custom_fields.attributes.delete_if do |key, val|
+        key.split('_').first != 'custom'
+      end
+    end
+    if !custom_fields.state_id.nil?
+      attrs['state'] = State.find(custom_fields.state_id).code
+    end
+    attrs
+  end
+
+
   def all_roles
     roles = ''
     self.roles.each_with_index do |role, i|
