@@ -99,9 +99,12 @@ RSpec.describe User, :type => :model do
 
   it "outputs custom organization fields hash" do
     cf_user = create(:custom_fields_user)
-    pp cf_user.org_attributes
-    #pp cf_user.user_custom_organization.attributes
     expect(cf_user.org_attributes).to be_an_instance_of(Hash)
+  end
+
+  it "outputs custom labgroup fields hash" do
+    cf_user = create(:custom_fields_user)
+    expect(cf_user.lab_attributes).to be_an_instance_of(Hash)
   end
 
   it "shows all lab groups of a particular user" do
