@@ -99,14 +99,14 @@ class UsersController < ApplicationController
         :organization_id, :ccgd_policy,
         user_custom_organization_attributes: [
           :id, :custom_org_name, :custom_org_phone,
-          :custom_org_email, :custom_org_street,
-          :custom_org_city, :custom_org_country, :state_id
+          :custom_org_email, :custom_street,
+          :custom_city, :custom_country, :state_id
         ],
         user_custom_labgroup_attributes: [
           :id, :custom_labgroup_name, :custom_labgroup_code,
           :custom_labgroup_building, :custom_labgroup_room,
-          :custom_labgroup_street, :custom_labgroup_city, 
-          :custom_labgroup_country, :state_id
+          :custom_street, :custom_city, 
+          :custom_country, :state_id
         ]
       )
     end
@@ -119,25 +119,6 @@ class UsersController < ApplicationController
     # Separate out admin update privileges
     def admin_update_params
       params.require(:user).permit(:status, roles:[])
-    end
-
-    def custom_org_params
-      params.require(:user).permit(
-        user_custom_organization_attributes: [
-          :id, :custom_org_name, :custom_org_phone,
-          :custom_org_email, :custom_org_street,
-          :custom_org_city, :custom_org_country, :state_id
-        ]
-      )
-    end
-
-    def custom_labgroup_params
-      params.require(:user).permit(
-        :custom_labgroup_name, :custom_labgroup_code,
-        :custom_labgroup_building, :custom_labgroup_room,
-        :custom_labgroup_street, :custom_labgroup_city, 
-        :custom_labgroup_country, :state_id
-      )
     end
 
 end

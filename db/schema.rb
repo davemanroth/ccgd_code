@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(version: 20160502162508) do
     t.string   "custom_labgroup_code",     limit: 255
     t.string   "custom_labgroup_building", limit: 255
     t.string   "custom_labgroup_room",     limit: 255
-    t.string   "custom_labgroup_street",   limit: 255
-    t.string   "custom_labgroup_city",     limit: 255
-    t.string   "custom_labgroup_country",  limit: 255
+    t.string   "custom_street",            limit: 255
+    t.string   "custom_city",              limit: 255
+    t.string   "custom_country",           limit: 255
     t.integer  "state_id",                 limit: 4
     t.integer  "user_id",                  limit: 4
     t.datetime "created_at",                           null: false
@@ -93,16 +93,16 @@ ActiveRecord::Schema.define(version: 20160502162508) do
   end
 
   create_table "user_custom_organizations", force: :cascade do |t|
-    t.string   "custom_org_name",    limit: 255
-    t.string   "custom_org_phone",   limit: 255
-    t.string   "custom_org_email",   limit: 255
-    t.string   "custom_org_street",  limit: 255
-    t.string   "custom_org_city",    limit: 255
-    t.string   "custom_org_country", limit: 255
-    t.integer  "state_id",           limit: 4
-    t.integer  "user_id",            limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "custom_org_name",  limit: 255
+    t.string   "custom_org_phone", limit: 255
+    t.string   "custom_org_email", limit: 255
+    t.string   "custom_street",    limit: 255
+    t.string   "custom_city",      limit: 255
+    t.string   "custom_country",   limit: 255
+    t.integer  "state_id",         limit: 4
+    t.integer  "user_id",          limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -7,9 +7,9 @@ FactoryGirl.define do
     custom_labgroup_code { Faker::Company.suffix }
     custom_labgroup_building { Faker::Lorem.word }
     custom_labgroup_room { Faker::Address.building_number }
-    custom_labgroup_street { Faker::Address.street_address }
-    custom_labgroup_city { Faker::Address.city }
-    custom_labgroup_country { Faker::Address.country }
+    custom_street { Faker::Address.street_address }
+    custom_city { Faker::Address.city }
+    custom_country { Faker::Address.country }
     state_id 1
   end
 end

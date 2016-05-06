@@ -12,16 +12,16 @@
     =ucl.label :custom_labgroup_room, "Room"
     =ucl.text_field :custom_labgroup_room, class: 'form-control', placeholder: 'Room'
   .form-group
-    =ucl.label :custom_labgroup_street, "Street"
-    =ucl.text_field :custom_labgroup_street, class: 'form-control', placeholder: 'Street'
+    =ucl.label :custom_street, "Street"
+    =ucl.text_field :custom_street, class: 'form-control', placeholder: 'Street'
   .form-group
-    =ucl.label :custom_labgroup_city, "City"
-    =ucl.text_field :custom_labgroup_city, class: 'form-control', placeholder: 'City'
+    =ucl.label :custom_city, "City"
+    =ucl.text_field :custom_city, class: 'form-control', placeholder: 'City'
   .form-group
     = ucl.label :state_id, "State (if applicable)"
     = ucl.select :state_id, State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' }, { class: 'form-control' }
   .form-group
-    =ucl.label :custom_labgroup_country, "Country"
-    =ucl.text_field :custom_labgroup_country, class: 'form-control', placeholder: 'Country'
+    =ucl.label :custom_country, "Country"
+    =ucl.text_field :custom_country, class: 'form-control', placeholder: 'Country'
 
 

@@ -9,15 +9,15 @@
     =uco.label :custom_org_email, "Organization email"
     =uco.text_field :custom_org_email, class: 'form-control', placeholder: 'Organization email'
   .form-group
-    =uco.label :custom_org_street, "Street"
-    =uco.text_field :custom_org_street, class: 'form-control', placeholder: 'Street'
+    =uco.label :custom_street, "Street"
+    =uco.text_field :custom_street, class: 'form-control', placeholder: 'Street'
   .form-group
-    =uco.label :custom_org_city, "City"
-    =uco.text_field :custom_org_city, class: 'form-control', placeholder: 'City'
+    =uco.label :custom_city, "City"
+    =uco.text_field :custom_city, class: 'form-control', placeholder: 'City'
   .form-group
     = uco.label :state_id, "State (if applicable)"
     = uco.select :state_id, State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' }, { class: 'form-control' }
   .form-group
-    =uco.label :custom_org_country, "Country"
-    =uco.text_field :custom_org_country, class: 'form-control', placeholder: 'Country'
+    =uco.label :custom_country, "Country"
+    =uco.text_field :custom_country, class: 'form-control', placeholder: 'Country'
 

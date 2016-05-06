@@ -5,9 +5,9 @@ class CreateUserCustomLabgroups < ActiveRecord::Migration
       t.string :custom_labgroup_code
       t.string :custom_labgroup_building
       t.string :custom_labgroup_room
-      t.string :custom_labgroup_street
-      t.string :custom_labgroup_city
-      t.string :custom_labgroup_country
+      t.string :custom_street
+      t.string :custom_city
+      t.string :custom_country
       t.integer :state_id
       t.integer :user_id
 

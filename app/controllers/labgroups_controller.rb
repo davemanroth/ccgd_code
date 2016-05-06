@@ -17,9 +17,9 @@ class LabgroupsController < ApplicationController
 
     def load_lab(ucl)
       location = add_location(ucl)
-      Labgroup.create(
+      LabGroup.create(
         name: ucl.custom_labgroup_name,
-        code: ucl.custom_labgroup_phone,
+        code: ucl.custom_labgroup_code,
         location_id: location.id
       )
     end

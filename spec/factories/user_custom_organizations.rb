@@ -6,9 +6,9 @@ FactoryGirl.define do
     custom_org_name { Faker::Company.name }
     custom_org_phone { Faker::PhoneNumber.phone_number }
     custom_org_email { Faker::Internet.email }
-    custom_org_street { Faker::Address.street_address }
-    custom_org_city { Faker::Address.city }
-    custom_org_country { Faker::Address.country }
+    custom_street { Faker::Address.street_address }
+    custom_city { Faker::Address.city }
+    custom_country { Faker::Address.country }
     state_id 1
   end
 end
