@@ -17,6 +17,7 @@ class LabgroupsController < ApplicationController
     end
     respond_to do |format|
       format.js { render partial: 'shared/add_success' }
+      format.html
     end
   end
 
