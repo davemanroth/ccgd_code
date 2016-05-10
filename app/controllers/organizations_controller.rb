@@ -3,7 +3,6 @@ class OrganizationsController < ApplicationController
 
   def create
     uco = UserCustomOrganization.find(org_params[:org_id])
-=begin
     user = User.find(uco.user_id)
     if !uco.nil?
       address = add_address(uco)
@@ -16,9 +15,8 @@ class OrganizationsController < ApplicationController
         flash[:error] = 'An error occurred'
       end
     end
-=end
     respond_to do |format|
-      format.js { render partial: 'shared/success' }
+      format.js { render partial: 'shared/add_success' }
     end
   end
 

@@ -31,6 +31,19 @@ header, footer {
   padding-left: 0;
 }
 
+.add-success {
+  width: 75%;
+  margin: 10px 0;
+  p {
+    margin: 19px 10px 23px;
+    font-size: 110%;
+  }
+}
+
+.centered {
+  text-align: center;
+}
+
 // Tables
 .admin-table {
   th.org {

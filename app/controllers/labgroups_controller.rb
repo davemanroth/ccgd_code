@@ -15,6 +15,9 @@ class LabgroupsController < ApplicationController
         flash[:error] = 'An error occurred'
       end
     end
+    respond_to do |format|
+      format.js { render partial: 'shared/add_success' }
+    end
   end
 
   private 
