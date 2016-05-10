@@ -9,10 +9,11 @@
     .container
       .wrap-color
         = render 'layouts/header'
+        = render 'layouts/main_nav'
         .white
           .row
             .col-md-3
-              = render 'layouts/nav'
+              = render 'layouts/side_nav' if logged_in? 
             .col-md-9
               - flash.each do |mssg_type, mssg|
                 %div(class="alert alert-#{mssg_type}") #{mssg}
