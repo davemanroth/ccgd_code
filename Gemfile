@@ -14,6 +14,9 @@ gem 'bootstrap-sass', '~> 3.2.0'
 # Use Bootswatch for color variety
 gem 'bootswatch-rails'
 
+# Use Bootstrap's modal in place of default browser's confirm() API
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
 # Use Data tables for dynamic table sorting and searching
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
