@@ -9,6 +9,7 @@
 path = File.join(Rails.root, 'app', 'csvs')
 
 =begin
+=end
 # Seeding States data
 State.delete_all
 File.open( File.join(path, 'states.csv'), 'r') do |file|
@@ -104,7 +105,6 @@ File.open( File.join(path, 'privileges.csv'), 'r') do |file|
   end
 end
 
-=end
 
 # Seeding Platforms data
 Platform.delete_all
