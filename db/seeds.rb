@@ -8,8 +8,8 @@
 
 path = File.join(Rails.root, 'app', 'csvs')
 
-/
-/
+=begin
+=end
 # Seeding States data
 State.delete_all
 File.open( File.join(path, 'states.csv'), 'r') do |file|
@@ -102,6 +102,25 @@ File.open( File.join(path, 'privileges.csv'), 'r') do |file|
   file.read.each_line do |priv|
     role_id, user_id = priv.chomp.split(',')
     Privilege.create!(role_id: role_id, user_id: user_id)
+  end
+end
+
+
+# Seeding Platforms data
+Platform.delete_all
+File.open( File.join(path, 'platforms.csv'), 'r') do |file|
+  file.read.each_line do |platform|
+    name, code = platform.chomp.split(',')
+    Platform.create!(name: name, code: code)
+  end
+end
+
+# Seeding Proposal status data
+ProposalStatus.delete_all
+File.open( File.join(path, 'proposal_status.csv'), 'r') do |file|
+  file.read.each_line do |status|
+    name, code = status.chomp.split(',')
+    ProposalStatus.create!(name: name, code: code)
   end
 end
 

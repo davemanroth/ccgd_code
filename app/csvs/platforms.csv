@@ -1,0 +1,19 @@
+Sequenom Genotyping,GT
+Illumina Whole Genome Sequencing,WG
+Sanger Sequencing,AS
+Illumina Whole Exome Sequencing (v2),WE
+Illumina Targeted Sequencing (Oncopanel version 2),TS
+Affymetrix SNP Array,A6
+DNA Fingerprinting,FP
+Affymetrix Gene Expression,AG
+Illumina Sequencing of Prepared Libraries,IS
+Whole Transcriptome Shotgun Sequencing (RNA-Seq),RS
+ChIP-Sequencing,CS
+Amplicon Sequencing,AS
+Illumina Targeted Sequencing (Custom Bait set),CB
+Illumina Targeted Sequencing (Profile Oncopanel version 1),PP
+Illumina Targeted Sequencing (Oncopanel version 3),P3
+Illumina Targeted Sequencing (Oncopanel version 3 w/ Trl),3T
+Illumina Whole Exome Sequencing (v5),E5
+Illumina Whole Exome Sequencing w/ Trl (v5),ET
+Illumina Whole Exome Sequencing - Mouse (v1),ME
