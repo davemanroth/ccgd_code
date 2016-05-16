@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :lab_groups, through: :memberships
   has_many :privileges
   has_many :roles, :through => :privileges
+  has_many :proposals
   has_secure_password
 
   before_create :initialize_user
