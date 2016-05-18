@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
 
 
+  get 'proposals/index'
+
+  get 'proposals/show'
+
+  get 'proposals/new'
+
+  get 'proposals/create'
+
+  get 'proposals/edit'
+
+  get 'proposals/update'
+
+  get 'proposals/destroy'
+
   get 'organizations/create'
 
   get 'organizations_controller/create'
@@ -22,6 +36,8 @@ Rails.application.routes.draw do
   resources :labgroups, only: [:create]
 
   resources :users
+
+  resources :proposals
 
   resources :password_resets
   # The priority is based upon order of creation: first created -> highest priority.
