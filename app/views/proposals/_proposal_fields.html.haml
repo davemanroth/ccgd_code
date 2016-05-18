@@ -1,0 +1,28 @@
+- if @proposal.errors.any?
+  =render 'errors'
+.row
+  .col-md-4
+    .form-group
+      = f.label :name, "Name of proposed project"
+      = f.text_field :name, class: 'form-control', placeholder: 'Proposal name', required: true
+    .form-group
+      = f.label :platform_id, "Platform"
+      = collection_select :proposal, :platform_id, Platform.all, :id, :name, { prompt: 'Please select a platform' }, { class: 'form-control' }
+    .form-group
+      = f.label :objectives, "Objectives"
+      = f.text_area :objectives, class: 'form-control', required: true
+    .form-group
+      = f.label :background, "Background"
+      = f.text_area :background, class: 'form-control', required: true
+    .form-group
+      = f.label :design_details, "Design details"
+      = f.text_area :design_details, class: 'form-control', required: true
+    .form-group
+      = f.label :sample_availability, "Sample availability"
+      = f.text_area :sample_availability, class: 'form-control', required: true
+    .form-group
+      = f.label :contributions, "Contributions"
+      = f.text_area :contributions, class: 'form-control', required: true
+    .form-group
+      = f.label :comments, "Comments"
+      = f.text_area :comments, class: 'form-control'
