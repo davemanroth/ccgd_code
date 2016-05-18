@@ -21,7 +21,7 @@ FactoryGirl.define do
     billing_phone { Faker::PhoneNumber.phone_number }
     state_id 1
     proposal_status_id 1
-    platform_id 1
     lab_group_id 27
+    ccgd_policy 'yes'
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516193224) do
+ActiveRecord::Schema.define(version: 20160518202334) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -71,6 +71,13 @@ ActiveRecord::Schema.define(version: 20160516193224) do
   add_index "privileges", ["role_id"], name: "index_privileges_on_role_id", using: :btree
   add_index "privileges", ["user_id"], name: "index_privileges_on_user_id", using: :btree
 
+  create_table "proposal_platforms", force: :cascade do |t|
+    t.integer  "proposal_id", limit: 4
+    t.integer  "platform_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "proposal_statuses", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "code",       limit: 255
@@ -98,7 +105,6 @@ ActiveRecord::Schema.define(version: 20160516193224) do
     t.string   "billing_phone",       limit: 255
     t.integer  "state_id",            limit: 4
     t.integer  "proposal_status_id",  limit: 4
-    t.integer  "platform_id",         limit: 4
     t.integer  "user_id",             limit: 4
     t.integer  "lab_group_id",        limit: 4
     t.boolean  "submitted",                         default: false
@@ -107,7 +113,6 @@ ActiveRecord::Schema.define(version: 20160516193224) do
   end
 
   add_index "proposals", ["lab_group_id"], name: "index_proposals_on_lab_group_id", using: :btree
-  add_index "proposals", ["platform_id"], name: "index_proposals_on_platform_id", using: :btree
   add_index "proposals", ["proposal_status_id"], name: "index_proposals_on_proposal_status_id", using: :btree
   add_index "proposals", ["state_id"], name: "index_proposals_on_state_id", using: :btree
   add_index "proposals", ["user_id"], name: "index_proposals_on_user_id", using: :btree

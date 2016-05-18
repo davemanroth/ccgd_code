@@ -10,7 +10,6 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     organization_id 1
-    ccgd_policy 'yes'
 
     factory :many_roles do
       roles []

@@ -20,7 +20,6 @@ class CreateProposals < ActiveRecord::Migration
       t.string :billing_phone
       t.belongs_to(:state, index: true)
       t.belongs_to(:proposal_status, index: true)
-      t.belongs_to(:platform, index: true)
       t.belongs_to(:user, index: true)
       t.belongs_to(:lab_group, index: true)
       t.boolean :submitted, default: false

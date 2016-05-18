@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   validates :lastname, presence: true
   validates :email, presence: true
   # validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :ccgd_policy, acceptance: { accept: 'yes' }, on: :create, allow_nil: false
   belongs_to :organization
   has_one :user_custom_labgroup
   has_one :user_custom_organization
@@ -21,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :proposals
   has_secure_password
 
-  before_create :initialize_user
+  # before_create :initialize_user
 
 
   def send_password_reset

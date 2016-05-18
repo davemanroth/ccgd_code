@@ -6,8 +6,8 @@
       = f.label :name, "Name of proposed project"
       = f.text_field :name, class: 'form-control', placeholder: 'Proposal name', required: true
     .form-group
-      = f.label :platform_id, "Platform"
-      = collection_select :proposal, :platform_id, Platform.all, :id, :name, { prompt: 'Please select a platform' }, { class: 'form-control' }
+      = f.label :lab_group_id, "Principle Investigator"
+      = f.select :lab_group_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Select lab/group-' }, { class: 'form-control' }
     .form-group
       = f.label :objectives, "Objectives"
       = f.text_area :objectives, class: 'form-control', required: true
