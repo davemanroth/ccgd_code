@@ -1,0 +1,12 @@
+%h1 Create a new proposal
+%p Please complete all form fields below. To save a draft of your proposal and complete it at a later time, click the "Save" button. To submit your proposal, click the "Submit proposal" button.
+= form_for(@proposal) do |f|
+  =render 'proposal_fields', f: f
+  .form-group
+    = f.label :ccgd_policy, "I have read accept CCGD's policy statement"
+    = f.check_box :ccgd_policy, {}, 'yes'
+    %br
+    = link_to "Read policy statement", policy_statement_path, target: '_blank'
+  = f.submit "Submit proposal", class: 'btn btn-primary btn-lg'
+
+
