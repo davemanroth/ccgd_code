@@ -21,24 +21,20 @@ RSpec.describe Proposal, :type => :model do
     expect(prop.proposal_status.code).to eq('draft')
   end
 
-  it "should have 2 platforms" do
+  it "should have 2 platforms and the correct code" do
     pl1 = Platform.find(1)
     pl2 = Platform.find(2)
     [pl1, pl2].each do |pl|
       prop.platforms << pl
     end
     prop.save
+    id = 1000 + prop.id
     expect(prop.platforms.count).to eq(2)
+    expect(prop.code).to eq(['SGT', id].join(''))
   end
 
   it "should not be submitted" do
     expect(prop.submitted?).to be(false)
-  end
-
-  it "should have the proper code" do
-    pp prop.id
-    id = 1000 + prop.id
-    expect(prop.code).to eq(['SGT', id].join(''))
   end
 
 end
