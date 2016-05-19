@@ -2,12 +2,24 @@
   =render 'errors'
 .row
   .col-md-4
+    %h2 Proposal information
     .form-group
       = f.label :name, "Name of proposed project"
       = f.text_field :name, class: 'form-control', placeholder: 'Proposal name', required: true
     .form-group
+      = f.label :user_id, "Submitting user"
+      = f.select :user_id, User.all.order(lastname: :asc).collect { |u| [u.full_name, u.id] }, { include_blank: '-Select user-', selected: current_user.id }, { class: 'form-control' }
+    .form-group
       = f.label :lab_group_id, "Principle Investigator"
       = f.select :lab_group_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Select lab/group-' }, { class: 'form-control' }
+    .form-group
+      = f.label :platforms, "Platform(s)"
+      = f.select :platforms, Platform.all.collect { |pl| [pl.name, pl.id] }, { include_blank: '-platforms-' }, { multiple: true, class: 'form-control' }
+    -#.form-inline
+      -Platform.all.order(code: :asc).collect do |pl|
+        .form-group
+          = f.check_box :platforms, { class: 'form-control', multiple: true }, pl.code, nil
+          = pl.name
     .form-group
       = f.label :objectives, "Objectives"
       = f.text_area :objectives, class: 'form-control', required: true
@@ -26,3 +38,5 @@
     .form-group
       = f.label :comments, "Comments"
       = f.text_area :comments, class: 'form-control'
+  .col-md-4
+    %h2 Funding information
