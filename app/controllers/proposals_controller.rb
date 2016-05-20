@@ -16,7 +16,7 @@ class ProposalsController < ApplicationController
 =begin
 =end
     platform_params[:platforms].each do |val|
-      @proposal.platforms << Platform.find(val)
+      @proposal.platforms << Platform.find(val) unless val.empty?
     end
 
     if @proposal.save

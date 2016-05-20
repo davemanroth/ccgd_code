@@ -15,12 +15,6 @@
     .form-group
       = f.label :platforms, "Platform(s)"
       = f.collection_select :platforms, Platform.all, :id, :name, { include_blank: '-platforms-' }, { multiple: true, class: 'form-control' }
-      -#= f.select :platforms, Platform.all.collect { |pl| [pl.name, pl.id] }, { include_blank: '-platforms-' }, { multiple: true, class: 'form-control' }
-    -#.form-inline
-      -Platform.all.order(code: :asc).collect do |pl|
-        .form-group
-          = f.check_box :platforms, { class: 'form-control', multiple: true }, pl.code, nil
-          = pl.name
     .form-group
       = f.label :objectives, "Objectives"
       = f.text_area :objectives, class: 'form-control', required: true

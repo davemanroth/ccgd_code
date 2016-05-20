@@ -1,2 +1,6 @@
-%h1 Proposals#edit
-%p Find me in app/views/proposals/edit.html.haml
+%h1 Update #{ @proposal.name } proposal
+%p Continue working on your proposal or update any fields. Once complete, either click the "Save" button to save and continue working later or the "Submit proposal" button to submit it to CCGD.
+= form_for(@proposal) do |f|
+  =render 'proposal_fields', f: f
+  = f.submit "Save proposal", class: 'btn btn-default btn-lg'
+  %button.btn.btn-primary.btn-lg Submit proposal
