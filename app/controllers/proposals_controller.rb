@@ -32,10 +32,15 @@ class ProposalsController < ApplicationController
 
   def update
     @proposal = Proposal.find(params[:id])
+    if @proposal.update_attributes(proposal_params)
+      flash[:success] = "Proposal saved"
+    else
+      flash[:error] = "Error updating proposal"
+    end
   end
 
   def destroy
-    @proposal = Proposal.find(params[:id])
+    Proposal.find(params[:id]).destroy
   end
 
   private

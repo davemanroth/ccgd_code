@@ -40,27 +40,43 @@ RSpec.describe ProposalsController, :type => :controller do
     end
   end
 
+  describe "PATCH update" do
+    context "http request" do
+      it "returns http success" do
+        patch :update, id: prop, proposal: attributes_for(:proposal)
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "updating proposal data" do
+      it "locates the correct proposal" do
+        patch :update, id: prop, proposal: attributes_for(:proposal)
+        expect(assigns(:proposal)).to eq(prop)
+      end
+
+      it "updates fields on a proposal" do
+        patch :update, id: prop,
+        proposal: attributes_for(:proposal,
+          name: 'A new proposal name',
+          comments: 'Some new comments'
+        )
+        prop.reload
+        expect(prop.name).to eq('A new proposal name')
+        expect(prop.comments).to eq('Some new comments')
+      end
+    end
+
+  end
+
+  describe "DELETE destroy" do
+    it "deletes a proposal" do
+      prop.save
+      expect {
+        delete :destroy, id: prop
+      }.to change(Proposal, :count).by(-1)
+    end
+  end
 =begin
-  describe "GET edit" do
-    it "returns http success" do
-      get :edit
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
-  end
 =end
 
 end
