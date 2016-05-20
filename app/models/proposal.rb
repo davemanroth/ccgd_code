@@ -14,7 +14,6 @@ class Proposal < ActiveRecord::Base
 
   after_create :generate_code
 
-  private
     def generate_code
       num = 1000 + self.id
       self.code = ['S', self.platforms.first.code, num].join('')

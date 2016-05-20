@@ -7,6 +7,11 @@ RSpec.describe Proposal, :type => :model do
     expect(prop).to be_valid
   end
 
+  it "should be invalid without a user id" do
+    prop.user_id = nil
+    expect(prop).to be_invalid
+  end
+
   it "should have a name" do
     expect(prop.name).to be_a(String)
   end
@@ -21,15 +26,12 @@ RSpec.describe Proposal, :type => :model do
     expect(prop.proposal_status.code).to eq('draft')
   end
 
-  it "should have 2 platforms and the correct code" do
-    pl1 = Platform.find(1)
-    pl2 = Platform.find(2)
-    [pl1, pl2].each do |pl|
-      prop.platforms << pl
-    end
+  it "should have 3 total platforms and the correct code" do
+    pl = Platform.find(3)
+    prop.platforms << pl
     prop.save
     id = 1000 + prop.id
-    expect(prop.platforms.count).to eq(2)
+    expect(prop.platforms.count).to eq(3)
     expect(prop.code).to eq(['SGT', id].join(''))
   end
 

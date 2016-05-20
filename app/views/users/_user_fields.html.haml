@@ -1,7 +1,7 @@
 - if @user.errors.any?
   =render 'errors'
 .row
-  .col-md-4
+  .col-md-6
     .form-group
       = f.label :firstname, "First name"
       = f.text_field :firstname, class: 'form-control', placeholder: 'First name', required: true
@@ -23,7 +23,7 @@
     .form-group
       = f.label :password_confirmation, "Password confirmation"
       = f.password_field :password_confirmation, class: 'form-control'
-  #select-lists.col-md-4
+  #select-lists.col-md-6
     -# Organizations
     .form-group
       = f.label :organizations, "Select your organization"

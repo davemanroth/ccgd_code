@@ -13,6 +13,17 @@ class ProposalsController < ApplicationController
 
   def create
     @proposal = Proposal.new(proposal_params)
+=begin
+=end
+    platform_params[:platforms].each do |val|
+      @proposal.platforms << Platform.find(val)
+    end
+
+    if @proposal.save
+      flash[:success] = "Proposal saved"
+    else
+      flash[:error] = "Error saving proposal"
+    end
   end
 
   def edit
@@ -36,8 +47,13 @@ class ProposalsController < ApplicationController
         :billing_dept, :billing_street, :billing_building,
         :billing_room, :billing_city, :billing_zip, 
         :billing_email, :billing_phone, :state_id,
-        :platform_id, :user_id, :lab_group_id,
-        :ccgd_polcy
+        :user_id, :lab_group_id, :ccgd_policy
       )
     end
+
+    def platform_params
+      params.require(:proposal).permit(platforms:[])
+    end
+=begin
+=end
 end
