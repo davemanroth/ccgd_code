@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @proposals = [Proposal.find_by(user_id: @user.id)].flatten
   end
 
   def new
@@ -22,20 +23,6 @@ class UsersController < ApplicationController
     if !lab_group_params.nil?
       add_lab_groups(@user)
     end
-
-=begin
-    if !custom_org_params.empty?
-      if organization_selected?(user_params)
-        @user.errors.add(:user_custom_organization_id, "If you've already selected an organization, you cannot add new one")
-      else
-        @user.user_custom_organization = custom_org_params
-      end
-    end
-
-    if !custom_labgroup_params.empty?
-      @user.user_custom_labgroup = custom_labgroup_params
-    end
-=end
 
     if @user.save
       #Rails.logger.debug(@user)
