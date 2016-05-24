@@ -15,11 +15,19 @@ class ProposalsController < ApplicationController
     @proposal = Proposal.new(proposal_params)
 =begin
 =end
+
     platform_params[:platforms].each do |val|
       @proposal.platforms << Platform.find(val) unless val.empty?
     end
 
+    if !params[:submitted].nil?
+      @proposal.submitted = true
+    end
+
     if @proposal.save
+      respond_to do |f|
+        f.html
+      end
       flash[:success] = "Proposal saved"
     else
       flash[:error] = "Error saving proposal"
@@ -32,9 +40,19 @@ class ProposalsController < ApplicationController
 
   def update
     @proposal = Proposal.find(params[:id])
+
+    if !params[:submitted].nil?
+      @proposal.submitted = true
+    end
+
     if @proposal.update_attributes(proposal_params)
+      respond_to do |f|
+        f.html
+      end
+      redirect_to user_path(@proposal.user_id)
       flash[:success] = "Proposal saved"
     else
+      render 'edit'
       flash[:error] = "Error updating proposal"
     end
   end

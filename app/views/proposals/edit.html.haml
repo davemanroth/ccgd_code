@@ -3,4 +3,4 @@
 = form_for(@proposal) do |f|
   =render 'proposal_fields', f: f
   = f.submit "Save proposal", class: 'btn btn-default btn-lg'
-  %button.btn.btn-primary.btn-lg Submit proposal
+  = button_to "Submit proposal", edit_proposal_path(@proposal, submitted: true), data: { confirm: 'Are you sure you want to submit this proposal?'}, class: 'btn btn-primary btn-lg' , remote: true
