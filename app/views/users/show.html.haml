@@ -1,26 +1,28 @@
 %h1 #{@user.full_name}'s user page
-%h2 User information
-%ul.no-list
-  %li <span class="lt-txt">Name:</span> #{@user.full_name}
-  %li <span class="lt-txt">Username:</span> #{@user.username}
-  %li <span class="lt-txt">Email:</span> #{@user.email}
-  %li <span class="lt-txt">Phone:</span> #{@user.phone}
-  -if !@user.organization_id.nil?
-    %li <span class="lt-txt">Organization:</span> #{@user.organization.name}
-  %li <span class="lt-txt">Status:</span> #{@user.status_name}
-  %li <span class="lt-txt">Roles:</span> #{@user.all_roles}
-  -if !@user.lab_groups.nil?
-    <li> <span class="lt-txt">Lab/group(s):</span>
-    - @user.lab_groups.each_with_index do |lg, i|
-      - semi = i == @user.lab_groups.size ? '; ' : '' 
-      = lg.name_code + semi
-    </li>
-= link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
-%h2 Proposals
-- if !@proposals.nil? 
+.user-info
+  %h2 User information
   %ul.no-list
-    - @proposals.each do |prop|
-      %li #{ link_to prop.name, edit_proposal_path(prop.id) } 
-      #{ prop.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
+    %li <span class="lt-txt">Name:</span> #{@user.full_name}
+    %li <span class="lt-txt">Username:</span> #{@user.username}
+    %li <span class="lt-txt">Email:</span> #{@user.email}
+    %li <span class="lt-txt">Phone:</span> #{@user.phone}
+    -if !@user.organization_id.nil?
+      %li <span class="lt-txt">Organization:</span> #{@user.organization.name}
+    %li <span class="lt-txt">Status:</span> #{@user.status_name}
+    %li <span class="lt-txt">Roles:</span> #{@user.all_roles}
+    -if !@user.lab_groups.nil?
+      <li> <span class="lt-txt">Lab/group(s):</span>
+      - @user.lab_groups.each_with_index do |lg, i|
+        - semi = i == @user.lab_groups.size ? '; ' : '' 
+        = lg.name_code + semi
+      </li>
+  = link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
+.proposal-info
+  %h2 Proposals
+  - if !@proposals.nil? 
+    %ul.no-list
+      - @proposals.each do |prop|
+        %li #{ link_to prop.name, edit_proposal_path(prop.id) } 
+        #{ prop.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
 
-= link_to "Submit a new proposal", new_proposal_path, class: "btn btn-default" 
+  = link_to "Submit a new proposal", new_proposal_path, class: "btn btn-default" 

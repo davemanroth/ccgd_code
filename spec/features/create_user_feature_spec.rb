@@ -30,7 +30,6 @@ RSpec.feature 'User creation', :type=> :feature do
       select "Beckman Coulter", from: "user_organization_id"
       select "15th floor, Meyerson", from: "user_lab_groups"
       select "Beckman, Beckman", from: "user_lab_groups"
-      check('user_ccgd_policy')
       click_on 'Create user account'
     }.to change(User, :count).by(+1)
 

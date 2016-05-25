@@ -25,12 +25,11 @@ class ProposalsController < ApplicationController
     end
 
     if @proposal.save
-      respond_to do |f|
-        f.html
-      end
       flash[:success] = "Proposal saved"
+      redirect_to user_path(@proposal.user_id)
     else
       flash[:error] = "Error saving proposal"
+      render 'new'
     end
   end
 
@@ -49,11 +48,11 @@ class ProposalsController < ApplicationController
       respond_to do |f|
         f.html
       end
-      redirect_to user_path(@proposal.user_id)
       flash[:success] = "Proposal saved"
+      redirect_to user_path(@proposal.user_id)
     else
-      render 'edit'
       flash[:error] = "Error updating proposal"
+      render 'edit'
     end
   end
 

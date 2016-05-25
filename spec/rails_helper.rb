@@ -66,6 +66,11 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 end
 
+# Capybara configuration
+Capybara.configure do |config|
+  config.app_host = 'http://ccgd.hccdev.org'
+end
+
 # Configure shoulda-matchers for association testing
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
