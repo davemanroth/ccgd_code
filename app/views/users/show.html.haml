@@ -19,7 +19,7 @@
   = link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
 .proposal-info
   %h2 Proposals
-  - if !@proposals.nil? 
+  - if !@proposals.nil?
     %ul.no-list
       - @proposals.each do |prop|
         %li #{ link_to prop.name, edit_proposal_path(prop.id) } 

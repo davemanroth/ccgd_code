@@ -9,7 +9,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @proposals = [Proposal.find_by(user_id: @user.id)].flatten
+    @proposals = Proposal.find_by(user_id: @user.id)
+    if @proposals.is_a? Proposal
+      @proposals = [@proposals]
+    end
   end
 
   def new
