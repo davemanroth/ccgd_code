@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.feature "save and submit proposals", :type => :feature do
   let(:proposal) { build(:proposal) }
-  let(:user) { create(:user) }
+  let(:admin) { create(:admin) }
 
+=begin
+=end
   before(:each) do
     default_url_options[:host] = 'http://ccgd.hccdev.org'
   end
 
   scenario "User fills out new proposal form and saves a draft" do
-    login(user)
+    login(admin)
     visit new_proposal_path
 
     within "h1" do
@@ -40,13 +42,11 @@ RSpec.feature "save and submit proposals", :type => :feature do
       click_on 'Save proposal'
     }.to change(Proposal, :count).by(+1)
 
-    expect(page.current_path).to be(['users/', user.id].join())
+    expect(page.current_path).to eq(['/users/', admin.id].join())
 
-=begin
     within ".proposal-info" do
       expect(page).to have_content('Proposals')
       expect(page).to have_content(proposal.name)
     end
-=end
   end
 end
