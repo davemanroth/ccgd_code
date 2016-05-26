@@ -17,7 +17,7 @@ RSpec.feature 'User creation', :type=> :feature do
     end
   end
 
-  scenario "goes to create user page, fills out all fields correctly and clicks CCGD policy checkbox" do
+  scenario "goes to create user page, fills out all fields correctly" do
     # Enter all user data and click submit
     expect {
       fill_in "First name", with: 'Dave'
@@ -34,7 +34,7 @@ RSpec.feature 'User creation', :type=> :feature do
     }.to change(User, :count).by(+1)
 
     # Verify submitted location, organization, and labgroup display correctly
-    within '.no-list' do
+    within '.user-info' do
       expect(page).to have_content 'Pending'
       expect(page).to have_content 'Beckman Coulter'
       expect(page).to have_content '15th floor, Meyerson'
@@ -44,7 +44,7 @@ RSpec.feature 'User creation', :type=> :feature do
 =end
   end
 
-  scenario "goes to create user page, but omits fields and does NOT click CCGD policy checkbox" do
+  scenario "goes to create user page, but omits fields" do
     # Enter all user data and click submit
     expect {
       fill_in "Last name", with: 'Rothfarb'
@@ -64,7 +64,6 @@ RSpec.feature 'User creation', :type=> :feature do
 
     within '#errors-list' do
       expect(page).to have_content "Firstname can't be blank"
-      expect(page).to have_content "Ccgd policy must be accepted"
     end
   end
 
@@ -83,7 +82,6 @@ RSpec.feature 'User creation', :type=> :feature do
       fill_in "Organization name", with: 'Test organization'
       click_on('Add a new Lab/group')
       fill_in "Lab/group name", with: 'Test lab'
-      check('user_ccgd_policy')
       click_on 'Create user account'
     }.to change(User, :count).by(1)
 

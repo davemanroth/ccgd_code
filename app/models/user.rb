@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :proposals
   has_secure_password
 
-  # before_create :initialize_user
+  before_create :initialize_user
 
 
   def send_password_reset

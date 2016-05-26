@@ -67,9 +67,9 @@ RSpec.configure do |config|
 end
 
 # Capybara configuration
-Capybara.configure do |config|
-  config.app_host = 'http://ccgd.hccdev.org'
-end
+# Capybara.configure do |config|
+#  config.app_host = 'http://ccgd.hccdev.org'
+# end
 
 # Configure shoulda-matchers for association testing
 Shoulda::Matchers.configure do |config|

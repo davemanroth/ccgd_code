@@ -37,7 +37,7 @@ RSpec.feature 'Update user information', :type=> :feature do
     visit edit_user_path(many_roles)
     expect(page).to have_content('Update any of the fields below')
 
-    within '#admin-user-update' do
+    within '#roles-and-privileges' do
       expect(find('#user_roles_1')).to be_checked
       expect(find('#user_roles_2')).to be_checked
       expect(find('#user_roles_3')).to be_checked
@@ -45,7 +45,7 @@ RSpec.feature 'Update user information', :type=> :feature do
       expect(find('#user_roles_5')).to be_checked
     end
 
-    within '#admin-user-update' do
+    within '#roles-and-privileges' do
       page.uncheck('CCGD Scientific Advisor')
     end
     click_on 'Update user information'
@@ -64,12 +64,12 @@ RSpec.feature 'Update user information', :type=> :feature do
     login(many_roles)
     visit edit_user_path(user)
     expect(page).to have_content('Update any of the fields below')
-    within '#admin-user-update' do
+    within '#roles-and-privileges' do
       expect(find('#user_status_p')).to be_checked
       expect(find('#user_roles_5')).to be_checked
     end
 
-    within '#admin-user-update' do
+    within '#roles-and-privileges' do
 
       # Make the user active
       choose('user_status_a')
