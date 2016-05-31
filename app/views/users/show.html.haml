@@ -16,13 +16,21 @@
         - semi = i == @user.lab_groups.size ? '; ' : '' 
         = lg.name_code + semi
       </li>
-  = link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
+  %p= link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
 .proposal-info
   %h2 Proposals
-  - if !@proposals.nil?
-    %ul.no-list
-      - @proposals.each do |prop|
-        %li #{ link_to prop.name, edit_proposal_path(prop.id) } 
-        #{ prop.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
+  - if @proposals.nil?
+    %p No proposals at this time
+  - else
+    - if !@proposals[:submitted].empty?
+      %h3 Submitted
+      %ul.no-list.submitted-proposals
+        - @proposals[:submitted].each do |sub|
+          %li #{ sub.name } <br />#{ sub.updated_at.strftime("Submitted: %m/%d/%Y at %I:%M%p") }
+    - if !@proposals[:drafts].empty?
+      %h3 Drafts
+      %ul.no-list.draft-proposals
+        - @proposals[:drafts].each do |draft|
+          %li #{ link_to draft.name, edit_proposal_path(draft.id) } <br />#{ draft.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
 
-  = link_to "Submit a new proposal", new_proposal_path, class: "btn btn-default" 
+  %p= link_to "Submit a new proposal", new_proposal_path, class: "btn btn-default" 

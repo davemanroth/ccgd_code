@@ -13,6 +13,7 @@ class Ability
 
     user ||= User.new
 
+    alias_action :create, :read, :update, :destroy, to: :crud
     # Admin
     if user.has_role?(1)
       can :manage, :all
@@ -37,6 +38,8 @@ class Ability
       can [:read, :update], User do |us|
         us == user
       end
+
+      can :crud, Proposal
     end
 
     #anonymous

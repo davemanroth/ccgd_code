@@ -94,16 +94,6 @@ ActiveRecord::Schema.define(version: 20160518202334) do
     t.text     "sample_availability", limit: 65535
     t.text     "contributions",       limit: 65535
     t.text     "comments",            limit: 65535
-    t.string   "financial_contact",   limit: 255
-    t.string   "billing_dept",        limit: 255
-    t.string   "billing_street",      limit: 255
-    t.string   "billing_building",    limit: 255
-    t.string   "billing_room",        limit: 255
-    t.string   "billing_city",        limit: 255
-    t.string   "billing_zip",         limit: 255
-    t.string   "billing_email",       limit: 255
-    t.string   "billing_phone",       limit: 255
-    t.integer  "state_id",            limit: 4
     t.integer  "proposal_status_id",  limit: 4
     t.integer  "user_id",             limit: 4
     t.integer  "lab_group_id",        limit: 4
@@ -114,7 +104,6 @@ ActiveRecord::Schema.define(version: 20160518202334) do
 
   add_index "proposals", ["lab_group_id"], name: "index_proposals_on_lab_group_id", using: :btree
   add_index "proposals", ["proposal_status_id"], name: "index_proposals_on_proposal_status_id", using: :btree
-  add_index "proposals", ["state_id"], name: "index_proposals_on_state_id", using: :btree
   add_index "proposals", ["user_id"], name: "index_proposals_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|

@@ -1,4 +1,5 @@
 class Proposal < ActiveRecord::Base
+
   belongs_to :user
   belongs_to :state
   belongs_to :proposal_status
@@ -14,6 +15,7 @@ class Proposal < ActiveRecord::Base
 
   after_create :generate_code
 
+  private
     def generate_code
       num = 1000 + self.id
       self.code = ['S', self.platforms.first.code, num].join('')

@@ -1,14 +1,15 @@
 - if @proposal.errors.any?
   =render 'errors'
 .row
-  .col-md-6
+  .col-md-9
     %h2 Proposal information
     .form-group
       = f.label :name, "Name of proposed project"
       = f.text_field :name, class: 'form-control', placeholder: 'Proposal name', required: true
-    .form-group
-      = f.label :user_id, "Submitting user"
-      = f.select :user_id, User.all.order(lastname: :asc).collect { |u| [u.full_name, u.id] }, { include_blank: '-Select user-', selected: current_user.id }, { class: 'form-control' }
+    - if can? :manage, Proposal
+      .form-group
+        = f.label :user_id, "Submitting user"
+        = f.select :user_id, User.all.order(lastname: :asc).collect { |u| [u.full_name, u.id] }, { include_blank: '-Select user-', selected: current_user.id }, { class: 'form-control' }
     .form-group
       = f.label :lab_group_id, "Principle Investigator"
       = f.select :lab_group_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Select lab/group-' }, { class: 'form-control' }
@@ -33,35 +34,3 @@
     .form-group
       = f.label :comments, "Comments"
       = f.text_area :comments, class: 'form-control'
-  .col-md-6
-    %h2 Funding information
-    .form-group
-      = f.label :financial_contact, "Financial contact"
-      = f.text_field :financial_contact, class: 'form-control', placeholder: 'Financial contact'
-    .form-group
-      = f.label :billing_dept, "Billing department"
-      = f.text_field :billing_dept, class: 'form-control', placeholder: 'Billing department'
-    .form-group
-      = f.label :billing_street, "Billing street"
-      = f.text_field :billing_street, class: 'form-control', placeholder: 'Billing street'
-    .form-group
-      = f.label :billing_building, "Billing building"
-      = f.text_field :billing_building, class: 'form-control', placeholder: 'Billing building'
-    .form-group
-      = f.label :billing_room, "Billing room"
-      = f.text_field :billing_room, class: 'form-control', placeholder: 'Billing room'
-    .form-group
-      = f.label :billing_city, "Billing city"
-      = f.text_field :billing_city, class: 'form-control', placeholder: 'Billing city'
-    .form-group
-      = f.label :billing_zip, "Billing zip"
-      = f.text_field :billing_zip, class: 'form-control', placeholder: 'Billing zip'
-    .form-group
-      = f.label :billing_email, "Billing email"
-      = f.text_field :billing_email, class: 'form-control', placeholder: 'Billing email'
-    .form-group
-      = f.label :billing_phone, "Billing phone"
-      = f.text_field :billing_phone, class: 'form-control', placeholder: 'Billing phone'
-    .form-group
-      = f.label :state_id, "State (if applicable)"
-      = f.select :state_id, State.all.order(name: :asc).collect { |state| [state.code, state.id] }, { include_blank: '-State-' }, { class: 'form-control' }

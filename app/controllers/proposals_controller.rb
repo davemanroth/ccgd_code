@@ -1,4 +1,6 @@
 class ProposalsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @proposals = Proposal.all
   end
@@ -13,6 +15,7 @@ class ProposalsController < ApplicationController
 
   def create
     @proposal = Proposal.new(proposal_params)
+    @proposal.user_id = current_user.id
 =begin
 =end
 
@@ -69,7 +72,7 @@ class ProposalsController < ApplicationController
         :billing_dept, :billing_street, :billing_building,
         :billing_room, :billing_city, :billing_zip, 
         :billing_email, :billing_phone, :state_id,
-        :user_id, :lab_group_id, :ccgd_policy
+        :lab_group_id, :ccgd_policy
       )
     end
 

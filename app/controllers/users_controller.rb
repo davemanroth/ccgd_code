@@ -9,9 +9,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @proposals = Proposal.find_by(user_id: @user.id)
-    if @proposals.is_a? Proposal
-      @proposals = [@proposals]
+    @proposals = Hash.new
+    @proposals[:submitted] = Proposal.where(user_id: @user.id, submitted: true)
+    @proposals[:drafts] = Proposal.where(user_id: @user.id, submitted: false)
+    @proposals.each do |key, val|
+      if val && val.is_a?(Proposal)
+        @proposals[key] = [val]
+      end
     end
   end
 
