@@ -8,6 +8,6 @@
     %br
     = link_to "Read policy statement", policy_statement_path, target: '_blank'
   = f.submit "Save proposal", class: 'btn btn-default btn-lg'
-  = button_to "Submit proposal", proposals_path(submitted: true), data: { confirm: 'Are you sure you want to submit this proposal?'}, class: 'btn btn-primary btn-lg' , remote: true
+  = button_to "Submit proposal", proposals_path(@proposal, submitted: true), data: { confirm: 'Are you sure you want to submit this proposal?'}, class: 'btn btn-primary btn-lg' , remote: true
 
 
