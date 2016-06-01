@@ -2,12 +2,3 @@
 %p Please complete all form fields below. To save a draft of your proposal and complete it at a later time, click the "Save" button. To submit your proposal, click the "Submit proposal" button.
 = form_for(@proposal) do |f|
   =render 'proposal_fields', f: f
-  .form-group
-    = f.label :ccgd_policy, "I have read accept CCGD's policy statement"
-    = f.check_box :ccgd_policy, {}, 'yes'
-    %br
-    = link_to "Read policy statement", policy_statement_path, target: '_blank'
-  = f.submit "Save proposal", class: 'btn btn-default btn-lg'
-  = button_to "Submit proposal", proposals_path(@proposal, submitted: true), data: { confirm: 'Are you sure you want to submit this proposal?'}, class: 'btn btn-primary btn-lg' , remote: true
-
-

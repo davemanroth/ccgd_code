@@ -23,7 +23,7 @@ class ProposalsController < ApplicationController
       @proposal.platforms << Platform.find(val) unless val.empty?
     end
 
-    if !params[:submitted].nil?
+    if params[:submit_proposal]
       @proposal.submitted = true
     end
 

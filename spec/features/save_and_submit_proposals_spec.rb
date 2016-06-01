@@ -28,8 +28,7 @@ RSpec.feature "save and submit proposals", :type => :feature do
       fill_in "Sample availability", with: proposal.sample_availability
       fill_in "Contributions", with: proposal.contributions
       fill_in "Comments", with: proposal.comments
-      check('proposal_ccgd_policy')
-      click_on 'Save proposal'
+      click_on 'Save draft'
     }.to change(Proposal, :count).by(+1)
 
     expect(page.current_path).to eq(['/users/', user.id].join())
@@ -56,7 +55,6 @@ RSpec.feature "save and submit proposals", :type => :feature do
       fill_in "Sample availability", with: proposal.sample_availability
       fill_in "Contributions", with: proposal.contributions
       fill_in "Comments", with: proposal.comments
-      check('proposal_ccgd_policy')
       click_on 'Submit proposal'
     }.to change(Proposal, :count).by(+1)
 

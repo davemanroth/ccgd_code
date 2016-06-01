@@ -11,7 +11,7 @@ class Proposal < ActiveRecord::Base
   validates :design_details, presence: true 
   validates :user_id, presence: true 
   validates :lab_group_id, presence: true 
-  validates :ccgd_policy, acceptance: { accept: 'yes' }, on: :create, allow_nil: false
+  validates :ccgd_policy, :if => :submitted?
 
   after_create :generate_code
 
@@ -19,6 +19,10 @@ class Proposal < ActiveRecord::Base
     def generate_code
       num = 1000 + self.id
       self.code = ['S', self.platforms.first.code, num].join('')
+    end
+
+    def submitted?
+      self.submitted
     end
 
 end
