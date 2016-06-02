@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518202334) do
+ActiveRecord::Schema.define(version: 20160602175413) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -86,20 +86,21 @@ ActiveRecord::Schema.define(version: 20160518202334) do
   end
 
   create_table "proposals", force: :cascade do |t|
-    t.string   "name",                limit: 255
-    t.string   "code",                limit: 10
-    t.text     "objectives",          limit: 65535
-    t.text     "background",          limit: 65535
-    t.text     "design_details",      limit: 65535
-    t.text     "sample_availability", limit: 65535
-    t.text     "contributions",       limit: 65535
-    t.text     "comments",            limit: 65535
-    t.integer  "proposal_status_id",  limit: 4
-    t.integer  "user_id",             limit: 4
-    t.integer  "lab_group_id",        limit: 4
-    t.boolean  "submitted",                         default: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.string   "name",                 limit: 255
+    t.string   "code",                 limit: 10
+    t.text     "objectives",           limit: 65535
+    t.text     "background",           limit: 65535
+    t.text     "design_details",       limit: 65535
+    t.text     "sample_availability",  limit: 65535
+    t.text     "contributions",        limit: 65535
+    t.text     "comments",             limit: 65535
+    t.integer  "proposal_status_id",   limit: 4
+    t.integer  "user_id",              limit: 4
+    t.integer  "lab_group_id",         limit: 4
+    t.boolean  "submitted",                          default: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.boolean  "ccgd_policy_approval",               default: false
   end
 
   add_index "proposals", ["lab_group_id"], name: "index_proposals_on_lab_group_id", using: :btree

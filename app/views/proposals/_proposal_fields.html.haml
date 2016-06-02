@@ -39,5 +39,15 @@
       = f.label :ccgd_policy, "I have read accept CCGD's policy statement"
       = f.check_box :ccgd_policy, {}, 'yes'
       %br
+    .form-group
+      %button.btn.btn-default(type="button" data-toggle="modal" data-target="ccgd-policy") Agree to CCGD policy
+    #ccgd-policy.modal.fade
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            %button.close(type="button" data-dismiss="close" aria-label="Close")
+              %span(aria-hidden="true")x
+            %h4.modal-title CCGD Policy
+
     = f.submit "Save draft", name: 'save_draft', class: 'btn btn-default btn-lg'
     = f.submit "Submit proposal", name: 'submit_proposal', class: 'btn btn-info btn-lg'
