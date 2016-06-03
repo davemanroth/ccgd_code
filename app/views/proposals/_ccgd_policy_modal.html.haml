@@ -1,0 +1,15 @@
+.form-group
+  %button.btn.btn-default(type="button" data-toggle="modal" data-target="#ccgd-policy") Agree to CCGD policy
+#ccgd-policy.modal.fade
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        %button.close(type="button" data-dismiss="modal" aria-label="Close")
+          %span(aria-hidden="true")x
+        %h4.modal-title CCGD Policy
+      .modal-body 
+        %p CCGD policy text to go here
+      .modal-footer
+        %button.btn.btn-default(data-dismiss="modal") Close
+        = button_to 'Accept policy', '#', class: 'btn btn-info', remote: true
+
