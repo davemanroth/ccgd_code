@@ -21,6 +21,10 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def destroy
+    UserCustomOrganization.find(org_params[:org_id]).destroy
+  end
+
   private 
 
     def load_org(uco, address_id)

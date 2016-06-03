@@ -21,6 +21,10 @@ class LabgroupsController < ApplicationController
     end
   end
 
+  def destroy
+    UserCustomLabgroup.find(lab_params[:lab_id]).destroy
+  end
+
   private 
 
     def load_lab(ucl)
