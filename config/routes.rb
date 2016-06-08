@@ -1,20 +1,6 @@
 Rails.application.routes.draw do
 
 
-  get 'proposals/index'
-
-  get 'proposals/show'
-
-  get 'proposals/new'
-
-  get 'proposals/create'
-
-  get 'proposals/edit'
-
-  get 'proposals/update'
-
-  get 'proposals/destroy'
-
   get 'organizations/create'
 
   get 'organizations_controller/create'
@@ -31,9 +17,9 @@ Rails.application.routes.draw do
 
   patch 'users/:id/status/:status'  => 'users#status_update'
 
-  resources :organizations, only: [:create]
+  resources :organizations, only: [:create, :destroy]
 
-  resources :labgroups, only: [:create]
+  resources :labgroups, only: [:create, :destroy]
 
   resources :users
 

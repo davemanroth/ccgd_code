@@ -9,4 +9,13 @@ RSpec.describe OrganizationsController, :type => :controller do
     end
   end
 
+  describe "DELETE destroy" do
+    it "deletes an organization" do
+      prop.save
+      expect {
+        delete :destroy, id: prop
+      }.to change(Proposal, :count).by(-1)
+    end
+  end
+
 end
