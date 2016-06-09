@@ -1,4 +1,14 @@
 %h1 #{@user.full_name}'s user page
+- if can? :manage, User
+  #pending.panel.panel-default
+    .panel-heading
+      %h3.panel-title Pending statuses
+    .panel-body
+      %h4 Pending users
+      - if pendings = User.pending
+        %ul
+          - pendings.each do |p|
+            %li= link_to p.username, edit_user_path(p)
 .user-info
   %h2 User information
   %ul.no-list
