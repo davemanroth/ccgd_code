@@ -34,11 +34,23 @@ RSpec.feature "Admin add org and labgroups", :type => :feature do
     within '#labs_and_orgs' do
       expect {
         find('#org').click_on 'Delete'
-      }.to change(LabGroup, :count).by(-1)
+      }.to change(UserCustomOrganization, :count).by(-1)
     end
     cf_user.reload
-    # expect(cf_user.user_custom_labgroup).to be_nil
+    expect(cf_user.user_custom_organization).to be_nil
     expect(cf_user.lab_groups.count).to be 0
   end
+
+  scenario "Admin deletes a labgroup based on user's custom fields" do
+    within '#labs_and_orgs' do
+      expect {
+        find('#lab').click_on 'Delete'
+      }.to change(UserCustomLabgroup, :count).by(-1)
+    end
+    cf_user.reload
+    expect(cf_user.user_custom_lab_groups).to be_nil
+    expect(cf_user.lab_groups.count).to be 0
+  end
+
 
 end
