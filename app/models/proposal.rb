@@ -11,7 +11,8 @@ class Proposal < ActiveRecord::Base
   validates :design_details, presence: true 
   validates :user_id, presence: true 
   validates :lab_group_id, presence: true 
-  # validates :ccgd_policy, :if => :submitted?
+  validates :ccgd_policy_approval, presence: true, :if => :should_policy_be_accepted?
+  attr_accessor :policy_should_be_accepted
 
   def generate_code
     num = 1000 + self.id
@@ -22,6 +23,10 @@ class Proposal < ActiveRecord::Base
 
     def submitted?
       self.submitted
+    end
+
+    def should_policy_be_accepted?
+      policy_should_be_accepted
     end
 
 end

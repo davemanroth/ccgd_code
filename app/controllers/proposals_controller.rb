@@ -25,6 +25,7 @@ class ProposalsController < ApplicationController
 
     if params[:submit_proposal]
       @proposal.submitted = true
+      @proposal.policy_should_be_accepted = true
     end
 
     if @proposal.save
@@ -72,7 +73,7 @@ class ProposalsController < ApplicationController
         :billing_dept, :billing_street, :billing_building,
         :billing_room, :billing_city, :billing_zip, 
         :billing_email, :billing_phone, :state_id,
-        :lab_group_id, :ccgd_policy
+        :lab_group_id, :ccgd_policy_approval
       )
     end
 

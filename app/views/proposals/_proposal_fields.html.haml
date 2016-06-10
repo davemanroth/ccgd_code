@@ -34,6 +34,7 @@
     .form-group
       = f.label :comments, "Comments"
       = f.text_area :comments, class: 'form-control'
+    = f.hidden_field :ccgd_policy_approval, value: nil, id: "ccgd-policy-value"
     -#.form-group
       = link_to "Read policy statement", policy_statement_path, target: '_blank'
       = f.label :ccgd_policy, "I have read accept CCGD's policy statement"
