@@ -11,7 +11,7 @@ class Proposal < ActiveRecord::Base
   validates :design_details, presence: true 
   validates :user_id, presence: true 
   validates :lab_group_id, presence: true 
-  validates :ccgd_policy_approval, presence: true, :if => :should_policy_be_accepted?
+  validates :ccgd_policy_approval, presence: true, :if => :should_policy_be_accepted?, inclusion: { in: [true, false], message: 'You must accept the CCGD policy' }
   attr_accessor :policy_should_be_accepted
 
   def generate_code
