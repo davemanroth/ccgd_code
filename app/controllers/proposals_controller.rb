@@ -2,7 +2,8 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @proposals = Proposal.all
+    @proposals = Proposal.non_draft
+    authorize! :index, @proposals
   end
 
   def show
@@ -16,6 +17,7 @@ class ProposalsController < ApplicationController
   def create
     @proposal = Proposal.new(proposal_params)
     @proposal.user_id = current_user.id
+    @proposal.proposal_status = 1
 =begin
 =end
 
@@ -24,9 +26,8 @@ class ProposalsController < ApplicationController
     end
 
     if params[:submit_proposal]
-      @proposal.submitted = true
       @proposal.policy_should_be_accepted = true
-      Rails.logger.debug(params)
+      @proposal.proposal_status = 2
     end
 
     if @proposal.save
@@ -45,18 +46,17 @@ class ProposalsController < ApplicationController
   def update
     @proposal = Proposal.find(params[:id])
 
-    if !params[:submitted].nil?
+    if params[:submit_proposal]
       @proposal.submitted = true
+      @proposal.policy_should_be_accepted = true
+      @proposal.proposal_status = 2
     end
 
     if @proposal.update_attributes(proposal_params)
-      respond_to do |f|
-        f.html
-      end
       flash[:success] = "Proposal saved"
       redirect_to user_path(@proposal.user_id)
     else
-      flash[:error] = "Error updating proposal"
+      flash[:error] = "Error saving proposal"
       render 'edit'
     end
   end

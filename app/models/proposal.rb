@@ -1,5 +1,7 @@
 class Proposal < ActiveRecord::Base
 
+  scope :non_draft, -> { where(proposal_status: (2..7) ).order(name: :asc) }
+
   belongs_to :user
   belongs_to :state
   belongs_to :proposal_status
@@ -14,9 +16,25 @@ class Proposal < ActiveRecord::Base
   validates :ccgd_policy_approval, presence: true, :if => :should_policy_be_accepted?, inclusion: { in: [true, false], message: 'You must accept the CCGD policy' }
   attr_accessor :policy_should_be_accepted
 
+# 1 - Draft/private proposal,draft
+# 2 - Pending review,pending
+# 3 - Under committee review,review
+# 4 - Accepted/project initiated,accepted
+# 5 - Rejected,rejected
+# 6 - Abandoned,abandoned
+# 7 - Complete/deprecated,complete
+
   def generate_code
     num = 1000 + self.id
     self.code = ['S', self.platforms.first.code, num].join('')
+  end
+
+  def is_pending?
+    self.proposal_status == 2
+  end
+
+  def is_complete?
+    self.proposal_status == 7
   end
 
   private
