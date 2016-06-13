@@ -1,5 +1,5 @@
 - if @proposal.errors.any?
-  =render 'errors'
+  =render 'shared/errors', errors: @proposal.errors
 .row
   .col-md-9
     %h2 Proposal information

@@ -39,7 +39,7 @@ RSpec.feature "save and submit proposals", :type => :feature do
     end
   end
 
-  scenario "User fills out new proposal form and submits the proposal" do
+  scenario "User fills out new proposal form, submits the proposal but does not agree to ccgd policy terms" do
 =begin
     visit root_path
     fill_in "Username", with: "rothfarb-test"
@@ -67,11 +67,19 @@ RSpec.feature "save and submit proposals", :type => :feature do
       click_on 'Submit proposal'
     }.to change(Proposal, :count).by(+1)
 
+    expect(page).to have_css('#errors-list')
+
+    within '#errors-list' do
+      expect(page).to have_content "You must accept the CCGD policy"
+    end
     expect(page.current_path).to eq(['/users/', user.id].join())
+
+=begin
     expect(page).to have_content('Proposals')
 
     within ".submitted-proposals" do
       expect(page).to have_content(proposal.name)
     end
+=end
   end
 end
