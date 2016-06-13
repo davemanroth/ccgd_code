@@ -7,7 +7,7 @@ RSpec.feature "save and submit proposals", :type => :feature do
 =begin
 =end
   before(:each) do
-    default_url_options[:host] = 'http://ccgd.hccdev.org'
+    default_url_options[:host] = 'http://localhost:3000'
     login(user)
     click_on 'Submit a new proposal'
   end
@@ -40,6 +40,13 @@ RSpec.feature "save and submit proposals", :type => :feature do
   end
 
   scenario "User fills out new proposal form and submits the proposal" do
+=begin
+    visit root_path
+    fill_in "Username", with: "rothfarb-test"
+    fill_in "Password", with: "B0ll0ck5!"
+    click_on "Log in"
+    click_on "Submit a new proposal"
+=end
 
     within "h1" do
       expect(page).to have_content('Create a new proposal')
@@ -55,6 +62,8 @@ RSpec.feature "save and submit proposals", :type => :feature do
       fill_in "Sample availability", with: proposal.sample_availability
       fill_in "Contributions", with: proposal.contributions
       fill_in "Comments", with: proposal.comments
+      click_on 'Accept CCGD policy'
+      click_on 'Accept terms'
       click_on 'Submit proposal'
     }.to change(Proposal, :count).by(+1)
 

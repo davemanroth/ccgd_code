@@ -26,6 +26,7 @@ class ProposalsController < ApplicationController
     if params[:submit_proposal]
       @proposal.submitted = true
       @proposal.policy_should_be_accepted = true
+      Rails.logger.debug(params)
     end
 
     if @proposal.save
