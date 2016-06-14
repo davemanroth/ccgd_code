@@ -17,7 +17,7 @@ class ProposalsController < ApplicationController
   def create
     @proposal = Proposal.new(proposal_params)
     @proposal.user_id = current_user.id
-    @proposal.proposal_status = 1
+    @proposal.proposal_status = ProposalStatus.find(1)
 =begin
 =end
 
@@ -27,7 +27,7 @@ class ProposalsController < ApplicationController
 
     if params[:submit_proposal]
       @proposal.policy_should_be_accepted = true
-      @proposal.proposal_status = 2
+      @proposal.proposal_status = ProposalStatus.find(2)
     end
 
     if @proposal.save
@@ -49,7 +49,7 @@ class ProposalsController < ApplicationController
     if params[:submit_proposal]
       @proposal.submitted = true
       @proposal.policy_should_be_accepted = true
-      @proposal.proposal_status = 2
+      @proposal.proposal_status = ProposalStatus.find(2)
     end
 
     if @proposal.update_attributes(proposal_params)
