@@ -30,11 +30,11 @@ class Proposal < ActiveRecord::Base
   end
 
   def is_pending?
-    self.proposal_status == 2
+    self.proposal_status.id == 2
   end
 
   def is_complete?
-    self.proposal_status == 7
+    self.proposal_status.id == 7
   end
 
   private

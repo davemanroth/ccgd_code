@@ -22,6 +22,13 @@ class User < ActiveRecord::Base
 
   before_create :initialize_user
 
+  def self.filter_roles(role)
+    users = []
+    User.all.each do |u|
+      users << u if u.role_ids.include?(role)
+    end
+    users
+  end
 
   def send_password_reset
     generate_token(:password_reset_token)
