@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def status_update
+  def user_status_update
     @user = User.find(params[:id])
     @user.status = params[:status]
     if @user.save

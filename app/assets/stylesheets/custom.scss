@@ -51,8 +51,23 @@ header, footer {
 }
 
 // Tables
-.admin-table {
+.user-table {
   th.org {
     width: 30%;
+  }
+}
+
+.proposal-table {
+  th.status {
+    width: 30%;
+  }
+  th.actions {
+    width: 20%;
+  }
+}
+
+.proposal-admin-actions {
+  select, button, a {
+    margin: 0 8px 8px 0;
   }
 }

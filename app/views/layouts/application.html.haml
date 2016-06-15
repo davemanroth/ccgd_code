@@ -12,9 +12,9 @@
         = render 'layouts/main_nav'
         .white
           .row
-            .col-md-3
+            .col-md-2
               = render 'layouts/side_nav' if logged_in? 
-            .col-md-9
+            .col-md-10
               - flash.each do |mssg_type, mssg|
                 %div(class="alert alert-#{mssg_type}") #{mssg}
               .main-content

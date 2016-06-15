@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'policy-statement'    => 'static_pages#policy'
 
-  patch 'users/:id/status/:status'  => 'users#status_update'
+  patch 'users/:id/status/:status'  => 'users#user_status_update'
 
   resources :organizations, only: [:create, :destroy]
 
