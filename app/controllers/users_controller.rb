@@ -83,7 +83,6 @@ class UsersController < ApplicationController
       respond_to do |f|
         f.html
       end
-      flash[:error] = "Could not update status"
     end
     authorize! :status_update, @user
   end

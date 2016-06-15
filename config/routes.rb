@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   patch 'users/:id/status/:status'  => 'users#user_status_update'
 
+  patch 'proposals/:id/status/:status'  => 'proposals#proposal_status_update'
+
   resources :organizations, only: [:create, :destroy]
 
   resources :labgroups, only: [:create, :destroy]

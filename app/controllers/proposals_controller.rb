@@ -65,6 +65,17 @@ class ProposalsController < ApplicationController
     Proposal.find(params[:id]).destroy
   end
 
+  def proposal_status_update
+    @proposal = Proposal.find(params[:id])
+    @proposal.proposal_status = ProposalStatus.find(params[:status])
+    if @proposal.save
+      # do something
+    else
+      flash[:error] = 'Error updating proposal status'
+    end
+  end
+
+
   private
     def proposal_params
       params.require(:proposal).permit(
