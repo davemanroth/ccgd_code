@@ -3,3 +3,13 @@
 %p Continue working on your proposal or update any fields. Once complete, either click the "Save" button to save and continue working later or the "Submit proposal" button to submit it to CCGD.
 = form_for(@proposal) do |f|
   =render 'proposal_fields', f: f
+- if can? :manage, Proposal
+  %h2 Administrator area
+  #proposal-status-update.panel.panel-default
+    .panel-heading
+      %h3.panel-title Proposal status
+    .panel-body
+      = label_tag "status", "Select a proposal status"
+      .form-inline
+        = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "code", @proposal.proposal_status.id), class: 'form-control pull-left'
+        = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success'
