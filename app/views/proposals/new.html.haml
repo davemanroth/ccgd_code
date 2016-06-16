@@ -1,4 +1,5 @@
-%h1 Create a new proposal
+.page-header
+  %h1 Create a new proposal
 %p Please complete all form fields below. To save a draft of your proposal and complete it at a later time, click the "Save" button. To submit your proposal, click the "Submit proposal" button.
 = form_for(@proposal) do |f|
   =render 'proposal_fields', f: f

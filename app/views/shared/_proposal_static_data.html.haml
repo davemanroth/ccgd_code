@@ -1,0 +1,26 @@
+.page-header
+  %h1= @proposal.name
+.row
+  .col-md-9
+    %dl
+      %dt Project name/title
+      %dd= proposal.name
+      %dt Submitting user
+      %dd= proposal.user.full_name
+      %dt Principle investigator
+      %dd= proposal.lab_group.name
+      %dt Platform(s)
+      %dd= proposal.platforms.pluck(:name).join(', ')
+      %dt Background
+      %dd= proposal.background
+      %dt Objectives
+      %dd= proposal.objectives
+      %dt Design details
+      %dd= proposal.design_details
+      %dt Sample availability
+      %dd= proposal.sample_availability
+      %dt Proposed contributions
+      %dd= proposal.contributions
+      - if !proposal.comments.empty?
+        %dt Comments
+        %dd= proposal.comments

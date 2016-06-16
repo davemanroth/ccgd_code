@@ -1,4 +1,5 @@
-%h1 #{@user.full_name}'s user page
+.page-header
+  %h1 #{@user.full_name}'s user page
 %h2 User information
 %p Update any of the fields below and click the "Update user information" button
 =form_for(@user) do |f|

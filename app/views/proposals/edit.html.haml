@@ -1,4 +1,5 @@
-%h1 Update #{ @proposal.name } proposal
+.page-header
+  %h1 Update #{ @proposal.name } proposal
 %p Continue working on your proposal or update any fields. Once complete, either click the "Save" button to save and continue working later or the "Submit proposal" button to submit it to CCGD.
 = form_for(@proposal) do |f|
   =render 'proposal_fields', f: f
