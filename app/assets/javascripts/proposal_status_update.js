@@ -2,34 +2,41 @@
   $(document).ready(function() {
     var form = $('#proposal-status-update form');
     var row = form.parent().parent().parent();
-    var url = form.attr('action') + '/';
     var select = $('#proposal-status-update select');
     var button = $('#proposal-status-update #submit-update');
-    var selected = get_selected(select);
+    var selected = getSelected(select);
+    var pendingClass = 'warning';
 
     select.on('change', function(e) {
-      selected = get_selected($(this));
-      form.attr('action', url + selected);
+      selected = getSelected($(this));
+      thisForm = $(this).next();
+      formUrl = getUrl(thisForm);
+      thisForm.attr('action', formUrl + selected);
     });
 
     button.on('click', function() {
-      modify_classes(row);
-      if(is_pending(selected)) {
-        // change classes
+      var row = $(this).closest('tr');
+      if(isPending(selected)) {
+        if(!row.hasClass(pendingClass)) {
+          row.addClass(pendingClass); 
+        }
       }
+      else if (row.hasClass(pendingClass) ) {
+        row.removeClass(pendingClass);
+      }
+      else {}
     });
 
-    function get_selected(select) {
-      return select.find('option:selected').val();
+    function getSelected(select) {
+      return $(select).find('option:selected').val();
     }
 
-    function is_pending(value) {
+    function getUrl(thisForm) {
+      return thisForm.attr('action').substr(0, thisForm.attr('action').length - 1);
+    }
+
+    function isPending(value) {
       return value == 2;
-    }
-
-    function modify_classes(row) {
-      var classes = row.attr('class');
-      console.log(classes.split(' '));
     }
   });
 })()
