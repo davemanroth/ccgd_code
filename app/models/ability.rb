@@ -19,6 +19,9 @@ class Ability
       can :manage, :all
     end
 
+    if user.has_role?(2) || user.has_role?(4)
+      can :vote, Proposal
+    end
 =begin
     # faculty
     if user.has_role?(2)

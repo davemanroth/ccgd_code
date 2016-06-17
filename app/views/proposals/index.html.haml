@@ -10,7 +10,7 @@
       %th.platform Platform
       %th.date Date
       %th.status Status
-      - if can? :manage, @user
+      - if can? :manage, Proposal or can? :vote, Proposal 
         %th.actions Actions
   - @proposals.each do |prop|
     - rowclass = ''
@@ -29,7 +29,9 @@
             = button_to "Update", [proposal_path(prop), 'status', prop.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update'
         -else
           = prop.proposal_status.name
-        - if can? :manage, @proposal
-          %td.proposal-admin-actions
+        %td.proposal-admin-actions
+          - if can? :manage, Proposal
             = link_to 'Edit', edit_proposal_path(prop), class: 'proposal-edit btn btn-default pull-left'
             = link_to 'Form committee', proposal_path(prop), class: 'proposal-edit btn btn-info pull-left'
+          - if can? :vote, Proposal
+            = link_to 'Vote', proposal_path(prop), class: 'proposal-edit btn btn-success'

@@ -3,7 +3,6 @@ class ProposalsController < ApplicationController
 
   def index
     @proposals = Proposal.non_draft
-    authorize! :index, @proposals
   end
 
   def show
