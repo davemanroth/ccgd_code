@@ -124,3 +124,12 @@ File.open( File.join(path, 'proposal_status.csv'), 'r') do |file|
   end
 end
 
+# Seeding Vote data
+Vote.delete_all
+File.open( File.join(path, 'votes.csv'), 'r') do |file|
+  file.read.each_line do |vote|
+    name = vote.chomp
+    Vote.create!(name: name)
+  end
+end
+

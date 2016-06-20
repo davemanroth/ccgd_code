@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602175413) do
+ActiveRecord::Schema.define(version: 20160617203017) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -161,6 +161,12 @@ ActiveRecord::Schema.define(version: 20160602175413) do
     t.string   "status",                 limit: 2
     t.string   "password_reset_token",   limit: 255
     t.datetime "password_reset_sent_at"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
