@@ -31,6 +31,9 @@ ActiveRecord::Schema.define(version: 20160620120419) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "committee_members", ["user_id"], name: "index_committee_members_on_user_id", using: :btree
+  add_index "committee_members", ["vote_id"], name: "index_committee_members_on_vote_id", using: :btree
+
   create_table "committees", force: :cascade do |t|
     t.integer  "proposal_id", limit: 4
     t.datetime "deadline"

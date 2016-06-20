@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
+    association :committee_member
     username { Faker::Internet.user_name }
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }
@@ -12,7 +13,6 @@ FactoryGirl.define do
     organization_id 1
 
     factory :many_roles do
-      roles []
       after(:create) do |user|
         (1..4).each do |num|
           user.roles << Role.find(num)
@@ -21,9 +21,14 @@ FactoryGirl.define do
     end
 
     factory :admin do
-      roles []
       after(:create) do |user|
         user.roles << Role.find(1)
+      end
+    end
+
+    factory :faculty do
+      after(:create) do |user|
+        user.roles << Role.find(2)
       end
     end
 

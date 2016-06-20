@@ -35,6 +35,45 @@ CREATE TABLE `addresses` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `committee_members`
+--
+
+DROP TABLE IF EXISTS `committee_members`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `committee_members` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `committee_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `vote_id` int(11) DEFAULT NULL,
+  `comment` text,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_committee_members_on_user_id` (`user_id`),
+  KEY `index_committee_members_on_vote_id` (`vote_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `committees`
+--
+
+DROP TABLE IF EXISTS `committees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `committees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `proposal_id` int(11) DEFAULT NULL,
+  `deadline` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_committees_on_proposal_id` (`proposal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `lab_groups`
 --
 
@@ -67,7 +106,7 @@ CREATE TABLE `locations` (
   `updated_at` datetime NOT NULL,
   `address_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +123,7 @@ CREATE TABLE `memberships` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +142,125 @@ CREATE TABLE `organizations` (
   `updated_at` datetime NOT NULL,
   `address_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `platforms`
+--
+
+DROP TABLE IF EXISTS `platforms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `platforms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(4) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `privileges`
+--
+
+DROP TABLE IF EXISTS `privileges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `privileges` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_privileges_on_role_id` (`role_id`) USING BTREE,
+  KEY `index_privileges_on_user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `proposal_platforms`
+--
+
+DROP TABLE IF EXISTS `proposal_platforms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proposal_platforms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `proposal_id` int(11) DEFAULT NULL,
+  `platform_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `proposal_statuses`
+--
+
+DROP TABLE IF EXISTS `proposal_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proposal_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `proposals`
+--
+
+DROP TABLE IF EXISTS `proposals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proposals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(10) DEFAULT NULL,
+  `objectives` text,
+  `background` text,
+  `design_details` text,
+  `sample_availability` text,
+  `contributions` text,
+  `comments` text,
+  `proposal_status_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `lab_group_id` int(11) DEFAULT NULL,
+  `submitted` tinyint(1) DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `ccgd_policy_approval` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `index_proposals_on_proposal_status_id` (`proposal_status_id`),
+  KEY `index_proposals_on_user_id` (`user_id`),
+  KEY `index_proposals_on_lab_group_id` (`lab_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,6 +294,53 @@ CREATE TABLE `states` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `user_custom_labgroups`
+--
+
+DROP TABLE IF EXISTS `user_custom_labgroups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_custom_labgroups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `custom_labgroup_name` varchar(255) DEFAULT NULL,
+  `custom_labgroup_code` varchar(255) DEFAULT NULL,
+  `custom_labgroup_building` varchar(255) DEFAULT NULL,
+  `custom_labgroup_room` varchar(255) DEFAULT NULL,
+  `custom_street` varchar(255) DEFAULT NULL,
+  `custom_city` varchar(255) DEFAULT NULL,
+  `custom_country` varchar(255) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `user_custom_organizations`
+--
+
+DROP TABLE IF EXISTS `user_custom_organizations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_custom_organizations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `custom_org_name` varchar(255) DEFAULT NULL,
+  `custom_org_phone` varchar(255) DEFAULT NULL,
+  `custom_org_email` varchar(255) DEFAULT NULL,
+  `custom_street` varchar(255) DEFAULT NULL,
+  `custom_city` varchar(255) DEFAULT NULL,
+  `custom_country` varchar(255) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `users`
 --
 
@@ -154,10 +358,27 @@ CREATE TABLE `users` (
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_digest` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `organization_id` int(11) DEFAULT NULL,
-  `location_id` int(11) DEFAULT NULL,
   `status` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password_reset_sent_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=319 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `votes`
+--
+
+DROP TABLE IF EXISTS `votes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `votes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -169,7 +390,7 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-23 11:18:26
+-- Dump completed on 2016-06-20 13:44:23
 INSERT INTO schema_migrations (version) VALUES ('20160315193611');
 
 INSERT INTO schema_migrations (version) VALUES ('20160315194655');
@@ -199,4 +420,36 @@ INSERT INTO schema_migrations (version) VALUES ('20160321220211');
 INSERT INTO schema_migrations (version) VALUES ('20160323145314');
 
 INSERT INTO schema_migrations (version) VALUES ('20160323150814');
+
+INSERT INTO schema_migrations (version) VALUES ('20160323193542');
+
+INSERT INTO schema_migrations (version) VALUES ('20160323193614');
+
+INSERT INTO schema_migrations (version) VALUES ('20160324175341');
+
+INSERT INTO schema_migrations (version) VALUES ('20160418170856');
+
+INSERT INTO schema_migrations (version) VALUES ('20160425171716');
+
+INSERT INTO schema_migrations (version) VALUES ('20160502160730');
+
+INSERT INTO schema_migrations (version) VALUES ('20160502160753');
+
+INSERT INTO schema_migrations (version) VALUES ('20160502162508');
+
+INSERT INTO schema_migrations (version) VALUES ('20160512194731');
+
+INSERT INTO schema_migrations (version) VALUES ('20160512194754');
+
+INSERT INTO schema_migrations (version) VALUES ('20160516193224');
+
+INSERT INTO schema_migrations (version) VALUES ('20160518202334');
+
+INSERT INTO schema_migrations (version) VALUES ('20160602175413');
+
+INSERT INTO schema_migrations (version) VALUES ('20160617203017');
+
+INSERT INTO schema_migrations (version) VALUES ('20160620114924');
+
+INSERT INTO schema_migrations (version) VALUES ('20160620120419');
 
