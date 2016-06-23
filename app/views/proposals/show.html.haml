@@ -1,3 +1,13 @@
 .page-header
   %h1= @proposal.name
 = render 'shared/proposal_static_data', proposal: @proposal
+- if can? :manage, Proposal
+  %h2 Administrator area
+  #form-committee.panel.panel-default
+    .panel-heading
+      %h3.panel-title Form committee
+    .panel-body
+      -#.form-group
+        = f.label :faculty, "Faculty"
+        = f.collection_select :faculty, @faculty, :id, :name, { include_blank: '-platforms-' }, { multiple: true, class: 'form-control' }
+
