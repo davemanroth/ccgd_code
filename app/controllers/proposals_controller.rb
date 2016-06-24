@@ -7,8 +7,6 @@ class ProposalsController < ApplicationController
 
   def show
     @proposal = Proposal.find(params[:id])
-    @faculty = User.filter_roles(2)
-    @advisors = User.filter_roles(4)
   end
 
   def new
