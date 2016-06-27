@@ -55,6 +55,9 @@ gem 'cancancan', '~> 1.10'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+# Use Datepicker Bootstrap gem for popup caledar date selection
+gem 'bootstrap-datepicker-rails', github: 'Nerian/bootstrap-datepicker-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

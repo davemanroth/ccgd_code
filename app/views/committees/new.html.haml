@@ -5,9 +5,12 @@
   %h2 Administrator area
   #committee-formation.panel.panel-default
     .panel-heading
-      %h3.panel-title Form a committee
+      %h3.panel-title Set a deadline and choose committee members
     .panel-body
       = form_for [@proposal, @committee] do |f|
+        .form-group
+          = f.label :deadline
+          = f.text_field :deadline, class: 'form-control small-text-field', data: { provide: 'datepicker' }
         .row
           .col-md-4
             .form-group
@@ -17,5 +20,6 @@
             .form-group
               = label_tag "advisors", "Advisors"
               = select_tag "advisors", options_from_collection_for_select(User.filter_roles(4), "id", "full_name"), multiple: true, class: 'form-control' 
+        = f.submit "Form committee", class: 'btn btn-info btn-lg'
 
 
