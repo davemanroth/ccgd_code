@@ -25,9 +25,10 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :proposals
+  resources :proposals do
+    resources :committees
+  end
 
-  resources :committees
 
   resources :password_resets
   # The priority is based upon order of creation: first created -> highest priority.

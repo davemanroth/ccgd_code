@@ -28,8 +28,9 @@ class User < ActiveRecord::Base
     users = []
     User.all.each do |u|
       users << u if u.role_ids.include?(role)
+      users
     end
-    users
+    users.sort! { |a, b| a.lastname <=> b.lastname }
   end
 
   def send_password_reset
