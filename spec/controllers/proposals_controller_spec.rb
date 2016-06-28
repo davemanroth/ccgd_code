@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ProposalsController, :type => :controller do
-  let(:user) { build(:user) }
+  let(:admin) { create(:admin) }
   let(:prop) { create(:proposal) }
+
+  before :each do
+    log_in(admin)
+  end
 
   describe "GET index" do
     it "returns http success" do
