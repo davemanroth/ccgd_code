@@ -6,11 +6,11 @@ FactoryGirl.define do
     deadline { Faker::Time.forward(14, :morning) }
 
 =begin
-=end
     after(:build) do |comm|
       3.times do |i|
-        comm.committee_members << FactoryGirl.build(:committee_member)
+        comm.member_votes << FactoryGirl.build(:member_vote)
       end
     end
+=end
   end
 end

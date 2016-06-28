@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
-    association :committee_member
+    # association :member_vote
     username { Faker::Internet.user_name }
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }

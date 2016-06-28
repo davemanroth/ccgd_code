@@ -2,9 +2,18 @@
 
 FactoryGirl.define do
   factory :member_vote do
-    committee_id 1
-    vote_id 1
-    user_id 1
-    comment "MyText"
+    association :committee
+    user { FactoryGirl.build(:user) }
+    comment { Faker::Lorem.sentences.join(' ') }
+
+    factory :approve_vote do
+      vote Vote.find(1)
+    end
+
+    factory :reject_vote do
+      vote Vote.find(2)
+    end
+
   end
+
 end

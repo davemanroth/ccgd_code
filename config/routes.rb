@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :committees do
-    resources :votes
+    resources :member_votes
   end
 
   resources :password_resets

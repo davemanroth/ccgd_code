@@ -26,6 +26,8 @@ RSpec.describe Proposal, :type => :model do
     expect(prop.proposal_status.code).to eq('draft')
   end
 
+=begin
+# This will be implemented after admin approves submission
   it "should have 3 total platforms and the correct code" do
     pl = Platform.find(3)
     prop.platforms << pl
@@ -34,9 +36,5 @@ RSpec.describe Proposal, :type => :model do
     expect(prop.platforms.count).to eq(3)
     expect(prop.code).to eq(['SGT', id].join(''))
   end
-
-  it "should not be submitted" do
-    expect(prop.submitted?).to be(false)
-  end
-
+=end
 end
