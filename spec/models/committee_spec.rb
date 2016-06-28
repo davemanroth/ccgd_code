@@ -18,10 +18,7 @@ RSpec.describe Committee, :type => :model do
   end
 
   it "has 3 member votes" do
-    3.times do |i|
-      comm.users << FactoryGirl.build(:user)
-    end
-    comm.save
-    expect(comm.member_votes.count).to eq(3)
+    three_member = create(:three_member)
+    expect(three_member.member_votes.count).to eq(3)
   end
 end
