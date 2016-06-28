@@ -1,7 +1,7 @@
 class CommitteesController < ApplicationController
 
   def index
-    @committees = Committees.all
+    @committees = Committee.all
   end
 
   def new
