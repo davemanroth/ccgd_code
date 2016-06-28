@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   has_many :lab_groups, through: :memberships
   has_many :privileges
   has_many :roles, :through => :privileges
-  has_many :committee_members
-  has_many :committees, :through => :committee_members
+  has_many :member_votes
+  has_many :committees, :through => :member_votes
   has_many :proposals
   has_secure_password
 

@@ -1,5 +1,5 @@
 class Committee < ActiveRecord::Base
   belongs_to :proposal
-  has_many :committee_members
-  has_many :users, :through => :committee_members
+  has_many :member_votes
+  has_many :users, :through => :member_votes
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620120419) do
+ActiveRecord::Schema.define(version: 20160628120020) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -21,18 +21,6 @@ ActiveRecord::Schema.define(version: 20160620120419) do
     t.datetime "updated_at",             null: false
     t.integer  "state_id",   limit: 4
   end
-
-  create_table "committee_members", force: :cascade do |t|
-    t.integer  "committee_id", limit: 4
-    t.integer  "user_id",      limit: 4
-    t.integer  "vote_id",      limit: 4
-    t.text     "comment",      limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "committee_members", ["user_id"], name: "index_committee_members_on_user_id", using: :btree
-  add_index "committee_members", ["vote_id"], name: "index_committee_members_on_vote_id", using: :btree
 
   create_table "committees", force: :cascade do |t|
     t.integer  "proposal_id", limit: 4
@@ -58,6 +46,18 @@ ActiveRecord::Schema.define(version: 20160620120419) do
     t.datetime "updated_at",             null: false
     t.integer  "address_id", limit: 4
   end
+
+  create_table "member_votes", force: :cascade do |t|
+    t.integer  "committee_id", limit: 4
+    t.integer  "vote_id",      limit: 4
+    t.integer  "user_id",      limit: 4
+    t.text     "comment",      limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "member_votes", ["user_id"], name: "index_member_votes_on_user_id", using: :btree
+  add_index "member_votes", ["vote_id"], name: "index_member_votes_on_vote_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
