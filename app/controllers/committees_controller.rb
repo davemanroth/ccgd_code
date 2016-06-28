@@ -16,6 +16,8 @@ class CommitteesController < ApplicationController
   end
 
   def edit
+    @proposal = Proposal.find(params[:proposal_id])
+    @committee = Committee.find(params[:id])
   end
 
   def update
