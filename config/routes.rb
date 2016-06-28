@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   get 'organizations/create'
 
   get 'organizations_controller/create'
@@ -26,11 +25,9 @@ Rails.application.routes.draw do
   resources :users
 
   resources :proposals do
-    resources :committees
-  end
-
-  resources :committees do
-    resources :member_votes
+    resources :committees do
+      resources :member_votes
+    end
   end
 
   resources :password_resets
