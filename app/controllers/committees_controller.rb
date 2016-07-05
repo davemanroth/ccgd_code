@@ -11,7 +11,17 @@ class CommitteesController < ApplicationController
 
   def create
     @committee = Committee.new(committee_params)
-    load_committee_members(member_params[:faculty], member_params[:advisors])
+    members = load_committee_members(member_params[:faculty], member_params[:advisors])
+    members.each do |member|
+      @committee.users << User.find(member)
+    end
+
+    if @committee.save
+      flash[:success] = "Committee saved"
+    else
+      flash[:error] = "Error saving committee"
+      render 'new'
+    end
 
   end
 
@@ -46,7 +56,6 @@ class CommitteesController < ApplicationController
     end
 
     def load_committee_members(faculty, advisors)
-      members = (faculty + advisors).uniq
-      binding.pry
+      (faculty + advisors).uniq if faculty && advisors
     end
 end
