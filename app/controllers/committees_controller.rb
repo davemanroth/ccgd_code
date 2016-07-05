@@ -21,9 +21,12 @@ class CommitteesController < ApplicationController
   end
 
   def update
+    @proposal = Proposal.find(params[:proposal_id])
+    @committee = Committee.find(params[:id])
   end
 
   def destroy
+    Committee.find(params[:id]).destroy
   end
 
   private

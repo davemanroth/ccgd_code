@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe CommitteesController, :type => :controller do
   let(:comm) { create(:committee) }
+=begin
+  let(:admin) { create(:admin) }
 
+  before :each do
+    log_in(admin)
+  end
+=end
   describe "GET index" do
     it "returns http success" do
       get :index
@@ -49,19 +55,33 @@ RSpec.describe CommitteesController, :type => :controller do
           proposal_id: comm.proposal_id, 
           id: comm,
           committee: attributes_for(:committee)
+        # binding.pry
         expect(assigns(:committee)).to eq(comm)
       end
 
+=begin
       it "updates fields on a committee" do
         patch :update, 
           proposal_id: comm.proposal_id, 
           id: comm,
           committee: attributes_for(:committee,
-            deadline: Time.now + 86400
+            # To be completed later
           )
         comm.reload
-        expect(comm.deadline).to eq(Time.now + 86400)
+        expect(comm.id).to eq(20)
       end
+=end
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "deletes a committee" do
+      comm.save
+      expect {
+        delete :destroy, 
+          proposal_id: comm.proposal_id,
+          id: comm
+      }.to change(Committee, :count).by(-1)
     end
   end
 
