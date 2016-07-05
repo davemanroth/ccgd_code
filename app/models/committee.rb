@@ -4,4 +4,6 @@ class Committee < ActiveRecord::Base
   has_many :users, :through => :member_votes
   validates :proposal, presence: true
   validates :deadline, presence: true
+
+  attr_accessor :faculty, :advisors
 end

@@ -10,6 +10,9 @@ class CommitteesController < ApplicationController
   end
 
   def create
+    @committee = Committee.new(committee_params)
+    load_committee_members(member_params[:faculty], member_params[:advisors])
+
   end
 
   def show
@@ -31,6 +34,19 @@ class CommitteesController < ApplicationController
 
   private
     def committee_params
-      params.require(:committee).permit()
+      params.require(:committee).permit(
+        :proposal_id, :deadline 
+      )
+    end
+
+    def member_params
+      params.require(:committee).permit(
+        faculty:[], advisors:[]
+      )
+    end
+
+    def load_committee_members(faculty, advisors)
+      members = (faculty + advisors).uniq
+      binding.pry
     end
 end

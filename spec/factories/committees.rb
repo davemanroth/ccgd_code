@@ -4,6 +4,8 @@ FactoryGirl.define do
   factory :committee do
     proposal { FactoryGirl.build(:proposal) }
     deadline { Faker::Time.forward(14, :morning) }
+    faculty [User.find(319), User.find(100)]
+    advisors [User.find(310), User.find(110), User.find(319)]
 
 =begin
 =end
