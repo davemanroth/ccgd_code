@@ -12,8 +12,11 @@ FactoryGirl.define do
     comments { Faker::Lorem.sentences.join(' ') }
     proposal_status_id 1
     lab_group_id 27
-    user_id 1
     platforms [Platform.find(1), Platform.find(2)]
+
+    after(:build) do |prop|
+      prop.user = FactoryGirl.create(:user)
+    end
 
   end
 end

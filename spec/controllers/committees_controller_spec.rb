@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe CommitteesController, :type => :controller do
   let(:comm) { create(:committee) }
-=begin
+
   let(:admin) { create(:admin) }
 
   before :each do
     log_in(admin)
   end
+=begin
 =end
   describe "GET index" do
     it "returns http success" do

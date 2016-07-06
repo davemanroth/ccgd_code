@@ -32,6 +32,12 @@ FactoryGirl.define do
       end
     end
 
+    factory :advisor do
+      after(:create) do |user|
+        user.roles << Role.find(4)
+      end
+    end
+
     factory :custom_fields_user do
       after(:create) do |user|
         user.organization_id = nil

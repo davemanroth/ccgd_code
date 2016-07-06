@@ -11,8 +11,8 @@ FactoryGirl.define do
 =end
     factory :three_member do
       after(:build) do |comm|
-        3.times do |i|
-          comm.member_votes << FactoryGirl.build(:member_vote, committee: comm, vote: Vote.find(i + 1))
+        [:faculty, :faculty, :advisor].each do |member|
+          comm.member_votes << FactoryGirl.build(:member_vote, committee: comm, user: FactoryGirl.create(member))
         end
       end
     end

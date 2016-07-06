@@ -1,14 +1,16 @@
-.form-group
-  = f.label :deadline
-  = f.text_field :deadline, class: 'form-control small-text-field', data: { provide: 'datepicker' }
-.row
+.form-inline.deadline-select
+  .form-group
+    = f.label :deadline
+    -#= f.text_field :deadline, class: 'form-control small-text-field', data: { provide: 'datepicker' }
+    = f.date_select :deadline, { order: [:month, :day, :year], start_year: Date.today.year }, class: 'form-control small-text-field'
+.row.committee-members
   .col-md-4
     .form-group
       = label_tag "faculty", "Faculty"
-      = select_tag "faculty", options_from_collection_for_select(User.filter_roles(2), "id", "full_name"), multiple: true, class: 'form-control' 
+      = select_tag "faculty", options_from_collection_for_select(@faculty, "id", "full_name"), multiple: true, class: 'form-control' 
   .col-md-4
     .form-group
       = label_tag "advisors", "Advisors"
-      = select_tag "advisors", options_from_collection_for_select(User.filter_roles(4), "id", "full_name"), multiple: true, class: 'form-control' 
+      = select_tag "advisors", options_from_collection_for_select(@advisors, "id", "full_name"), multiple: true, class: 'form-control' 
 
 
