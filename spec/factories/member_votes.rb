@@ -5,7 +5,7 @@ FactoryGirl.define do
     association :committee
     user { FactoryGirl.build(:user) }
     comment { Faker::Lorem.sentences.join(' ') }
-
+=begin
     factory :approve_vote do
       vote Vote.find(1)
     end
@@ -13,7 +13,7 @@ FactoryGirl.define do
     factory :reject_vote do
       vote Vote.find(2)
     end
-
+=end
   end
 
 end

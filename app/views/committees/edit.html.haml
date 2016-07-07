@@ -9,5 +9,4 @@
     .panel-body
       = form_for [@proposal, @committee] do |f|
         = render 'committee_fields', f: f
-        - binding.pry
         = f.submit "Update committee", class: 'btn btn-info btn-lg'

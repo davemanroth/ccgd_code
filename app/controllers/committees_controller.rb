@@ -68,15 +68,27 @@ class CommitteesController < ApplicationController
     end
 
     def load_committee_members(comm, faculty, advisors)
-      comm.users.clear
+      comm.member_votes.clear
+      members = { 2 => faculty, 4 => advisors }
+      members.each do |role_id, group|
+        group.each do |user_id|
+          mv = MemberVote.create(
+            user: User.find(user_id),
+            member_role: role_id,
+            committee: comm
+          )
+          comm.member_votes << mv
+        end
+      end
+      #binding.pry
 =begin
       [faculty, advisors].each do |type|
         type.collect! { |num| num.to_i }
       end
-=end
       members = (faculty + advisors).uniq if faculty && advisors
       members.each do |member|
         comm.users << User.find(member)
       end
+=end
     end
 end
