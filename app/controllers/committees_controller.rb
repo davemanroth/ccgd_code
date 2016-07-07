@@ -16,10 +16,7 @@ class CommitteesController < ApplicationController
     @committee = Committee.new(committee_params)
     @proposal = Proposal.find(params[:proposal_id])
     @committee.proposal = @proposal
-    members = load_committee_members(member_params[:faculty], member_params[:advisors])
-    members.each do |member|
-      @committee.users << User.find(member)
-    end
+    load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.save
       flash[:success] = "Committee saved"
@@ -44,6 +41,15 @@ class CommitteesController < ApplicationController
   def update
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:id])
+    load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
+
+    if @committee.update_attributes(committee_params)
+      flash[:success] = "Committee successfully updated"
+      redirect_to edit_proposal_committee_path(@proposal, @committee)
+    else
+      flash[:error] = "There was a problem updating this committee"
+      render 'edit'
+    end
   end
 
   def destroy
@@ -61,7 +67,16 @@ class CommitteesController < ApplicationController
       )
     end
 
-    def load_committee_members(faculty, advisors)
-      (faculty + advisors).uniq if faculty && advisors
+    def load_committee_members(comm, faculty, advisors)
+      comm.users.clear
+=begin
+      [faculty, advisors].each do |type|
+        type.collect! { |num| num.to_i }
+      end
+=end
+      members = (faculty + advisors).uniq if faculty && advisors
+      members.each do |member|
+        comm.users << User.find(member)
+      end
     end
 end

@@ -24,8 +24,10 @@ class User < ActiveRecord::Base
 
   before_create :initialize_user
 
+  # Returns ActiveRecord hash of User objects ordered by last name which have role specified
+  # by id parameter
   def self.filter_roles(id)
-    users = self.joins(:privileges).where(privileges: { role_id: id } ).order(lastname: :asc)
+    self.joins(:privileges).where(privileges: { role_id: id } ).order(lastname: :asc)
   end
 
   def send_password_reset

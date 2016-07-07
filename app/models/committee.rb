@@ -6,4 +6,5 @@ class Committee < ActiveRecord::Base
   validates :deadline, presence: true
 
   attr_accessor :faculty, :advisors
+
 end
