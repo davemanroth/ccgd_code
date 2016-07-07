@@ -38,6 +38,7 @@ class CommitteesController < ApplicationController
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:id])
     @faculty = User.filter_roles(2)
+    @advisors = User.filter_roles(4)
   end
 
   def update

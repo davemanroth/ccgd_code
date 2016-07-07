@@ -15,11 +15,6 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
       expect(page).to have_content('Form a new committee')
     end
 
-=begin
-    within ".deadline-select" do
-      select "10", from: "committee_deadline_3i"
-    end
-=end
     expect {
       select "10", from: "committee_deadline_3i"
       select "Adam Bass", from: "faculty"
@@ -41,8 +36,10 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
     end
 
     within ".committee-members" do
-      expect(page).to have_select("faculty", selected: "Adam Bass")
+      expect(page).to have_select("faculty", selected: [members[0].full_name, members[1].full_name])
+      expect(page).to have_select("advisors", selected: [members[2].full_name])
     end
   end
+    #binding.pry
 
 end

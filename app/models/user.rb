@@ -24,13 +24,8 @@ class User < ActiveRecord::Base
 
   before_create :initialize_user
 
-  def self.filter_roles(role)
-    users = []
-    User.all.each do |u|
-      users << u if u.role_ids.include?(role)
-      users
-    end
-    users.sort! { |a, b| a.lastname <=> b.lastname }
+  def self.filter_roles(id)
+    users = self.joins(:privileges).where(privileges: { role_id: id } ).order(lastname: :asc)
   end
 
   def send_password_reset
