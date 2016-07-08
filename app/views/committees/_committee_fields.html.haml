@@ -7,9 +7,9 @@
   .col-md-4
     .form-group
       = label_tag "faculty", "Faculty"
-      = select_tag "faculty", options_from_collection_for_select(@faculty, "id", "full_name", selected(@faculty, @committee.member_votes, 2) ), multiple: true, class: 'form-control' 
+      = select_tag "faculty", options_from_collection_for_select(@faculty, "id", "full_name", selected(@committee.member_votes, 2) ), multiple: true, class: 'form-control' 
   .col-md-4
     .form-group
       = label_tag "advisors", "Advisors"
-      = select_tag "advisors", options_from_collection_for_select(@advisors, "id", "full_name", selected(@advisors, @committee.member_votes, 4) ), multiple: true, class: 'form-control' 
+      = select_tag "advisors", options_from_collection_for_select(@advisors, "id", "full_name", selected(@committee.member_votes, 4) ), multiple: true, class: 'form-control' 
 

@@ -1,8 +1,8 @@
 module CommitteesHelper
 
-  def selected(group, member_votes, role)
+  def selected(member_votes, role)
     if !member_votes.empty?
-      member_votes.where(member_role: role).pluck(:user_id)
+      group = member_votes.where(member_role: role).pluck(:user_id)
     end
   end
 

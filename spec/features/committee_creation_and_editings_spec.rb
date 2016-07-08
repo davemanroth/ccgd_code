@@ -55,6 +55,7 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
     click_on "Update committee"
     comm.reload
 
+    #binding.pry
     expect(comm.users.count).to be(4)
 
 =begin
