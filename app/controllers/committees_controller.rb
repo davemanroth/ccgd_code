@@ -21,6 +21,7 @@ class CommitteesController < ApplicationController
     @committee = Committee.new(committee_params)
     @proposal = Proposal.find(params[:proposal_id])
     @committee.proposal = @proposal
+    update_status(@proposal, status_params[:status])
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.save
@@ -66,10 +67,17 @@ class CommitteesController < ApplicationController
       params.require(:committee).permit(:deadline)
     end
 
+    def status_params
+      params.permit(:status)
+    end
+
     def member_params
       params.permit(
         faculty:[], advisors:[]
       )
+    end
+
+    def update_status(prop, status)
     end
 
     def load_committee_members(comm, faculty, advisors)
@@ -86,14 +94,5 @@ class CommitteesController < ApplicationController
         end
       end
       #binding.pry
-=begin
-      [faculty, advisors].each do |type|
-        type.collect! { |num| num.to_i }
-      end
-      members = (faculty + advisors).uniq if faculty && advisors
-      members.each do |member|
-        comm.users << User.find(member)
-      end
-=end
     end
 end
