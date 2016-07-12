@@ -7,9 +7,14 @@ class CommitteesController < ApplicationController
 
   def new
     @proposal = Proposal.find(params[:proposal_id])
-    @committee = Committee.new
-    @faculty = User.filter_roles(2)
-    @advisors = User.filter_roles(4)
+    if @proposal.committee
+      flash[:error] = "Committee already created for this proposal"
+      redirect_to proposals_path 
+    else
+      @committee = Committee.new
+      @faculty = User.filter_roles(2)
+      @advisors = User.filter_roles(4)
+    end
   end
 
   def create
