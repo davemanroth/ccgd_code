@@ -3,7 +3,7 @@
     = f.label :deadline
     -#= f.text_field :deadline, class: 'form-control small-text-field', data: { provide: 'datepicker' }
     = f.date_select :deadline, { order: [:month, :day, :year], start_year: Date.today.year }, class: 'form-control small-text-field'
-.form-inline
+.form-inline.status
   .form-group
     = label_tag "status", "Update proposal status"
     = select_tag "status", options_from_collection_for_select(ProposalStatus.all, "id", "name", @proposal.proposal_status.id), class: 'form-control'

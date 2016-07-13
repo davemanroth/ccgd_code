@@ -16,7 +16,8 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
     end
 
     expect {
-      select "10", from: "committee_deadline_3i"
+      select "20", from: "committee_deadline_3i"
+      select "Under committee review", from: "status"
       select "Adam Bass", from: "faculty"
       select "Levi Garraway", from: "faculty"
       select "Anna Cooley", from: "advisors"
@@ -43,6 +44,10 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
       expect(page).to have_select("advisors", selected: [members[2].full_name])
     end
 
+    within ".status" do
+      select "Under committee review", from: "status"
+    end
+
     within ".committee-members" do
       unselect members[0].full_name, from: "faculty"
       unselect members[1].full_name, from: "faculty"
@@ -57,6 +62,10 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
 
     #binding.pry
     expect(comm.users.count).to be(4)
+
+    within ".status" do
+      expect(page).to have_select("status", selected: "Under committee review")
+    end
 
 =begin
 =end

@@ -47,6 +47,7 @@ class CommitteesController < ApplicationController
   def update
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:id])
+    update_status(@proposal, status_params[:status])
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.update_attributes(committee_params)
@@ -77,7 +78,9 @@ class CommitteesController < ApplicationController
       )
     end
 
-    def update_status(prop, status)
+    def update_status(prop, status_id)
+      status = ProposalStatus.find(status_id) 
+      prop.update(proposal_status: status)
     end
 
     def load_committee_members(comm, faculty, advisors)
