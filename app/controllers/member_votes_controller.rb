@@ -1,5 +1,7 @@
 class MemberVotesController < ApplicationController
+  load_and_authorize_resource
   def new
+    @member_vote = MemberVote.new
   end
 
   def create
