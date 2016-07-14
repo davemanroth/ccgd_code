@@ -13,4 +13,6 @@
           %li= link_to "Users", users_path
         -if can? :manage, Proposal or can? :vote, Proposal
           %li= link_to "Proposals", proposals_path
+        -if can? :manage, Committee
+          %li= link_to "Committees", committees_path
         %li= link_to "Log out", logout_path, method: 'delete'
