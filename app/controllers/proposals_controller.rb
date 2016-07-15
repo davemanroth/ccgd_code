@@ -2,7 +2,11 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @proposals = Proposal.non_draft
+    if can? :vote, Proposal and current_user.committees
+      @proposals = Proposal.where(committee_id: current_user.committee_ids)
+    else
+      @proposals = Proposal.non_draft
+    end
   end
 
   def show
