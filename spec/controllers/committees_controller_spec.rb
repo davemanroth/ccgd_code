@@ -41,7 +41,7 @@ RSpec.describe CommitteesController, :type => :controller do
 
   describe "PATCH update" do
     context "http request" do
-      it "retruns http success" do
+      it "returns http success" do
         patch :update, 
           proposal_id: comm.proposal_id, 
           id: comm,

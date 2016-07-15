@@ -21,31 +21,20 @@ class Ability
     # Submitter
     if user.has_role?(5)
       can [:read, :update], User, id: user.id
-      can :crud, Proposal, userid: user.id
+      can :crud, Proposal, user_id: user.id
     end
 
+    # Faculty and Advisors
+    if user.has_role?(2) || user.has_role?(4)
+      can :vote, Proposal
+      can :crud, MemberVote, user_id: user.id
+    end
 
     # Admin
     if user.has_role?(1)
       can :manage, :all
     end
 
-    if user.has_role?(2) || user.has_role?(4)
-      can :vote, Proposal
-    end
-=begin
-    # faculty
-    if user.has_role?(2)
-    end
-
-    # Staff
-    if user.has_role?(3)
-    end
-
-    # Advisor
-    if user.has_role?(4)
-    end
-=end
 
     # Define abilities for the passed in user here. For example:
     #

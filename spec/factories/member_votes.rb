@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :member_vote do
     association :committee
-    user { FactoryGirl.build(:user) }
+    user { FactoryGirl.create(:faculty) }
     comment { Faker::Lorem.sentences.join(' ') }
 =begin
     factory :approve_vote do
