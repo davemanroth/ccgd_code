@@ -25,7 +25,7 @@
       %td.proposal-admin-actions
         - if can? :manage, @proposal
           #proposal-status-update
-            = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", prop.proposal_status.id), class: 'form-control pull-left'
+            = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "code", prop.proposal_status.id), class: 'form-control pull-left'
             = button_to "Update", [proposal_path(prop), 'status', prop.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update'
         -else
           = prop.proposal_status.name
@@ -36,5 +36,5 @@
               = link_to 'Edit committee', edit_proposal_committee_path(prop, prop.committee), class: 'proposal-edit btn btn-warning pull-left'
             - else
               = link_to 'Form committee', new_proposal_committee_path(prop), class: 'proposal-edit btn btn-info pull-left'
-          - elsif can? :vote, Proposal
+          - if can? :vote, Proposal
             = link_to 'Vote', proposal_path(prop), class: 'proposal-edit btn btn-success'

@@ -2,10 +2,12 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if can? :vote, Proposal and current_user.committees
-      @proposals = Proposal.where(committee_id: current_user.committee_ids)
-    else
+    if can? :manage, Proposal
       @proposals = Proposal.non_draft
+    elsif can? :vote, Proposal
+      ids = Committee.joins(:member_votes).where(member_votes: { user_id: current_user.id } ).pluck(:id)
+      @proposals = Proposal.find(ids)
+    else
     end
   end
 

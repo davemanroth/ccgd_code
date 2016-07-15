@@ -14,6 +14,17 @@ class Ability
     user ||= User.new
 
     alias_action :create, :read, :update, :destroy, to: :crud
+
+    #anonymous
+    can :create, User
+
+    # Submitter
+    if user.has_role?(5)
+      can [:read, :update], User, id: user.id
+      can :crud, Proposal, userid: user.id
+    end
+
+
     # Admin
     if user.has_role?(1)
       can :manage, :all
@@ -35,18 +46,6 @@ class Ability
     if user.has_role?(4)
     end
 =end
-
-    # Submitter
-    if user.has_role?(5)
-      can [:read, :update], User do |us|
-        us == user
-      end
-
-      can :crud, Proposal
-    end
-
-    #anonymous
-    can :create, User
 
     # Define abilities for the passed in user here. For example:
     #
