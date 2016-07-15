@@ -5,8 +5,7 @@ class ProposalsController < ApplicationController
     if can? :manage, Proposal
       @proposals = Proposal.non_draft
     elsif can? :vote, Proposal
-      ids = Committee.joins(:member_votes).where(member_votes: { user_id: current_user.id } ).pluck(:id)
-      @proposals = Proposal.find(ids)
+      @proposals = Proposal.joins(committee: :member_votes).where(member_votes: { user_id: current_user })
     else
     end
   end
