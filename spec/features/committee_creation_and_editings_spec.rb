@@ -11,6 +11,7 @@ RSpec.feature "Admin committee creation and editing", :type => :feature do
     prop = create(:proposal)
     visit new_proposal_committee_path(prop)
 
+    # Make sure we're on the right page
     within 'h1' do
       expect(page).to have_content('Form a new committee')
     end
