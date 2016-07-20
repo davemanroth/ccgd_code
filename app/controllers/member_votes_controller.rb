@@ -27,11 +27,17 @@ class MemberVotesController < ApplicationController
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
     @member_vote = MemberVote.find_by(user_id: current_user.id)
-    vote = Vote.find(vote_params[:vote])
-    if @member_vote.update(vote: vote, comment: vote_params[:comment])
-      flash[:success] = "Vote successfully cast"
+
+    if vote_params[:vote].nil?
+      flash[:error] = "You must choose to approve, reject, or request proposal revision"
+      render "new"
     else
-      flash[:error] = "Error casting vote"
+      vote = Vote.find(vote_params[:vote])
+      if @member_vote.update(vote: vote, comment: vote_params[:comment])
+        flash[:success] = "Vote successfully cast"
+      else
+        flash[:error] = "Error casting vote"
+      end
     end
   end
 
