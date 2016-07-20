@@ -8,15 +8,15 @@ RSpec.feature "MemberVotings", :type => :feature do
   before :each do
     login(faculty)
     three_member.member_votes << mv
-    visit new_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
-
-    # Make sure we're on the right page
-    within 'h1' do
-      expect(page).to have_content('Committee vote')
-    end
   end
 
   scenario "Faculty votes on proposal" do
+   
+    # Make sure we're on the right page
+    visit new_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
+    within 'h1' do
+      expect(page).to have_content('Committee vote')
+    end
 
     # Vote to approve proposal
     within ".edit_member_vote" do
@@ -39,6 +39,12 @@ RSpec.feature "MemberVotings", :type => :feature do
 
   scenario "Faculty submits voting form without voting" do
 
+    # Make sure we're on the right page
+    visit new_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
+    within 'h1' do
+      expect(page).to have_content('Committee vote')
+    end
+
     # Vote to approve proposal
     within ".edit_member_vote" do
       click_on "Cast vote"
@@ -50,5 +56,10 @@ RSpec.feature "MemberVotings", :type => :feature do
     end
   end
 
+  scenario "Faculty tries to access voting page for proposal he/she is NOT assigned" do
+    mv.user = build_stubbed(:advisor)
+    mv.save
+    visit new_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
+  end
 
 end
