@@ -17,6 +17,13 @@
       = f.label :platforms, "Platform(s)"
       = f.collection_select :platforms, Platform.all, :id, :name, { include_blank: '-platforms-' }, { multiple: true, class: 'form-control' }
     .form-group
+      = f.label :sample_types, "Sample type(s)"
+      = f.collection_select :sample_types, SampleType.all, :id, :name, { include_blank: '-sample types-' }, { multiple: true, class: 'form-control' }
+    =f.fields_for :new_sample_type do |st|
+      .form-group
+        = st.label :name, "Other sample type if not listed above"
+        = st.text_field :name, class: 'form-control', placeholder: 'New sample type'
+    .form-group
       = f.label :objectives, "Objectives"
       = f.text_area :objectives, class: 'form-control', required: true
     .form-group

@@ -23,6 +23,7 @@ RSpec.feature "save and submit proposals", :type => :feature do
       fill_in "Name of proposed project", with: proposal.name
       select "CCCB, CCCB", from: "proposal_lab_group_id"
       select "Affymetrix SNP Array", from: "proposal_platforms"
+      select "RNA", from: "proposal_sample_types"
       fill_in "Objectives", with: proposal.objectives
       fill_in "Background", with: proposal.background
       fill_in "Design details", with: proposal.design_details

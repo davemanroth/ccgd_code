@@ -11,6 +11,7 @@ class Proposal < ActiveRecord::Base
   has_many :sample_types, :through => :proposal_sample_types
   has_many :proposal_platforms
   has_many :platforms, :through => :proposal_platforms
+  accepts_nested_attributes_for :sample_types, allow_destroy: true
   validates :name, presence: true 
   validates :objectives, presence: true 
   validates :design_details, presence: true 
