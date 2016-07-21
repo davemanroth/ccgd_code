@@ -52,6 +52,6 @@ class MemberVotesController < ApplicationController
     end
 
     def is_on_committee?(committee)
-      User.joins(committee: :member_votes).where(committee: committee, member_votes: { user_id: current_user })
+      user = User.joins(committee: :member_votes).where(committee: committee, member_votes: { user_id: current_user })
     end
 end

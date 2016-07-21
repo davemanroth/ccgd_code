@@ -57,9 +57,13 @@ RSpec.feature "MemberVotings", :type => :feature do
   end
 
   scenario "Faculty tries to access voting page for proposal he/she is NOT assigned" do
-    mv.user = build_stubbed(:advisor)
+    mv.user = create(:advisor)
     mv.save
     visit new_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
+
+    within ".alert" do
+      expect(page).to have_content("You do not have voting privileges on this proposal")
+    end
   end
 
 end
