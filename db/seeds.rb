@@ -133,3 +133,12 @@ File.open( File.join(path, 'votes.csv'), 'r') do |file|
   end
 end
 
+# Seeding Sample Type data
+SampleType.delete_all
+File.open( File.join(path, 'sample_types.csv'), 'r') do |file|
+  file.read.each_line do |st|
+    name = st.chomp
+    SampleType.create!(name: name)
+  end
+end
+

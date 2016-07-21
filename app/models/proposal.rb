@@ -7,6 +7,8 @@ class Proposal < ActiveRecord::Base
   belongs_to :proposal_status
   belongs_to :lab_group
   has_one :committee
+  has_many :proposal_sample_types
+  has_many :sample_types, :through => :proposal_sample_types
   has_many :proposal_platforms
   has_many :platforms, :through => :proposal_platforms
   validates :name, presence: true 

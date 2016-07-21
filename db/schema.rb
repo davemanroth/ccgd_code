@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707192841) do
+ActiveRecord::Schema.define(version: 20160721151815) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -100,6 +100,16 @@ ActiveRecord::Schema.define(version: 20160707192841) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "proposal_sample_types", force: :cascade do |t|
+    t.integer  "proposal_id",    limit: 4
+    t.integer  "sample_type_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "proposal_sample_types", ["proposal_id"], name: "index_proposal_sample_types_on_proposal_id", using: :btree
+  add_index "proposal_sample_types", ["sample_type_id"], name: "index_proposal_sample_types_on_sample_type_id", using: :btree
+
   create_table "proposal_statuses", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "code",       limit: 255
@@ -134,6 +144,12 @@ ActiveRecord::Schema.define(version: 20160707192841) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "sample_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "states", force: :cascade do |t|
