@@ -19,7 +19,7 @@
     .form-group
       = f.label :sample_types, "Sample type(s)"
       = f.collection_select :sample_types, SampleType.all, :id, :name, { include_blank: '-sample types-' }, { multiple: true, class: 'form-control' }
-    =f.fields_for :new_sample_type do |st|
+    =f.fields_for :sample_type do |st|
       .form-group
         = st.label :name, "Other sample type if not listed above"
         = st.text_field :name, class: 'form-control', placeholder: 'New sample type'

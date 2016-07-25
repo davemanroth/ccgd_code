@@ -20,7 +20,6 @@ class ProposalsController < ApplicationController
 
   def create
     @proposal = Proposal.new(proposal_params)
-    # binding.pry
     manage_sample_types(@proposal)
 =begin
 =end
@@ -98,32 +97,36 @@ class ProposalsController < ApplicationController
       params.require(:proposal).permit(platforms:[])
     end
 
-    def manage_sample_types(proposal)
-      sample_types = sample_type_params.drop(1) || []
-      if !new_sample_type_params.empty?
-        add_new_sample_type(new_sample_type_params)
-        sample_types << new_sample_type_params
-      end
-      add_sample_types_to_proposal(@proposal, sample_types) unless sample_types.empty?
-    end
 
     def sample_type_params
       params.require(:proposal).permit(sample_types:[])
     end
 
     def new_sample_type_params
-      params.require(:proposal).permit(:new_sample_type)
+      params.require(:proposal).permit(
+        sample_type: [:name]
+      )
     end
 
+=begin
+=end
     def add_sample_types_to_proposal(prop, sample_types)
       sample_types.each do |st|
         prop.sample_types << SampleType.find_by(name: st)
       end
     end
 
+    def manage_sample_types(proposal)
+      sample_types = sample_type_params.drop(1) || []
+      if !new_sample_type_params[:sample_type].empty?
+        new_sample_type = new_sample_type_params[:sample_type][:name]
+        add_new_sample_type(new_sample_type)
+        sample_types << new_sample_type
+      end
+      add_sample_types_to_proposal(@proposal, sample_types) unless sample_types.empty?
+    end
+
     def add_new_sample_type(new_sample)
       SampleType.create(name: new_sample)
     end
-=begin
-=end
 end

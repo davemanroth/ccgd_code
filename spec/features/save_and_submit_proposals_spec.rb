@@ -42,6 +42,27 @@ RSpec.feature "save and submit proposals", :type => :feature do
 
   end
 
+  scenario "User fills out new proposal form and adds a new sample type" do
+
+    within "h1" do
+      expect(page).to have_content('Create a new proposal')
+    end
+
+    expect {
+      fill_in "Name of proposed project", with: proposal.name
+      select "CCCB, CCCB", from: "proposal_lab_group_id"
+      select "Affymetrix SNP Array", from: "proposal_platforms"
+      fill_in "Other sample type if not listed above", with: "Other sample type"
+      fill_in "Objectives", with: proposal.objectives
+      fill_in "Background", with: proposal.background
+      fill_in "Design details", with: proposal.design_details
+      fill_in "Sample availability", with: proposal.sample_availability
+      fill_in "Contributions", with: proposal.contributions
+      fill_in "Comments", with: proposal.comments
+      click_on "Save draft"
+    }.to change(SampleType, :count).by(+1)
+  end
+
   scenario "User fills out new proposal form, submits the proposal but does not agree to ccgd policy terms" do
   
     within "h1" do
