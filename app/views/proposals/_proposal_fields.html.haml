@@ -15,10 +15,10 @@
       = f.select :lab_group_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Select lab/group-' }, { class: 'form-control' }
     .form-group
       = f.label :platforms, "Platform(s)"
-      = f.collection_select :platforms, Platform.all, :id, :name, { include_blank: '-platforms-' }, { multiple: true, class: 'form-control' }
+      = f.collection_select :platforms, Platform.all, :id, :name, { include_blank: '-platforms-', selected: @proposal.platform_ids }, { multiple: true, class: 'form-control' }
     .form-group
       = f.label :sample_types, "Sample type(s)"
-      = f.collection_select :sample_types, SampleType.all, :id, :name, { include_blank: '-sample types-' }, { multiple: true, class: 'form-control' }
+      = f.collection_select :sample_types, SampleType.all, :id, :name, { include_blank: '-sample types-', selected: @proposal.sample_type_ids }, { multiple: true, class: 'form-control' }
     =f.fields_for :sample_type do |st|
       .form-group
         = st.label :name, "Other sample type if not listed above"
