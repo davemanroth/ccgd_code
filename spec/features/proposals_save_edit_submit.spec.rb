@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "save and submit proposals", :type => :feature do
+RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
   let(:proposal) { build(:proposal) }
   let(:user) { create(:user) }
 
@@ -8,12 +8,12 @@ RSpec.feature "save and submit proposals", :type => :feature do
 =end
   before(:each) do
     #default_url_options[:host] = 'http://localhost:3000'
-    default_url_options[:host] = 'http://ccgd.hccdev.org'
+    #default_url_options[:host] = 'http://ccgd.hccdev.org'
     login(user)
-    click_on 'Submit a new proposal'
   end
 
   scenario "User fills out new proposal form and saves a draft" do
+    click_on 'Submit a new proposal'
 
     within "h1" do
       expect(page).to have_content('Create a new proposal')
@@ -43,6 +43,7 @@ RSpec.feature "save and submit proposals", :type => :feature do
   end
 
   scenario "User fills out new proposal form and adds a new sample type" do
+    click_on 'Submit a new proposal'
 
     within "h1" do
       expect(page).to have_content('Create a new proposal')
@@ -64,6 +65,7 @@ RSpec.feature "save and submit proposals", :type => :feature do
   end
 
   scenario "User fills out new proposal form, submits the proposal but does not agree to ccgd policy terms" do
+    click_on 'Submit a new proposal'
   
     within "h1" do
       expect(page).to have_content('Create a new proposal')
@@ -88,6 +90,34 @@ RSpec.feature "save and submit proposals", :type => :feature do
       expect(page).to have_content "You must accept the CCGD policy"
     end
     expect(page.current_path).to eq('/proposals')
+
+  end
+
+  scenario "User edits a saved proposal draft" do
+    prop_draft = create(:proposal)
+    prop_draft.user = user
+    prop_draft.ccgd_policy_approval = true
+    prop_draft.save
+    #binding.pry
+
+    visit edit_proposal_path(prop_draft)
+
+    within "h1" do
+      expect(page).to have_content("Update #{prop_draft.name} proposal")
+    end
+
+    select "DNA Fingerprinting", from: "proposal_platforms"
+    select "cfDNA", from: "proposal_sample_types"
+    click_on "Save draft"
+
+    within ".proposal-info" do
+      expect(page).to have_content(prop_draft.name)
+    end
+=begin
+    within ".proposal-info" do
+      expect(page).to have_content(prop_draft.name)
+    end
+=end
 
   end
 

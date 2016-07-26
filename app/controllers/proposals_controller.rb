@@ -20,16 +20,13 @@ class ProposalsController < ApplicationController
 
   def create
     @proposal = Proposal.new(proposal_params)
+    manage_platforms(@proposal)
     manage_sample_types(@proposal)
 =begin
 =end
 
     @proposal.user_id = current_user.id
     @proposal.proposal_status = ProposalStatus.find(1)
-
-    platform_params[:platforms].each do |val|
-      @proposal.platforms << Platform.find(val) unless val.empty?
-    end
 
     if params[:submit_proposal]
       @proposal.policy_should_be_accepted = true
@@ -51,6 +48,7 @@ class ProposalsController < ApplicationController
 
   def update
     @proposal = Proposal.find(params[:id])
+    manage_platforms(@proposal)
     manage_sample_types(@proposal)
 
     if params[:submit_proposal]
@@ -107,21 +105,28 @@ class ProposalsController < ApplicationController
         sample_type: [:name]
       )
     end
-
 =begin
 =end
     def add_sample_types_to_proposal(prop, sample_types)
       sample_types.each do |st|
-        prop.sample_types << SampleType.find_by(name: st)
+        prop.sample_types << SampleType.find(st)
+      end
+    end
+
+    def manage_platforms(proposal)
+      proposal.platforms.clear if !proposal.platforms.empty?
+      platform_params[:platforms].each do |val|
+        proposal.platforms << Platform.find(val) unless val.empty?
       end
     end
 
     def manage_sample_types(proposal)
-      sample_types = sample_type_params.drop(1) || []
-      if !new_sample_type_params[:sample_type].empty?
+      proposal.sample_types.clear if !proposal.sample_types.empty?
+      sample_types = sample_type_params[:sample_types].drop(1) || []
+      if !new_sample_type_params[:sample_type][:name].empty?
         new_sample_type = new_sample_type_params[:sample_type][:name]
-        add_new_sample_type(new_sample_type)
-        sample_types << new_sample_type
+        new_sample = add_new_sample_type(new_sample_type)
+        sample_types << new_sample.id
       end
       add_sample_types_to_proposal(@proposal, sample_types) unless sample_types.empty?
     end

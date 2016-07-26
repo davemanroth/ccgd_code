@@ -12,6 +12,7 @@ FactoryGirl.define do
     comments { Faker::Lorem.sentences.join(' ') }
     proposal_status_id 1
     lab_group_id 27
+    sample_types [SampleType.find(1)]
     platforms [Platform.find(1), Platform.find(2)]
 
     after(:build) do |prop|
