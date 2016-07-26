@@ -98,27 +98,25 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
     prop_draft.user = user
     prop_draft.ccgd_policy_approval = true
     prop_draft.save
-    #binding.pry
 
     visit edit_proposal_path(prop_draft)
 
     within "h1" do
       expect(page).to have_content("Update #{prop_draft.name} proposal")
     end
-
+    unselect "Sequenom Genotyping", from: "proposal_platforms"
+    unselect "Illumina Whole Genome Sequencing", from: "proposal_platforms"
+    unselect "RNA", from: "proposal_sample_types"
     select "DNA Fingerprinting", from: "proposal_platforms"
     select "cfDNA", from: "proposal_sample_types"
     click_on "Save draft"
 
-    within ".proposal-info" do
-      expect(page).to have_content(prop_draft.name)
-    end
-=begin
-    within ".proposal-info" do
-      expect(page).to have_content(prop_draft.name)
-    end
-=end
+    visit edit_proposal_path(prop_draft)
 
+    expect(page).to have_select("proposal_platforms", selected: ["DNA Fingerprinting"])
+    expect(page).to have_select("proposal_sample_types", selected: ["cfDNA"])
+=begin
+=end
   end
 
 =begin
