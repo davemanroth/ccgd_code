@@ -27,6 +27,7 @@ class Proposal < ActiveRecord::Base
 # 5 - Rejected,rejected
 # 6 - Abandoned,abandoned
 # 7 - Complete/deprecated,complete
+# 8 - Awaiting revision, revision
 
   def generate_code
     num = 1000 + self.id

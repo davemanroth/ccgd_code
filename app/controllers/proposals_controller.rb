@@ -72,7 +72,17 @@ class ProposalsController < ApplicationController
 
   def proposal_status_update
     @proposal = Proposal.find(params[:id])
-    @proposal.proposal_status = ProposalStatus.find(params[:status])
+    old_status = @proposal.proposal_status.id
+    new_status = params[:status].to_i
+
+    # Generate the proposal code if the proposal was submitted by the user 
+    # and approved by the admin
+    if old_status == 2 and new_status == 3 and @proposal.code.nil?
+      @proposal.generate_code
+    end
+
+    # Update the proposal status regardless
+    @proposal.proposal_status = ProposalStatus.find(new_status)
     if @proposal.save
       # do something
     else

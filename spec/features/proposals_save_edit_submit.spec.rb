@@ -93,6 +93,32 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
 
   end
 
+  # Unfortunately this scenario fails without JS enabled. Enabling JS does not
+  # work on this server unfortunately
+  scenario "Admin approves submitted proposal and proposal code generated" do
+    admin = create(:admin)
+    logout(user)
+    login(admin)
+
+    submitted = create(:proposal)
+    submitted.ccgd_policy_approval = true
+    submitted.proposal_status = ProposalStatus.find(2)
+    submitted.save
+
+    visit edit_proposal_path(submitted)
+
+    # Make sure the admin options are displayed
+    expect(page).to have_css("#proposal-status-update")
+
+    within "#proposal-status-update" do
+      select "complete", from: "Status"
+      click_on "Update"
+    end
+
+    expect(submitted.proposal_status.id).to be(3)
+    #expect(submitted.code).to_not be_nil
+  end
+
   scenario "User edits a saved proposal draft" do
     prop_draft = create(:proposal)
     prop_draft.user = user
