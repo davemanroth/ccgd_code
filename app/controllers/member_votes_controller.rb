@@ -32,6 +32,8 @@ class MemberVotesController < ApplicationController
     @committee = Committee.find(params[:committee_id])
     @member_vote = MemberVote.find_by(user_id: current_user.id)
 
+    #Rails.logger.debug("\nIMPORTANT!!! #{params}")
+
     if vote_params[:vote].nil?
       flash[:error] = "You must choose to approve, reject, or request proposal revision"
       render "new"

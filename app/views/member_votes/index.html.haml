@@ -7,14 +7,32 @@
   %thead
     %tr
       %th.username Member username
-      %th.labgroup Vote
-      %th.labgroup Comments
+      %th.vote Vote
+      %th.comments Comments
+      %th.actions Actions
   %tbody
     - @member_votes.each do |mv|
       %tr
-        %td= mv.user.username
-        %td= mv.vote.name if mv.vote
-        %td= mv.comment if mv.comment
+        = form_for(mv, url: proposal_committee_member_vote_path(@proposal, @committee, mv), remote: true, method: :patch) do |f|
+          %td= mv.user.username
+          %td
+            .form-inline
+              .form-group
+                = f.radio_button :vote, 1, checked: mv.vote_id == 1, class: "form-control"
+                = f.label :vote, "Approve"
+              .form-group
+                = f.radio_button :vote, 2, checked: mv.vote_id == 2, class: "form-control"
+                = f.label :vote, "Reject"
+              .form-group
+                = f.radio_button :vote, 3, checked: mv.vote_id == 3, class: "form-control"
+                = f.label :vote, "Request revision"
+
+          %td= mv.comment if mv.comment
+          %td
+            - if mv.vote_id
+              = f.submit "Update", class: 'btn btn-success'
+            - else
+              = f.submit "Vote", class: 'btn btn-success'
 
 -#= form_for [@proposal, @committee, @member_vote] do |f|
   = render 'voting_fields', f: f
