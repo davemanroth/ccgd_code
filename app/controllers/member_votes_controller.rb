@@ -33,8 +33,10 @@ class MemberVotesController < ApplicationController
       vote = Vote.find(vote_params[:vote])
       if @member_vote.update(vote: vote, comment: vote_params[:comment])
         flash[:success] = "Vote successfully cast"
+        redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
       else
         flash[:error] = "Error casting vote"
+        render "new"
       end
     end
   end
@@ -45,7 +47,7 @@ class MemberVotesController < ApplicationController
     end
 
     def check_member_vote(committee, member_vote)
-      if !member_vote || !is_on_committee?(committee)
+      if !member_vote or !is_on_committee?(committee)
         flash[:error] = "You do not have voting privileges on this proposal"
         redirect_to root_url
       end

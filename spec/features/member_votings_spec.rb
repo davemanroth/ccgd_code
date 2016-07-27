@@ -66,4 +66,29 @@ RSpec.feature "MemberVotings", :type => :feature do
     end
   end
 
+  scenario "Faculty goes to proposals list page, casts vote with 'Vote' button, revisits proposals list page, and edits existing vote with 'Edit vote' button" do
+    visit proposals_path
+
+    within "table" do
+      expect(page).to have_content(three_member.proposal.name)
+      click_on "Vote"
+    end
+
+    within "h1" do
+      expect(page).to have_content("Committee vote")
+    end
+
+    within ".edit_member_vote" do
+      choose "member_vote_vote_1"
+      fill_in "member_vote_comment", with: mv.comment
+      click_on "Cast vote"
+    end
+
+    visit proposals_path
+
+    within "table" do
+      expect(page).to have_content("Edit vote")
+    end
+  end
+
 end
