@@ -1,0 +1,21 @@
+.page-header
+  %h1 Committee voting results
+%h2 Proposal
+= render 'shared/proposal_static_data', proposal: @proposal
+%h2 Committee votes
+%table.table.table-hover.table-striped.table-responsive.member-vote-table
+  %thead
+    %tr
+      %th.username Member username
+      %th.labgroup Vote
+      %th.labgroup Comments
+  %tbody
+    - @member_votes.each do |mv|
+      %tr
+        %td= mv.user.username
+        %td= mv.vote.name if mv.vote
+        %td= mv.comment if mv.comment
+
+-#= form_for [@proposal, @committee, @member_vote] do |f|
+  = render 'voting_fields', f: f
+  = f.submit "Cast vote", class: 'btn btn-info btn-lg'
