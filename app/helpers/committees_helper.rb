@@ -6,4 +6,11 @@ module CommitteesHelper
     end
   end
 
+  def members_that_voted(member_votes)
+    if !member_votes.empty?
+      result = member_votes.where.not(vote_id: nil)
+      result.count
+    end
+  end
+
 end

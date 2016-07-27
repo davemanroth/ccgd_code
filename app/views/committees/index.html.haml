@@ -18,7 +18,7 @@
       %td= comm.proposal.name
       %td= comm.created_at.strftime("%m/%d/%Y")
       %td= comm.deadline.strftime("%m/%d/%Y")
-      %td 0 out of 0 votes cast
+      %td #{members_that_voted(comm.member_votes)} of #{comm.member_votes.count} votes cast
       -#%td= comm.proposal.proposal_status.name
       %td.committee-admin-actions
         - if can? :manage, Committee

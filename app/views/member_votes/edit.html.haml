@@ -1,2 +1,6 @@
-%h1 MemberVotes#edit
-%p Find me in app/views/member_votes/edit.html.haml
+.page-header
+  %h1 Edit committee vote
+= render 'shared/proposal_static_data', proposal: @proposal
+= form_for [@proposal, @committee, @member_vote] do |f|
+  = render 'voting_fields', f: f
+  = f.submit "Update vote", class: 'btn btn-info btn-lg'
