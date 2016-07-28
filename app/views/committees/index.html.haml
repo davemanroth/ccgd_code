@@ -28,3 +28,5 @@
               = button_to "Update", [proposal_path(comm.proposal), 'status', comm.proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update'
         %td.committee-admin-actions
           = link_to 'Edit committee', edit_proposal_committee_path(comm.proposal, comm), class: 'proposal-edit btn btn-warning pull-left'
+          - if comm.member_votes
+            = link_to 'View committee votes', proposal_committee_member_votes_path(comm.proposal, comm), class: 'proposal-edit btn btn-info pull-left'
