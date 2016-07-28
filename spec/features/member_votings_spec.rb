@@ -91,4 +91,39 @@ RSpec.feature "MemberVotings", :type => :feature do
     end
   end
 
+  scenario "Admin accesses member votes list page and votes for a member that did not cast a vote" do
+
+    # First make sure faculty is not logged in and log in admin instead
+    logout(faculty)
+    admin = create(:admin)
+    comm = create(:committee)
+
+    # assign a committee member to the committee
+    comm.member_votes << mv
+    comm.save
+
+    login(admin)
+    visit proposal_committee_member_votes_path(comm.proposal, comm)
+
+    # Make sure we're on the right page
+    within "h1" do
+      expect(page).to have_content("Committee voting results")
+    end
+
+    # Make sure the committee member is listed in the table of voters
+    within ".member-vote-table" do
+      expect(page).to have_content(mv.user.username)
+
+      # Choose to approve the proposal and click the Vote button
+      choose "member_vote_vote_1"
+      click_on "Vote"
+    end
+
+    # Make sure the member vote object recorded and saved the Approve vote
+    mv.reload
+    expect(mv.vote.name).to eq("Approve")
+
+  end
+
+
 end

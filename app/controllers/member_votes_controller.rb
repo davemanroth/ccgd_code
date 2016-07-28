@@ -31,15 +31,24 @@ class MemberVotesController < ApplicationController
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
     @member_vote = MemberVote.find_by(user_id: current_user.id)
+    comment = vote_params[:comment]
 
-    #Rails.logger.debug("\nIMPORTANT!!! #{params}")
+    # Check if this vote is being updated by an admin or the currently logged
+    # in committee member
+    if submitter = params[:submitter]
+      if User.find(submitter).has_role?(1) # role 1 = admin
+        @member_vote = MemberVote.find(params[:id])
+        comment = @member_vote.comment
+      end
+    end
 
+    #Rails.logger.debug("\nIMPORTANT!!! #{params}") 
     if vote_params[:vote].nil?
       flash[:error] = "You must choose to approve, reject, or request proposal revision"
       render "new"
     else
       vote = Vote.find(vote_params[:vote])
-      if @member_vote.update(vote: vote, comment: vote_params[:comment])
+      if @member_vote.update(vote: vote, comment: comment)
         flash[:success] = "Vote successfully cast"
         redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
       else

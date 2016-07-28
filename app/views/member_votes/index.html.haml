@@ -13,7 +13,7 @@
   %tbody
     - @member_votes.each do |mv|
       %tr
-        = form_for(mv, url: proposal_committee_member_vote_path(@proposal, @committee, mv), remote: true, method: :patch) do |f|
+        = form_for(mv, url: proposal_committee_member_vote_path(@proposal, @committee, mv, submitter: current_user), remote: true, method: :patch) do |f|
           %td= mv.user.username
           %td
             .form-inline
