@@ -6,13 +6,13 @@
       %span.icon-bar
   #main-nav.collapse.navbar-collapse
     %ul.nav.navbar-nav
-      %li= link_to "Home", root_url
+      %li= link_to "Home", root_url, class: item_class(root_url)
       -if logged_in?
-        %li= link_to "My profile", user_path(current_user)
+        %li= link_to "My profile", user_path(current_user), class: item_class(user_path(current_user))
         -if can? :manage, User
-          %li= link_to "Users", users_path
+          %li= link_to "Users", users_path, class: item_class(users_path)
         -if can? :manage, Proposal or can? :vote, Proposal
-          %li= link_to "Proposals", proposals_path
+          %li= link_to "Proposals", proposals_path, class: item_class(proposals_path)
         -if can? :manage, Committee
-          %li= link_to "Committees", committees_path
+          %li= link_to "Committees", committees_path, class: item_class(committees_path)
         %li= link_to "Log out", logout_path, method: 'delete'

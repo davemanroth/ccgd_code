@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def item_class(url)
+    current_page?(url) ? "active-item" : ""
+  end
+
+  # For modal messages
   def message(key)
     messages = {
       user_approval: "The user has been approved",
