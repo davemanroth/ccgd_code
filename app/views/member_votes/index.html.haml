@@ -18,14 +18,17 @@
           %td
             .form-inline
               .form-group
-                = f.radio_button :vote, 1, checked: mv.vote_id == 1, class: "form-control"
-                = f.label :vote, "Approve"
+                .radio
+                  = f.radio_button "vote_#{mv.id}", 1, checked: mv.vote_id == 1
+                  = f.label :vote, "Approve"
               .form-group
-                = f.radio_button :vote, 2, checked: mv.vote_id == 2, class: "form-control"
-                = f.label :vote, "Reject"
+                .radio
+                  = f.radio_button "vote_#{mv.id}", 2, checked: mv.vote_id == 2
+                  = f.label :vote, "Reject"
               .form-group
-                = f.radio_button :vote, 3, checked: mv.vote_id == 3, class: "form-control"
-                = f.label :vote, "Request revision"
+                .radio
+                  = f.radio_button "vote_#{mv.id}", 3, checked: mv.vote_id == 3
+                  = f.label :vote, "Request revision"
 
           %td= mv.comment if mv.comment
           %td

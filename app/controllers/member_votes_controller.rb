@@ -31,6 +31,12 @@ class MemberVotesController < ApplicationController
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
     @member_vote = MemberVote.find_by(user_id: current_user.id)
+
+    if vote_params[:vote].nil?
+      flash[:error] = "You must choose to approve, reject, or request proposal revision"
+      render "new"
+    end
+
     comment = vote_params[:comment]
 
     # Check if this vote is being updated by an admin or the currently logged
@@ -39,22 +45,20 @@ class MemberVotesController < ApplicationController
       if User.find(submitter).has_role?(1) # role 1 = admin
         @member_vote = MemberVote.find(params[:id])
         comment = @member_vote.comment
+        choice = params[:member_vote]["vote_#{@member_vote.id}"]
+        vote = Vote.find(choice)
       end
+    else
+      vote = Vote.find(vote_params[:vote])
     end
 
     #Rails.logger.debug("\nIMPORTANT!!! #{params}") 
-    if vote_params[:vote].nil?
-      flash[:error] = "You must choose to approve, reject, or request proposal revision"
-      render "new"
+    if @member_vote.update(vote: vote, comment: comment)
+      flash[:success] = "Vote successfully cast"
+      redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
     else
-      vote = Vote.find(vote_params[:vote])
-      if @member_vote.update(vote: vote, comment: comment)
-        flash[:success] = "Vote successfully cast"
-        redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
-      else
-        flash[:error] = "Error casting vote"
-        render "new"
-      end
+      flash[:error] = "Error casting vote"
+      render "new"
     end
   end
 

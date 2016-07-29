@@ -111,11 +111,12 @@ RSpec.feature "MemberVotings", :type => :feature do
     end
 
     # Make sure the committee member is listed in the table of voters
+    radio_button = "member_vote_vote_#{mv.id}_1"
     within ".member-vote-table" do
       expect(page).to have_content(mv.user.username)
 
       # Choose to approve the proposal and click the Vote button
-      choose "member_vote_vote_1"
+      choose radio_button
       click_on "Vote"
     end
 
