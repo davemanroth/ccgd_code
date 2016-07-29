@@ -32,13 +32,6 @@ class MemberVotesController < ApplicationController
     @committee = Committee.find(params[:committee_id])
     @member_vote = MemberVote.find_by(user_id: current_user.id)
 
-    if vote_params[:vote].nil?
-      flash[:error] = "You must choose to approve, reject, or request proposal revision"
-      render "new"
-    end
-
-    comment = vote_params[:comment]
-
     # Check if this vote is being updated by an admin or the currently logged
     # in committee member
     if submitter = params[:submitter]
@@ -48,11 +41,17 @@ class MemberVotesController < ApplicationController
         choice = params[:member_vote]["vote_#{@member_vote.id}"]
         vote = Vote.find(choice)
       end
+    # If vote not being updated by admin, vote params should not be nil. Handle
+    # error and break out of update action
+    elsif vote_params[:vote].nil?
+      flash[:error] = "You must choose to approve, reject, or request proposal revision"
+      render "new"
+      return
     else
+      comment = vote_params[:comment]
       vote = Vote.find(vote_params[:vote])
     end
 
-    #Rails.logger.debug("\nIMPORTANT!!! #{params}") 
     if @member_vote.update(vote: vote, comment: comment)
       flash[:success] = "Vote successfully cast"
       redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
