@@ -26,7 +26,7 @@
         - if can? :manage, @proposal
           #proposal-status-update
             = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "code", prop.proposal_status.id), class: 'form-control pull-left'
-            = button_to "Update", [proposal_path(prop), 'status', prop.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update'
+            = button_to "Update", [proposal_path(prop), 'status', prop.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
         -else
           = prop.proposal_status.name
         %td.proposal-admin-actions

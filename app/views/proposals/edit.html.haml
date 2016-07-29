@@ -12,4 +12,4 @@
       = label_tag "status", "Select a proposal status"
       .form-inline
         = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "code", @proposal.proposal_status.id), class: 'form-control pull-left'
-        = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success'
+        = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }

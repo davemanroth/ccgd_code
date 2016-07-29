@@ -25,7 +25,7 @@
           - if can? :manage, Committee
             #proposal-status-update
               = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", comm.proposal.proposal_status.id), class: 'form-control pull-left'
-              = button_to "Update", [proposal_path(comm.proposal), 'status', comm.proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update'
+              = button_to "Update", [proposal_path(comm.proposal), 'status', comm.proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
         %td.committee-admin-actions
           = link_to 'Edit committee', edit_proposal_committee_path(comm.proposal, comm), class: 'proposal-edit btn btn-warning pull-left'
           - if comm.member_votes

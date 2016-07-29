@@ -33,9 +33,9 @@
           %td= mv.comment if mv.comment
           %td
             - if mv.vote_id
-              = f.submit "Update", class: 'btn btn-success'
+              = f.submit "Update", class: 'btn btn-success modal-confirm', data: { toggle: 'modal', target: "#app-modal", message: message(:vote_update) }
             - else
-              = f.submit "Vote", class: 'btn btn-success'
+              = f.submit "Vote", class: 'btn btn-success modal-confirm', data: { toggle: 'modal', target: "#app-modal", message: message(:vote_cast) }
 
 -#= form_for [@proposal, @committee, @member_vote] do |f|
   = render 'voting_fields', f: f
