@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @proposals = Hash.new
     @proposals[:submitted] = Proposal.non_draft.where(user_id: @user.id)
     @proposals[:drafts] = Proposal.where(user_id: @user.id, proposal_status: 1)
+    @proposals[:revisions] = Proposal.where(user_id: @user.id, proposal_status: 8)
     @proposals.each do |key, val|
       if val && val.is_a?(Proposal)
         @proposals[key] = [val]

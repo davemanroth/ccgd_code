@@ -33,5 +33,9 @@
       %ul.no-list.draft-proposals
         - @proposals[:drafts].each do |draft|
           %li #{ link_to draft.name, edit_proposal_path(draft.id) } <br />#{ draft.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
-
+    - if !@proposals[:revisions].empty?
+      %h3 Revisions
+      %ul.no-list.draft-proposals
+        - @proposals[:revisions].each do |rev|
+          %li #{ link_to rev.name, edit_proposal_path(rev.id) } <br />#{ rev.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
   %p= link_to "Submit a new proposal", new_proposal_path, class: "btn btn-default" 

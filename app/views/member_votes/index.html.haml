@@ -2,6 +2,15 @@
   %h1 Committee voting results
 %h2 Proposal
 = render 'shared/proposal_static_data', proposal: @proposal
+%h2 Proposal status update
+#proposal-status-update.panel.panel-default
+  .panel-heading
+    %h3.panel-title Proposal status
+  .panel-body
+    = label_tag "status", "Select a proposal status"
+    .form-inline
+      = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", @proposal.proposal_status.id), class: 'form-control pull-left'
+      = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
 %h2 Committee votes
 %table.table.table-hover.table-striped.table-responsive.member-vote-table
   %thead
