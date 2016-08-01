@@ -1,6 +1,7 @@
 class Proposal < ActiveRecord::Base
 
   scope :non_draft, -> { where(proposal_status: (2..7) ).order(name: :asc) }
+  scope :pending, -> { where(proposal_status: (2) ).order(name: :asc) }
 
   belongs_to :user
   belongs_to :state

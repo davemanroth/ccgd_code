@@ -37,11 +37,20 @@
     };
 
   // Handle action buttons' click events and respond accordingly
-    $('#users tbody tr').on('click', function(e) {
+    $('.user-admin-table tbody tr').on('click', function(e) {
+
+      // First check to make sure one of the action buttons was clicked
+      if (e.target.nodeName != 'A') {
+        return;
+      }
+
+      // Next, make sure preventDefault does not affect the 'Edit' button
       if (e.target.innerText != 'Edit') {
         e.preventDefault();
       }
-      href = e.target.pathname.slice(0,-1);
+
+      // Check the button that was clicked and perform the corresponding action
+      var href = e.target.pathname.slice(0,-1);
       var action = actions[e.target.innerText.toLowerCase()];
       if (action != undefined) {
         if( action.remove ) {

@@ -24,7 +24,7 @@
         .white
           .row
             .col-md-2
-              = render 'layouts/side_nav' if logged_in? 
+              -#= render 'layouts/side_nav' if logged_in? 
             .col-md-10
               - flash.each do |mssg_type, mssg|
                 %div(class="alert alert-#{mssg_type}") #{mssg}
