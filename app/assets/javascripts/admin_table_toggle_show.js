@@ -1,7 +1,7 @@
 (function () {
   $(document).ready(function() {
-    var toggle = $('#user-table-toggle-show');
-    var table = $('.user-admin-table').DataTable();
+    var toggle = $('#admin-table-toggle-show');
+    var table = $('#admin-table').DataTable();
     var rows = [];
 
     table.rows().every( function () {

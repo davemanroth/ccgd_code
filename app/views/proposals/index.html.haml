@@ -1,6 +1,6 @@
 .page-header
   %h1 Proposal administration
--#= link_to 'Show completed', '#', id: 'proposal-table-toggle-show', class: 'btn btn-default', data: { show_inactive: 0 }
+= link_to 'Show inactive', '#', id: 'admin-table-toggle-show', class: 'btn btn-default', data: { show_inactive: 0 }
 %table#admin-table.table.table-hover.table-striped.table-responsive.proposal-table
   %thead
     %tr
@@ -16,7 +16,7 @@
   - @proposals.each do |prop|
     - rowclass = ''
     - rowclass = 'warning' if prop.is_pending?
-    - rowclass = 'info' if prop.is_complete?
+    - rowclass = 'info' if prop.is_non_active?
     %tr(class="#{rowclass}")
       %td= prop.code || ""
       %td= link_to prop.name, proposal_path(prop)
@@ -38,7 +38,7 @@
               = link_to 'Edit committee', edit_proposal_committee_path(prop, prop.committee), class: 'proposal-edit btn btn-warning pull-left'
             - else
               = link_to 'Form committee', new_proposal_committee_path(prop), class: 'proposal-edit btn btn-info pull-left'
-          - if can? :vote, Proposal and prop.committee
+          - if can? :vote, Proposal and prop.committee and !current_user.is_admin?
             - if voted?(prop)
               = link_to 'Edit vote', edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop)), class: 'proposal-edit btn btn-success'
             - else

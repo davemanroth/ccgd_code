@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     self.role_ids.include?(id)
   end
 
+  def is_admin?
+    has_role?(1)
+  end
+
   def initialize_user
     self.status = 'P'
     if Role.count > 0

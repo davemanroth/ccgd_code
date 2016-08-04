@@ -43,6 +43,10 @@ class Proposal < ActiveRecord::Base
     self.proposal_status.id == 7
   end
 
+  def is_non_active?
+    (5..7).include?(self.proposal_status.id)
+  end
+
   private
 
     def submitted?
