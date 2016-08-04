@@ -4,6 +4,7 @@
 %table#admin-table.table.table-hover.table-striped.table-responsive.proposal-table
   %thead
     %tr
+      %th.name Code
       %th.name Name
       %th.username Username
       %th.labgroup Labgroup
@@ -17,7 +18,8 @@
     - rowclass = 'warning' if prop.is_pending?
     - rowclass = 'info' if prop.is_complete?
     %tr(class="#{rowclass}")
-      %td= prop.name
+      %td= prop.code || ""
+      %td= link_to prop.name, proposal_path(prop)
       %td= prop.user.username
       %td= prop.lab_group.name
       %td= prop.platforms.first.name

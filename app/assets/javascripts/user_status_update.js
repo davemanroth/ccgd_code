@@ -38,14 +38,15 @@
 
   // Handle action buttons' click events and respond accordingly
     $('.user-admin-table tbody tr').on('click', function(e) {
+      var allActions = Object.keys(actions);
 
       // First check to make sure one of the action buttons was clicked
       if (e.target.nodeName != 'A') {
         return;
       }
 
-      // Next, make sure preventDefault does not affect the 'Edit' button
-      if (e.target.innerText != 'Edit') {
+      // Next, make sure preventDefault only happens with action buttons
+      if ( allActions.includes(e.target.innerText) ) {
         e.preventDefault();
       }
 

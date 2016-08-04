@@ -9,7 +9,7 @@
     - if can? :manage, Proposal
       .form-group
         = f.label :user_id, "Submitting user"
-        = f.select :user_id, User.all.order(lastname: :asc).collect { |u| [u.full_name, u.id] }, { include_blank: '-Select user-', selected: current_user.id }, { class: 'form-control' }
+        = f.select :user_id, User.approved.order(lastname: :asc).collect { |u| [u.full_name, u.id] }, { include_blank: '-Select user-', selected: current_user.id }, { class: 'form-control' }
     .form-group
       = f.label :lab_group_id, "Principle Investigator"
       = f.select :lab_group_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Select lab/group-' }, { class: 'form-control' }

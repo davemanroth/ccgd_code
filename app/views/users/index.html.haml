@@ -15,8 +15,8 @@
     - rowclass = 'warning' if user.is_pending?
     - rowclass = 'info' if user.is_inactive?
     %tr(class="#{rowclass}")
-      %td= user.lastname
-      %td= user.firstname
+      %td= link_to user.lastname, user_path(user)
+      %td= link_to user.firstname, user_path(user)
       %td= user.organization.name unless user.organization.nil?
       %td.user-status= user.status_name
       - if can? :manage, @user
