@@ -117,12 +117,16 @@ RSpec.feature "MemberVotings", :type => :feature do
 
       # Choose to approve the proposal and click the Vote button
       choose radio_button
+      fill_in "member_vote_comment", with: mv.comment
       click_on "Vote"
     end
 
     # Make sure the member vote object recorded and saved the Approve vote
     mv.reload
-    expect(mv.vote.name).to eq("Approve")
+
+    db_mv = MemberVote.find(mv)
+    expect(db_mv.comment).to eq(mv.comment)
+    expect(db_mv.vote.name).to eq("Approve")
 
   end
 

@@ -37,7 +37,7 @@ class MemberVotesController < ApplicationController
     if submitter = params[:submitter]
       if User.find(submitter).has_role?(1) # role 1 = admin
         @member_vote = MemberVote.find(params[:id])
-        comment = @member_vote.comment
+        comment = params[:member_vote][:comment]
         choice = params[:member_vote]["vote_#{@member_vote.id}"]
         vote = Vote.find(choice)
       end
@@ -52,7 +52,7 @@ class MemberVotesController < ApplicationController
       vote = Vote.find(vote_params[:vote])
     end
 
-    if @member_vote.update(vote: vote, comment: comment)
+    if @member_vote.update!(vote: vote, comment: comment)
       flash[:success] = "Vote successfully cast"
       redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
     else

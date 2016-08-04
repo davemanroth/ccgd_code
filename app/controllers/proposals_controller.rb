@@ -31,6 +31,7 @@ class ProposalsController < ApplicationController
     if params[:submit_proposal]
       @proposal.policy_should_be_accepted = true
       @proposal.proposal_status = ProposalStatus.find(2)
+      AdminMailer.new_proposal(@proposal).deliver_now
     end
 
     if @proposal.save
@@ -55,6 +56,7 @@ class ProposalsController < ApplicationController
       @proposal.submitted = true
       @proposal.policy_should_be_accepted = true
       @proposal.proposal_status = ProposalStatus.find(2)
+      AdminMailer.new_proposal(@proposal).deliver_now
     end
 
     if @proposal.update_attributes(proposal_params)

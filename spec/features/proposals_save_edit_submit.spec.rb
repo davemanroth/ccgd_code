@@ -11,7 +11,6 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
   end
 
   scenario "User fills out new proposal form and saves a draft" do
-    pp request.env['PATH_INFO']
     click_on 'Submit a new proposal'
 
     within "h1" do
@@ -144,18 +143,14 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
 =end
   end
 
-=begin
-This is commented out because I first need to get JavaScript working properly to get the proposal submission working
   scenario "User fills out new proposal form, accepts the ccgd policy terms, and submits the proposal" do
-    visit root_path
-    fill_in "Username", with: "rothfarb-test"
-    fill_in "Password", with: "B0ll0ck5!"
-    click_on "Log in"
-    click_on "Submit a new proposal"
+
+    click_on 'Submit a new proposal'
 
     within "h1" do
       expect(page).to have_content('Create a new proposal')
     end
+    proposal.ccgd_policy_approval = true
 
     expect {
       fill_in "Name of proposed project", with: proposal.name
@@ -167,8 +162,6 @@ This is commented out because I first need to get JavaScript working properly to
       fill_in "Sample availability", with: proposal.sample_availability
       fill_in "Contributions", with: proposal.contributions
       fill_in "Comments", with: proposal.comments
-      click_on 'Accept CCGD policy'
-      click_on 'Accept terms'
       click_on 'Submit proposal'
     }.to change(Proposal, :count).by(+1)
 
@@ -178,6 +171,8 @@ This is commented out because I first need to get JavaScript working properly to
       expect(page).to have_content(proposal.name)
     end
   end
+=begin
+This is commented out because I first need to get JavaScript working properly to get the proposal submission working
 =end
 
 end

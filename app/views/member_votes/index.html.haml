@@ -39,7 +39,10 @@
                   = f.radio_button "vote_#{mv.id}", 3, checked: mv.vote_id == 3
                   = f.label :vote, "Request revision"
 
-          %td= mv.comment if mv.comment
+          -#%td= mv.comment if mv.comment
+          %td
+            .form-group
+              = f.text_area :comment, class: 'form-control'
           %td
             - if mv.vote_id
               = f.submit "Update", class: 'btn btn-success modal-confirm', data: { toggle: 'modal', target: "#app-modal", message: message(:vote_update) }
