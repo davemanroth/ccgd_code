@@ -7,12 +7,11 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
 =begin
 =end
   before(:each) do
-    #default_url_options[:host] = 'http://localhost:3000'
-    #default_url_options[:host] = 'http://ccgd.hccdev.org'
     login(user)
   end
 
   scenario "User fills out new proposal form and saves a draft" do
+    pp request.env['PATH_INFO']
     click_on 'Submit a new proposal'
 
     within "h1" do
