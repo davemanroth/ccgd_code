@@ -1,7 +1,7 @@
 (function () {
   $(document).ready(function() {
     var toggle = $('#admin-table-toggle-show');
-    var table = $('#admin-table').DataTable();
+    var table = $('#admin-table').DataTable({ pageLength: 25 });
     var rows = [];
 
     table.rows().every( function () {
