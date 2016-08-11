@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'organizations/create'
-
   get 'organizations_controller/create'
 
   root 'sessions#new'
@@ -17,6 +15,8 @@ Rails.application.routes.draw do
   patch 'users/:id/status/:status'  => 'users#user_status_update'
 
   patch 'proposals/:id/status/:status'  => 'proposals#proposal_status_update'
+
+  resources :configurations
 
   resources :organizations, only: [:create, :destroy]
 
