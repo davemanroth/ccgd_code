@@ -22,6 +22,9 @@ class ConfigurationsController < ApplicationController
   def destroy
   end
 
+  def load_partial
+  end
+
   private
     def load_model_hash
       @model_hash = {
