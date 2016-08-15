@@ -28,12 +28,12 @@ class ConfigurationsController < ApplicationController
   private
     def load_model_hash
       @model_hash = {
-        address: Address,
-        location: Location,
-        organization: Organization,
-        labgroup: LabGroup,
-        platform: Platform,
-        sample: SampleType
+        addresses: Address,
+        locations: Location,
+        organizations: Organization,
+        labgroups: LabGroup,
+        platforms: Platform,
+        samples: SampleType
       }
     end
 

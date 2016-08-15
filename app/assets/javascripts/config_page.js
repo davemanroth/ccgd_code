@@ -10,6 +10,7 @@
       },
       ajaxStop: function() {
         loading.hide();
+        $('#admin-table').DataTable().draw();
       }
     });
 
