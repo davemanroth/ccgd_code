@@ -1,5 +1,8 @@
 class LocationsController < ApplicationController
+
   def index
+    @locations = Location.all
+    render layout: false
   end
 
   def show

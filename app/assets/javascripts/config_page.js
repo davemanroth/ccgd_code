@@ -1,7 +1,7 @@
 (function() {
   $(document).ready(function() {
-    display = $("#config-display");
-    loading = $(".loading");
+    var display = $("#config-display");
+    var loading = $(".loading");
     loading.hide();
 
     $(document).on({
@@ -10,7 +10,7 @@
       },
       ajaxStop: function() {
         loading.hide();
-        $('#admin-table').DataTable().draw();
+        // $('#admin-table').DataTable().draw();
       }
     });
 

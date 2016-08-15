@@ -1,2 +1,18 @@
-%h1 Locations#index
-%p Find me in app/views/locations/index.html.haml
+.page-header
+  %h1 Locations
+%table#admin-table.table.table-hover.table-striped.table-responsive.locations-table
+  %thead
+    %tr
+      %th.street Building
+      %th.city Room
+      %th.state Address
+      %th.actions Actions
+  %tbody
+    - @locations.each do |loc|
+      %tr
+        %td= loc.building
+        %td= loc.room
+        %td= loc.address.full_address if loc.address
+        %td.location-admin-actions
+          = link_to 'Edit', edit_location_path(loc), class: 'btn btn-default pull-left'
+          = link_to 'Delete', location_path(loc), data: { confirm: 'Are you sure you want to delete this location?' }, class: 'btn btn-primary', remote: true, method: :delete
