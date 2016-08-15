@@ -1,2 +1,4 @@
-%h1 Addresses#edit
-%p Find me in app/views/addresses/edit.html.haml
+.page-header
+  %h1 Update address
+=form_for(@address) do |f|
+  = render 'address_fields', f: f

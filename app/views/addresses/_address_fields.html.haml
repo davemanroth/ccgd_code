@@ -1,0 +1,16 @@
+- if @address.errors.any?
+  =render 'shared/errors', errors: @address.errors
+.row
+  .col-md-6
+    .form-group
+      =f.label :street, "Street"
+      =f.text_field :street, class: 'form-control', placeholder: 'Street', required: true
+    .form-group
+      =f.label :city, "City"
+      =f.text_field :city, class: 'form-control', placeholder: 'City', required: true
+    .form-group
+      =f.label :state, "State"
+      =f.collection_select :state, State.all, :id, :code, { include_blank: '-State-', selected: @address.state_id }, { class: 'form-control' }
+    .form-group
+      =f.label :country, "Country"
+      =f.text_field :country, class: 'form-control', placeholder: 'Country'
