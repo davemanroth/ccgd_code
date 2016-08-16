@@ -1,2 +1,5 @@
-%h1 Platforms#edit
-%p Find me in app/views/platforms/edit.html.haml
+.page-header
+  %h1 Update a platform
+=form_for(@platform) do |f|
+  = render 'platform_fields', f: f
+  = f.submit "Upate platform", class: 'btn btn-info btn-lg'

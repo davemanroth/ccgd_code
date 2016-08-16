@@ -1,6 +1,14 @@
 class LabgroupsController < ApplicationController
   include AddressHelper
 
+  def index
+    @lab_groups = LabGroup.all
+    render layout: false
+  end
+
+  def new
+  end
+
   def create
     ucl = UserCustomLabgroup.find(lab_params[:lab_id])
     user = User.find(ucl.user_id)
@@ -19,6 +27,12 @@ class LabgroupsController < ApplicationController
       format.js { render partial: 'shared/add_success' }
       format.html
     end
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   def destroy

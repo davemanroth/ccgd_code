@@ -1,9 +1,10 @@
 (function() {
   $(document).ready(function() {
-    var display = $("#config-display");
+    var configTable = $("#config-table");
+    var configForm = $("#config-form");
     var loading = $(".loading");
     var create = $('#create-btn');
-    var createText = create.html().split(' ');
+    var createText;
     [loading, create].map(hideComponent);
 
     $(document).on({
@@ -16,24 +17,40 @@
       }
     });
 
+    if( create.length > 0) {
+      createText = create.html().split(' ');
+    }
+
     $("#config-options").on("change", function(e) {
-      if(e.target.value == '') {
-        display.children().remove();
+      var path = e.target.value;
+      if(path == '') {
+        configTable.children().remove();
         hideComponent(create);
         return;
       }
-      display.load(e.target.value, function() {
-        var target = singularize(e.target.value);
+      configTable.load(path, function() {
+        var action = singularize(path);
         createText = reloadCreateText(createText);
-        createText.push(target);
+        createText.push(action);
         create.html(createText.join(' '));
+        create.attr('href', [path, 'new'].join('/'));
         showComponent(create);
       });
     });
 
+    /*
+    create.on('click', function(e) {
+      var path = pathSetup.getPath();
+      path = [path, 'new'].join('/');
+    });
+    */
+
     function singularize(text) {
-      if( text[text.length - 2] == 'e' ) {
+      if( text.slice(-3) == 'ses' ) {
         return text.slice(0, -2);
+      }
+      if (text.search(/\_/) ) {
+        text = text.split('_').join(' ');
       }
       return text.slice(0, -1);
     }
@@ -49,5 +66,18 @@
     function showComponent(component) {
       component.show();
     }
+
+    function pathOps() {
+      return {
+        path: '',
+        setPath: function(newpath) {
+          this.path = newpath;
+        },
+        getPath: function() {
+          return this.path;
+        }
+      }
+    }
+
   });
 })()

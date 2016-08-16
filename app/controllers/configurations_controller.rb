@@ -33,7 +33,7 @@ class ConfigurationsController < ApplicationController
         organizations: Organization,
         labgroups: LabGroup,
         platforms: Platform,
-        samples: SampleType
+        sample_types: SampleType
       }
     end
 

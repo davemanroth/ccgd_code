@@ -1,0 +1,7 @@
+- if @sample_type.errors.any?
+  =render 'shared/errors', errors: @sample_type.errors
+.row
+  .col-md-6
+    .form-group
+      =f.label :name, "Name"
+      =f.text_field :name, class: 'form-control', placeholder: 'Name', required: true

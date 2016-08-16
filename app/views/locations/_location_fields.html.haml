@@ -1,0 +1,13 @@
+- if @location.errors.any?
+  =render 'shared/errors', errors: @location.errors
+.row
+  .col-md-6
+    .form-group
+      =f.label :building, "Building"
+      =f.text_field :building, class: 'form-control', placeholder: 'Building', required: true
+    .form-group
+      =f.label :room, "Room"
+      =f.text_field :room, class: 'form-control', placeholder: 'Room', required: true
+    .form-group
+      =f.label :address, "Address"
+      =f.collection_select :address, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @location.address_id }, { class: 'form-control' }

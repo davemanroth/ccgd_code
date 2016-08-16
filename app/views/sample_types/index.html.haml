@@ -1,2 +1,14 @@
-%h1 SampleTypes#index
-%p Find me in app/views/sample_types/index.html.haml
+.page-header
+  %h1 Sample types
+%table#admin-table.table.table-hover.table-striped.table-responsive.sample-types-table
+  %thead
+    %tr
+      %th.street Name
+      %th.actions Actions
+  %tbody
+    - @sample_types.each do |st|
+      %tr
+        %td= st.name
+        %td.sample-type-admin-actions
+          = link_to 'Edit', edit_sample_type_path(st), class: 'btn btn-default pull-left'
+          = link_to 'Delete', sample_type_path(st), data: { confirm: 'Are you sure you want to delete this location?' }, class: 'btn btn-primary', remote: true, method: :delete

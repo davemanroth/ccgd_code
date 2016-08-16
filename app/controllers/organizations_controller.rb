@@ -1,6 +1,14 @@
 class OrganizationsController < ApplicationController
   include AddressHelper
 
+  def index
+    @organizations = Organization.all
+    render layout: false
+  end
+
+  def new
+  end
+
   def create
     uco = UserCustomOrganization.find(org_params[:org_id])
     user = User.find(uco.user_id)

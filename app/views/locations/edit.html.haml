@@ -1,2 +1,5 @@
-%h1 Locations#edit
-%p Find me in app/views/locations/edit.html.haml
+.page-header
+  %h1 Update a location
+=form_for(@location) do |f|
+  = render 'location_fields', f: f
+  = f.submit "Update location", class: 'btn btn-info btn-lg'
