@@ -4,24 +4,30 @@
     var loading = $(".loading");
     var create = $('#create-btn');
     var createText = create.html().split(' ');
-    loading.hide();
+    [loading, create].map(hideComponent);
 
     $(document).on({
       ajaxStart: function () {
-        loading.show();
+        showComponent(loading);
       },
       ajaxStop: function() {
-        loading.hide();
+        hideComponent(loading);
         $('#admin-table').DataTable({ destroy: true });
       }
     });
 
     $("#config-options").on("change", function(e) {
+      if(e.target.value == '') {
+        display.children().remove();
+        hideComponent(create);
+        return;
+      }
       display.load(e.target.value, function() {
         var target = singularize(e.target.value);
         createText = reloadCreateText(createText);
         createText.push(target);
         create.html(createText.join(' '));
+        showComponent(create);
       });
     });
 
@@ -34,6 +40,14 @@
 
     function reloadCreateText(text) {
       return text.length > 3 ? text.slice(0, -1) : text;
+    }
+
+    function hideComponent(component) {
+      component.hide();
+    }
+
+    function showComponent(component) {
+      component.show();
     }
   });
 })()
