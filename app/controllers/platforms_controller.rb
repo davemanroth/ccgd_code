@@ -1,7 +1,7 @@
 class PlatformsController < ApplicationController
   def index
     @platforms = Platform.all
-    render layout: false
+    render layout: false if params[:rendering]
   end
 
   def show

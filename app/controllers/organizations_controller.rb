@@ -3,7 +3,7 @@ class OrganizationsController < ApplicationController
 
   def index
     @organizations = Organization.all
-    render layout: false
+    render layout: false if params[:rendering]
   end
 
   def new

@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
   def index
     @addresses = Address.all
-    render layout: false
+    render layout: false if params[:rendering]
   end
 
   def show

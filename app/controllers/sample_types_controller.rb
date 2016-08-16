@@ -1,7 +1,7 @@
 class SampleTypesController < ApplicationController
   def index
     @sample_types = SampleType.all
-    render layout: false
+    render layout: false if params[:rendering]
   end
 
   def show

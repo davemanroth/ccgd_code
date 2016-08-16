@@ -22,14 +22,15 @@
     }
 
     $("#config-options").on("change", function(e) {
-      var path = e.target.value;
-      if(path == '') {
+      var target = e.target.value;
+      if( target == '') {
         configTable.children().remove();
         hideComponent(create);
         return;
       }
+      var action = singularize(target);
+      var path = [target, 'rendering=dynamic'].join('?');
       configTable.load(path, function() {
-        var action = singularize(path);
         createText = reloadCreateText(createText);
         createText.push(action);
         create.html(createText.join(' '));

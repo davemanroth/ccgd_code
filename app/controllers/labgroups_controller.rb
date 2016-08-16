@@ -3,7 +3,7 @@ class LabgroupsController < ApplicationController
 
   def index
     @lab_groups = LabGroup.all
-    render layout: false
+    render layout: false if params[:rendering]
   end
 
   def new

@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.all
-    render layout: false
+    render layout: false if params[:rendering]
   end
 
   def show
