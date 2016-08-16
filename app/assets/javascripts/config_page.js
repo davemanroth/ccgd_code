@@ -23,18 +23,20 @@
 
     $("#config-options").on("change", function(e) {
       var target = e.target.value;
+
       if( target == '') {
         configTable.children().remove();
         hideComponent(create);
         return;
       }
+
       var action = singularize(target);
       var path = [target, 'rendering=dynamic'].join('?');
       configTable.load(path, function() {
         createText = reloadCreateText(createText);
         createText.push(action);
         create.html(createText.join(' '));
-        create.attr('href', [path, 'new'].join('/'));
+        create.attr('href', [target, 'new'].join('/'));
         showComponent(create);
       });
     });

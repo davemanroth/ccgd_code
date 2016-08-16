@@ -1,0 +1,14 @@
+- if @labgroup.errors.any?
+  =render 'shared/errors', errors: @labgroup.errors
+.row
+  .col-md-6
+    .form-group
+      =f.label :name, "Name"
+      =f.text_field :name, class: 'form-control', placeholder: 'Name'
+    .form-group
+      =f.label :code, "Code"
+      =f.text_field :code, class: 'form-control', placeholder: 'Code'
+    .form-group
+      =f.label :location, "Location"
+      =f.collection_select :location, Location.all, :id, :building_code, { include_blank: '-Location-', selected: @labgroup.location_id }, { class: 'form-control' }
+

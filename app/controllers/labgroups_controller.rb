@@ -2,11 +2,12 @@ class LabgroupsController < ApplicationController
   include AddressHelper
 
   def index
-    @lab_groups = LabGroup.all
+    @labgroups = LabGroup.all
     render layout: false if params[:rendering]
   end
 
   def new
+    @labgroup = LabGroup.new
   end
 
   def create
@@ -30,9 +31,11 @@ class LabgroupsController < ApplicationController
   end
 
   def edit
+    @labgroup = LabGroup.find(params[:id])
   end
 
   def update
+    @labgroup = LabGroup.find(params[:id])
   end
 
   def destroy
