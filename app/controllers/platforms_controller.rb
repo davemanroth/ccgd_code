@@ -1,5 +1,6 @@
 class PlatformsController < ApplicationController
   def index
+    render layout: false
   end
 
   def show
