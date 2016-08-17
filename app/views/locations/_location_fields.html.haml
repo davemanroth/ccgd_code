@@ -9,6 +9,6 @@
       =f.label :room, "Room"
       =f.text_field :room, class: 'form-control', placeholder: 'Room', required: true
     .form-group
-      =f.label :address, "Address"
-      =f.collection_select :address, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @location.address_id }, { class: 'form-control' }
+      =f.label :address_id, "Address"
+      =f.collection_select :address_id, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @location.address_id }, { class: 'form-control' }
     %p= link_to "Add a new address", new_address_path

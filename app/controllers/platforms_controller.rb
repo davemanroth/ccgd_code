@@ -15,7 +15,7 @@ class PlatformsController < ApplicationController
     @platform = Platform.new(platform_params)
     if @platform.save
       flash[:success] = "New platform successfully added"
-      redirect_to "/configurations"
+      redirect_to configurations_path
     else
       flash[:error] = "Error saving platform"
       render "new"
@@ -30,7 +30,7 @@ class PlatformsController < ApplicationController
     @platform = Platform.find(params[:id])
     if @platform.update_attributes(platform_params)
       flash[:success] = "Platform successfully updated"
-      redirect_to "/configurations"
+      redirect_to configurations_path
     else
       flash[:error] = "Error updating platform"
       render "edit"
@@ -39,7 +39,9 @@ class PlatformsController < ApplicationController
 
   def destroy
     Platform.find(params[:id]).destroy
-    flash[:success] = "Platform has been deleted"
+    respond_to do |f|
+      f.html { redirect_to configurations_path, status: 303 }
+    end
   end
 
   private
