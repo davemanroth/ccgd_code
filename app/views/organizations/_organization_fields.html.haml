@@ -12,7 +12,7 @@
       =f.label :email, "Email"
       =f.text_field :email, class: 'form-control', placeholder: 'Email'
     .form-group
-      =f.label :address, "Address"
-      =f.collection_select :address, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @organization.address_id }, { class: 'form-control' }
-
-
+      =f.label :address_id, "Address"
+      =f.collection_select :address_id, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @organization.address_id }, { class: 'form-control' }
+    %p= link_to "Add a new address", new_address_path
+    =hidden_field_tag "form_type", "admin"

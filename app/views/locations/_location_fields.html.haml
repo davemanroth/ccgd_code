@@ -11,3 +11,4 @@
     .form-group
       =f.label :address, "Address"
       =f.collection_select :address, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @location.address_id }, { class: 'form-control' }
+    %p= link_to "Add a new address", new_address_path

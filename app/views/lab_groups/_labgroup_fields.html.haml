@@ -11,4 +11,6 @@
     .form-group
       =f.label :location, "Location"
       =f.collection_select :location, Location.all, :id, :building_room, { include_blank: '-Location-', selected: @labgroup.location_id }, { class: 'form-control' }
+    %p= link_to "Add a new location", new_location_path
+    =hidden_field_tag "form_type", "admin"
 

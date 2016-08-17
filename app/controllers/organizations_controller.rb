@@ -11,22 +11,35 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-    uco = UserCustomOrganization.find(org_params[:org_id])
-    user = User.find(uco.user_id)
-    if !uco.nil?
-      address = add_address(uco)
-      org = load_org(uco, address.id)
-      if org.save
-        flash[:success] = 'Organization added'
-        user.update(organization: org)
-        uco.destroy
+    # Check to see if new org created via admin create org form
+    if params[:form_type] == 'admin'
+      @organization = Organization.new(admin_org_params)
+      if @organization.save
+        flash[:success] = "New organization successfully added"
+        redirect_to "configurations"
       else
-        flash[:error] = 'An error occurred'
+        flash[:error] = "Error saving organization"
+        render "new"
       end
-    end
-    respond_to do |format|
-      format.js { render partial: 'shared/add_success' }
-      format.html
+    else
+    # If not from admin create form, handle org creation via new user form
+      uco = UserCustomOrganization.find(org_params[:org_id])
+      user = User.find(uco.user_id)
+      if !uco.nil?
+        address = add_address(uco)
+        org = load_org(uco, address.id)
+        if org.save
+          flash[:success] = 'Organization added'
+          user.update(organization: org)
+          uco.destroy
+        else
+          flash[:error] = 'An error occurred'
+        end
+      end
+      respond_to do |format|
+        format.js { render partial: 'shared/add_success' }
+        format.html
+      end
     end
   end
 
@@ -34,8 +47,15 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
   end
 
-  def updatedite
+  def update
     @organization = Organization.find(params[:id])
+    if @organization.update_attributes(admin_org_params)
+      flash[:success] = "Organization successfully updated"
+      redirect_to "configurations"
+    else
+      flash[:error] = "Error updating organization"
+      render "edit"
+    end
   end
 
   def destroy
@@ -55,5 +75,11 @@ class OrganizationsController < ApplicationController
 
     def org_params
       params.permit(:org_id)
+    end
+
+    def admin_org_params
+      params.require(:organization).permit(
+        :name, :phone, :email, :address_id
+      )
     end
 end

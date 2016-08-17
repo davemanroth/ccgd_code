@@ -11,22 +11,33 @@ class LabGroupsController < ApplicationController
   end
 
   def create
-    ucl = UserCustomLabgroup.find(lab_params[:lab_id])
-    user = User.find(ucl.user_id)
-    if !ucl.nil?
-      lab = load_lab(ucl)
-      if lab.save
-        flash[:success] = 'Lab/group added'
-        user.lab_groups << lab
-        user.save
-        ucl.destroy
+    if params[:form_type] == 'admin'
+      @labgroup = LabGroup.new(admin_labgroup_params)
+      if @labgroup.save
+        flash[:success] = "New labgroup successfully added"
+        redirect_to "configurations"
       else
-        flash[:error] = 'An error occurred'
+        flash[:error] = "Error saving labgroup"
+        render "new"
       end
-    end
-    respond_to do |format|
-      format.js { render partial: 'shared/add_success' }
-      format.html
+    else
+      ucl = UserCustomLabgroup.find(lab_params[:lab_id])
+      user = User.find(ucl.user_id)
+      if !ucl.nil?
+        lab = load_lab(ucl)
+        if lab.save
+          flash[:success] = 'Lab/group added'
+          user.lab_groups << lab
+          user.save
+          ucl.destroy
+        else
+          flash[:error] = 'An error occurred'
+        end
+      end
+      respond_to do |format|
+        format.js { render partial: 'shared/add_success' }
+        format.html
+      end
     end
   end
 
@@ -36,6 +47,13 @@ class LabGroupsController < ApplicationController
 
   def update
     @labgroup = LabGroup.find(params[:id])
+    if @labgroup.update_attributes(admin_labgroup_params)
+      flash[:success] = "Labgroup successfully updated"
+      redirect_to "configurations"
+    else
+      flash[:error] = "Error updating labgroup"
+      render "edit"
+    end
   end
 
   def destroy
@@ -65,5 +83,11 @@ class LabGroupsController < ApplicationController
 
     def lab_params
       params.permit(:lab_id)
+    end
+
+    def admin_labgroup_params
+      params.require(:lab_group).permit(
+        :name, :code, :location_id
+      )
     end
 end

@@ -13,6 +13,14 @@ class AddressesController < ApplicationController
   end
 
   def create
+    @address = Address.new(address_params)
+    if @address.save
+      flash[:success] = "New address successfully added"
+      redirect_to "configurations"
+    else
+      flash[:error] = "Error saving address"
+      render "new"
+    end
   end
 
   def edit
@@ -21,9 +29,24 @@ class AddressesController < ApplicationController
 
   def update
     @address = Address.find(params[:id])
+    if @address.update_attributes(address_params)
+      flash[:success] = "Address successfully updated"
+      redirect_to "configurations"
+    else
+      flash[:error] = "Error updating address"
+      render "edit"
+    end
   end
 
   def destroy
-    @address = Address.find(params[:id])
+    Address.find(params[:id]).destroy
+    flash[:success] = "Address has been deleted"
   end
+
+  private
+    def address_params
+      params.require(:address).permit(
+        :street, :city, :country, :state_id
+      )
+    end
 end

@@ -13,7 +13,14 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new
+    @location = Location.new(location_params)
+    if @location.save
+      flash[:success] = "New location successfully added"
+      redirect_to "configurations"
+    else
+      flash[:error] = "Error saving location"
+      render "new"
+    end
   end
 
   def edit
@@ -22,9 +29,25 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:id])
+    if @location.update_attributes(location_params)
+      flash[:success] = "Location successfully updated"
+      redirect_to "configurations"
+    else
+      flash[:error] = "Error updating location"
+      render "edit"
+    end
   end
 
   def destroy
-    @location = Location.find(params[:id])
+    Location.find(params[:id]).destroy
+    flash[:success] = "Location has been deleted"
   end
+
+  private
+    def location_params
+      params.require(:location).permit(
+        :building, :room, :address_id
+      )
+    end
+
 end
