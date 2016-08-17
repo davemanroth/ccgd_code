@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :organizations
 
-  resources :labgroups
+  resources :lab_groups
 
   resources :users
 

@@ -31,7 +31,7 @@ class ConfigurationsController < ApplicationController
         addresses: Address,
         locations: Location,
         organizations: Organization,
-        labgroups: LabGroup,
+        lab_groups: LabGroup,
         platforms: Platform,
         sample_types: SampleType
       }

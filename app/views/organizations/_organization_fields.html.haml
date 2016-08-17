@@ -1,0 +1,18 @@
+- if @organization.errors.any?
+  =render 'shared/errors', errors: @organization.errors
+.row
+  .col-md-6
+    .form-group
+      =f.label :name, "Name"
+      =f.text_field :name, class: 'form-control', placeholder: 'Name'
+    .form-group
+      =f.label :phone, "Phone"
+      =f.text_field :phone, class: 'form-control', placeholder: 'Phone'
+    .form-group
+      =f.label :email, "Email"
+      =f.text_field :email, class: 'form-control', placeholder: 'Email'
+    .form-group
+      =f.label :address, "Address"
+      =f.collection_select :address, Address.all, :id, :full_address, { include_blank: '-Address-', selected: @organization.address_id }, { class: 'form-control' }
+
+

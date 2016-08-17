@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
   end
 
   def new
+    @organization = Organization.new
   end
 
   def create
@@ -27,6 +28,14 @@ class OrganizationsController < ApplicationController
       format.js { render partial: 'shared/add_success' }
       format.html
     end
+  end
+
+  def edit
+    @organization = Organization.find(params[:id])
+  end
+
+  def updatedite
+    @organization = Organization.find(params[:id])
   end
 
   def destroy

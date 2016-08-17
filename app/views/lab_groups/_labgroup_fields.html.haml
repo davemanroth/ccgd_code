@@ -10,5 +10,5 @@
       =f.text_field :code, class: 'form-control', placeholder: 'Code'
     .form-group
       =f.label :location, "Location"
-      =f.collection_select :location, Location.all, :id, :building_code, { include_blank: '-Location-', selected: @labgroup.location_id }, { class: 'form-control' }
+      =f.collection_select :location, Location.all, :id, :building_room, { include_blank: '-Location-', selected: @labgroup.location_id }, { class: 'form-control' }
 

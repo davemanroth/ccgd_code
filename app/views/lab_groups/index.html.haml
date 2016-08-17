@@ -14,7 +14,7 @@
         %td= lg.code
         %td= lg.location.building_room if lg.location && lg.location != 'NULL'
         %td.address-admin-actions
-          = link_to 'Edit', edit_labgroup_path(lg), class: 'btn btn-default pull-left'
-          = link_to 'Delete', labgroup_path(lg), data: { confirm: 'Are you sure you want to delete this labgroup?' }, class: 'btn btn-primary', remote: true, method: :delete
+          = link_to 'Edit', edit_lab_group_path(lg), class: 'btn btn-default pull-left'
+          = link_to 'Delete', lab_group_path(lg), data: { confirm: 'Are you sure you want to delete this labgroup?' }, class: 'btn btn-primary', remote: true, method: :delete
 
 

@@ -1,4 +1,4 @@
-class LabgroupsController < ApplicationController
+class LabGroupsController < ApplicationController
   include AddressHelper
 
   def index
