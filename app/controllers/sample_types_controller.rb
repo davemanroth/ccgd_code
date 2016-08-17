@@ -15,7 +15,7 @@ class SampleTypesController < ApplicationController
     @sample_type = SampleType.new(sample_type_params)
     if @sample_type.save
       flash[:success] = "New sample type successfully added"
-      redirect_to "configurations"
+      redirect_to "/configurations"
     else
       flash[:error] = "Error saving sample type"
       render "new"
@@ -30,7 +30,7 @@ class SampleTypesController < ApplicationController
     @sample_type = SampleType.find(params[:id])
     if @sample_type.update_attributes(sample_type_params)
       flash[:success] = "Sample type successfully updated"
-      redirect_to "configurations"
+      redirect_to "/configurations"
     else
       flash[:error] = "Error updating sample type"
       render "edit"

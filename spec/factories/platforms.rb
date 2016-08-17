@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :platform do
-    name "MyString"
+    name { Faker::Lorem.words(3).join(' ') }
+    code { Faker::Lorem.characters(3).upcase }
   end
 end

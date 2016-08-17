@@ -16,7 +16,7 @@ class OrganizationsController < ApplicationController
       @organization = Organization.new(admin_org_params)
       if @organization.save
         flash[:success] = "New organization successfully added"
-        redirect_to "configurations"
+        redirect_to "/configurations"
       else
         flash[:error] = "Error saving organization"
         render "new"
@@ -51,7 +51,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     if @organization.update_attributes(admin_org_params)
       flash[:success] = "Organization successfully updated"
-      redirect_to "configurations"
+      redirect_to "/configurations"
     else
       flash[:error] = "Error updating organization"
       render "edit"
