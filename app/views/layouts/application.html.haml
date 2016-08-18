@@ -17,19 +17,17 @@
             %p
           .modal-footer
             %button.btn.btn-success.btn-lg(data-dismiss="modal") Ok
-    .container
-      .wrap-color
-        = render 'layouts/header'
-        = render 'layouts/main_nav'
-        .white
-          .row
-            .col-md-2
-              -#= render 'layouts/side_nav' if logged_in? 
-            .col-md-10
-              - flash.each do |mssg_type, mssg|
-                %div(class="alert alert-#{mssg_type}") #{mssg}
-              .main-content
-                %article
-                  = yield
-              -#= debug(params) if Rails.env.development?
-        = render 'layouts/footer'
+    = render 'layouts/header'
+    = render 'layouts/main_nav'
+    .white
+      .container
+        .row
+          .col-md-3
+            -#= render 'layouts/side_nav' if logged_in? 
+          .col-md-9
+            - flash.each do |mssg_type, mssg|
+              %div(class="alert alert-#{mssg_type}") #{mssg}
+            .main-content
+              %article
+                = yield
+    = render 'layouts/footer'

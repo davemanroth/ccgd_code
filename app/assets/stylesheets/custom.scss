@@ -1,6 +1,19 @@
 // Custom styles
+/* Variables */
+
+$dark-blue: #004272;
+$turquoise: #56B4D8;
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-size: 18px;
+  background: #C0DBE7;
+}
+
 .wrap-color {
-  background: #444;
 }
 
 .white {
@@ -8,15 +21,45 @@
 }
 
 header {
-  background: #fff;
+  background: $dark-blue;
+  padding: 22px 0;
 }
 
 header, footer {
-  height: 80px;
 }
+
+.navbar {
+  padding: 10px 0;
+  .navbar-nav > li > a {
+    font-size: 20px;
+  }
+}
+
+.navbar-default {
+  border: none;
+  .navbar-nav > li > a {
+    color: $dark-blue;
+  }
+  .navbar-nav > li > a:focus,
+  .navbar-nav > li > a:hover,
+  .navbar-nav > li > a.active-item {
+    color: $turquoise;
+  }
+}
+
 
 .main-content {
   padding-bottom: 40px;
+}
+
+h1 {
+  color: $dark-blue;
+  font-size: 2.0em;
+}
+
+.page-header {
+  border-bottom: $dark-blue 1px solid;
+  padding-bottom: 0;
 }
 
 .add-btn {
@@ -76,6 +119,6 @@ header, footer {
   width: 100px;
 }
 
-.navbar-default .navbar-nav > li > a.active-item {
-  color: #D9230F;
+footer {
+  border-top: $turquoise 5px solid;
 }
