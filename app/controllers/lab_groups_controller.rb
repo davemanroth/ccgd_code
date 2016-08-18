@@ -15,7 +15,7 @@ class LabGroupsController < ApplicationController
       @labgroup = LabGroup.new(admin_labgroup_params)
       if @labgroup.save
         flash[:success] = "New labgroup successfully added"
-        redirect_to "/configurations"
+        redirect_to configurations_path
       else
         flash[:error] = "Error saving labgroup"
         render "new"
@@ -49,7 +49,7 @@ class LabGroupsController < ApplicationController
     @labgroup = LabGroup.find(params[:id])
     if @labgroup.update_attributes(admin_labgroup_params)
       flash[:success] = "Labgroup successfully updated"
-      redirect_to "/configurations"
+      redirect_to configurations_path
     else
       flash[:error] = "Error updating labgroup"
       render "edit"
@@ -57,7 +57,14 @@ class LabGroupsController < ApplicationController
   end
 
   def destroy
-    UserCustomLabgroup.find(lab_params[:lab_id]).destroy
+    if lab_params[:lab_id]
+      UserCustomLabgroup.find(lab_params[:lab_id]).destroy
+    else
+      LabGroup.find(params[:id]).destroy
+      respond_to do |f|
+        f.html { redirect_to configurations_path, status: 303 }
+      end
+    end
   end
 
   private 

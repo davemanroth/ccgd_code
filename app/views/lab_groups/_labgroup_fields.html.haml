@@ -9,8 +9,8 @@
       =f.label :code, "Code"
       =f.text_field :code, class: 'form-control', placeholder: 'Code'
     .form-group
-      =f.label :location, "Location"
-      =f.collection_select :location, Location.all, :id, :building_room, { include_blank: '-Location-', selected: @labgroup.location_id }, { class: 'form-control' }
+      =f.label :location_id, "Location"
+      =f.collection_select :location_id, Location.all, :id, :building_room, { include_blank: '-Location-', selected: @labgroup.location_id }, { class: 'form-control' }
     %p= link_to "Add a new location", new_location_path
     =hidden_field_tag "form_type", "admin"
 

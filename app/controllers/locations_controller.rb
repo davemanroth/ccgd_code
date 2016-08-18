@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     if @location.save
       flash[:success] = "New location successfully added"
-      redirect_to "/configurations"
+      redirect_to configurations_path
     else
       flash[:error] = "Error saving location"
       render "new"
@@ -31,7 +31,7 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     if @location.update_attributes(location_params)
       flash[:success] = "Location successfully updated"
-      redirect_to "/configurations"
+      redirect_to configurations_path
     else
       flash[:error] = "Error updating location"
       render "edit"
@@ -40,7 +40,9 @@ class LocationsController < ApplicationController
 
   def destroy
     Location.find(params[:id]).destroy
-    flash[:success] = "Location has been deleted"
+    respond_to do |f|
+      f.html { redirect_to configurations_path, status: 303 }
+    end
   end
 
   private

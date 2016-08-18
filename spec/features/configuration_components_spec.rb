@@ -78,6 +78,111 @@ feature "ConfigurationComponents", :type => :feature do
 
   end
 
+  feature "Organization CRUD" do
+    let(:org) { build(:organization) }
+
+    scenario "Creating a new organization" do
+      visit new_organization_path
+
+      expect(page).to have_content("Create a new organization")
+
+      expect {
+        fill_in "Name", with: org.name
+        fill_in "Phone", with: org.phone
+        fill_in "Email", with: org.email
+        select "44 Binney Street, Boston, MA", from: "organization_address_id"
+        click_on "Create new organization"
+      }.to change(Organization, :count).by(+1)
+    end
+
+    scenario "Updating an organization" do
+      org.save
+      visit edit_organization_path(org)
+
+      expect(page).to have_content("Update an organization")
+
+      within ".col-md-6" do
+        expect(page.find('#organization_name').value).to eq(org.name)
+        fill_in "Name", with: "New organization name"
+      end
+      click_on "Update organization"
+
+      expect(page).to have_content("Organization successfully updated")
+      org.reload
+      expect(org.name).to eq("New organization name")
+    end
+
+  end
+
+  feature "Labgroup CRUD" do
+    let(:lg) { build(:lab_group) }
+
+    scenario "Creating a new labgroup" do
+      visit new_lab_group_path
+
+      expect(page).to have_content("Create a new labgroup")
+
+      expect {
+        fill_in "Name", with: lg.name
+        fill_in "Code", with: lg.code
+        select "Dana, 1539", from: "lab_group_location_id"
+        click_on "Create new labgroup"
+      }.to change(LabGroup, :count).by(+1)
+    end
+
+    scenario "Updating an organization" do
+      lg.save
+      visit edit_lab_group_path(lg)
+
+      expect(page).to have_content("Update a labgroup")
+
+      within ".col-md-6" do
+        expect(page.find('#lab_group_name').value).to eq(lg.name)
+        fill_in "Name", with: "New labgroup name"
+      end
+      click_on "Update labgroup"
+
+      expect(page).to have_content("Labgroup successfully updated")
+      lg.reload
+      expect(lg.name).to eq("New labgroup name")
+    end
+
+  end
+
+  feature "Sample type CRUD" do
+    let(:st) { build(:sample_type) }
+
+    scenario "Creating a new sample type" do
+      visit new_sample_type_path
+
+      expect(page).to have_content("Create a new sample type")
+
+      expect {
+        fill_in "Name", with: st.name
+        click_on "Create new sample type"
+      }.to change(SampleType, :count).by(+1)
+    end
+
+    scenario "Updating a sample type" do
+      st.save
+      visit edit_sample_type_path(st)
+
+      expect(page).to have_content("Update a sample type")
+
+      within ".col-md-6" do
+        expect(page.find('#sample_type_name').value).to eq(st.name)
+        fill_in "Name", with: "New sample type name"
+      end
+      click_on "Update sample type"
+
+      expect(page).to have_content("Sample type successfully updated")
+      st.reload
+      expect(st.name).to eq("New sample type name")
+    end
+
+  end
+
+
   feature "Platform CRUD" do
     let(:plat) { build(:platform) }
 
