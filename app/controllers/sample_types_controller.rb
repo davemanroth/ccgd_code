@@ -1,4 +1,6 @@
 class SampleTypesController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @sample_types = SampleType.all
     render layout: false if params[:rendering]

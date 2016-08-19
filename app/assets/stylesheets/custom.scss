@@ -3,6 +3,14 @@
 
 $dark-blue: #004272;
 $turquoise: #56B4D8;
+$brown: #d4a671;
+$red: #ab002c;
+$dark-red: #5E0927;
+$primary: #225d8e;
+$primary-dk: #0d3252;
+$info: #52afd8;
+$success: #4da654;
+$danger: #af1219;
 
 html {
   font-size: 14px;
@@ -28,6 +36,7 @@ header {
 header, footer {
 }
 
+// main nav
 .navbar {
   padding: 10px 0;
   .navbar-nav > li > a {
@@ -47,9 +56,26 @@ header, footer {
   }
 }
 
+// Side nav
+.side-nav {
+  margin-top: 20px;
+  text-align: center;
+  li a {
+    border-bottom: $info 1px solid;
+    color: $red;
+  }
+  li:last-child a {
+    border: none;
+  }
+  li a.active-item,
+  li a:hover {
+    background: none;
+    color: $dark-red;
+  }
+}
 
 .main-content {
-  padding-bottom: 40px;
+  padding: 0 0 40px 25px;
 }
 
 h1 {
@@ -57,9 +83,35 @@ h1 {
   font-size: 2.0em;
 }
 
+h2 {
+  text-transform: uppercase;
+  color: $brown;
+  font-size: 1.3em;
+  font-weight: 100;
+  border: none;
+}
+
+h3 {
+  font-size: 1.1em;
+  color: $red;
+}
+
+a {
+  color: $turquoise;
+}
+
+a:hover {
+  color: $dark-blue;
+}
+
 .page-header {
   border-bottom: $dark-blue 1px solid;
   padding-bottom: 0;
+  margin: 0 0 60px 0;
+}
+
+.panel-info {
+  border-color: $info;
 }
 
 .add-btn {
@@ -67,6 +119,56 @@ h1 {
 }
 
 .lt-txt {
+  font-weight: bold;
+}
+
+// Home
+.login-form {
+  margin: 30px 0;
+  padding: 10px 20px;
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .btn {
+    margin: 20px 0;
+  }
+}
+
+// Buttons
+
+.btn-default, .btn-default:hover,
+.btn-primary, .btn-primary:hover,
+.btn-info, .btn-info:hover,
+.btn-success, .btn-success:hover,
+.btn-danger, .btn-danger:hover {
+  border: none;
+}
+
+.btn-default {
+}
+
+.btn-primary {
+  background: $primary;
+}
+
+.btn-primary:hover {
+  background: $primary-dk;
+}
+
+.btn-info {
+  background: $info;
+}
+
+.btn-success {
+  background: $success;
+}
+
+.btn-danger {
+  background: $danger;
+}
+
+.section {
+  margin-bottom: 40px;
 }
 
 .no-list {

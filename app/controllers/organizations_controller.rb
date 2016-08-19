@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   include AddressHelper
+  load_and_authorize_resource except: [:new, :create]
 
   def index
     @organizations = Organization.all

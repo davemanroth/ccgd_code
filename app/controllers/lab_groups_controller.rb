@@ -1,5 +1,6 @@
 class LabGroupsController < ApplicationController
   include AddressHelper
+  load_and_authorize_resource except: [:new, :create]
 
   def index
     @labgroups = LabGroup.all

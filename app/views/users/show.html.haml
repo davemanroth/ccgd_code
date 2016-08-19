@@ -22,7 +22,7 @@
                 - pending_proposals.each do |p|
                   %li= link_to p.name, edit_proposal_path(p)
             =link_to "View all proposals", proposals_path, class: 'btn btn-success'
-.user-info
+.user-info.section
   %h2 User information
   %ul.no-list
     %li <span class="lt-txt">Name:</span> #{@user.full_name}
@@ -39,8 +39,8 @@
         - semi = i == @user.lab_groups.size ? '; ' : '' 
         = lg.name_code + semi
       </li>
-  %p= link_to "Update user information", edit_user_path(@user), class: "btn btn-default" 
-.proposal-info
+  %p= link_to "Update user information", edit_user_path(@user), class: "btn btn-primary btn-lg" 
+.proposal-info.section
   %h2 Proposals
   - if @proposals.nil?
     %p No proposals at this time
@@ -61,4 +61,4 @@
       %ul.no-list.draft-proposals
         - @proposals[:revisions].each do |rev|
           %li #{ link_to rev.name, edit_proposal_path(rev.id) } <br />#{ rev.updated_at.strftime("last updated: %m/%d/%Y at %I:%M%p") }
-  %p= link_to "Submit a new proposal", new_proposal_path, class: "btn btn-default" 
+  %p= link_to "Submit a new proposal", new_proposal_path, class: "btn btn-primary btn-lg" 

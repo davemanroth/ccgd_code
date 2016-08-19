@@ -1,4 +1,11 @@
-- if logged_in?
+.panel.panel-info.side-nav
   %nav
-    %ul.nav.nav-pills.nav-stacked
-      %li= link_to "This is a test", "#"
+    %ul.nav.nav-stacked
+      - if current_user.is_admin?
+        %li= link_to "Manage users", users_path, class: item_class(users_path)
+        %li= link_to "Manage proposals", proposals_path, class: item_class(proposals_path)
+        %li= link_to "Manage committees", committees_path, class: item_class(committees_path)
+      - else
+        %li= link_to "Create new proposal", new_proposal_path, class: item_class(new_proposal_path)
+        %li= link_to "Update my information", edit_user_path(current_user), class: item_class(edit_user_path(current_user))
+      %li= link_to "Log out", logout_path, method: 'delete'

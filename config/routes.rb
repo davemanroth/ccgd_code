@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   patch 'proposals/:id/status/:status'  => 'proposals#proposal_status_update'
 
+  get 'configurations'  => 'configurations#index'
+
   resources :addresses
 
   resources :locations
@@ -22,8 +24,6 @@ Rails.application.routes.draw do
   resources :platforms
 
   resources :sample_types
-
-  resources :configurations
 
   resources :organizations
 

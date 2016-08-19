@@ -1,4 +1,6 @@
 class PlatformsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @platforms = Platform.all
     render layout: false if params[:rendering]
