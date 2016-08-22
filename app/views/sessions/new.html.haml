@@ -10,11 +10,11 @@
           = form_for(:session, url: login_path) do |f|
             .form-group
               = f.label :username
-              = f.text_field :username, placeholder: "Username", class: 'form-control input-lg', required: true 
+              = f.text_field :username, placeholder: "Username", class: 'form-control', required: true 
 
             .form-group
               = f.label :password
-              = f.password_field :password, placeholder: "Password", class: 'form-control input-lg', required: true 
+              = f.password_field :password, placeholder: "Password", class: 'form-control', required: true 
             = f.submit "Log in", class: 'btn btn-primary btn-lg btn-block'
             %p.small Don't have an account yet? #{link_to "Create an account", signup_path}
             %p.small Forgot your password? #{link_to "Reset password", new_password_reset_path}

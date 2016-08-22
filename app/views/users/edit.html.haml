@@ -6,9 +6,9 @@
   = render 'user_fields', f: f
   .row
     .col-md-9
-      - if can? :manage, User
+      - if can? :manage, :all
         %h2 Administrator area
-        #roles-and-privileges.panel.panel-default
+        #roles-and-privileges.panel.panel-admin
           .panel-heading
             %h3.panel-title Assign status and roles
           .panel-body
@@ -31,12 +31,12 @@
                   = b.check_box(class: "form-control", checked: checked)
                   = b.label
                   %br
-      = f.submit "Update user information", class: 'btn btn-info btn-lg'
+      = f.submit "Update user information", class: 'btn btn-primary btn-lg top-bottom-space'
 .row
   .col-md-9
-    - if can? :manage, User
+    - if can? :manage, :all
       - if @user.org_attributes || @user.lab_attributes
-        #labs_and_orgs.panel.panel-default
+        #labs_and_orgs.panel.panel-admin
           .panel-heading
             %h3.panel-title Add user-contributed labs and organizations
           .panel-body
@@ -47,13 +47,13 @@
                 %ul
                   - @user.org_attributes.each do |key, val|
                     %li= [key.split('_').last.capitalize, val].join(': ')
-                = button_to 'Add', organizations_path(org_id: @user.user_custom_organization), class: 'btn btn-info btn-add pull-left', remote: true
-                = button_to 'Delete', organization_path(org_id: @user.user_custom_organization), data: { confirm: 'Are you sure want to delete this custom organization?' }, class: 'btn btn-primary btn-delete', remote: true, method: :delete
+                = button_to 'Add', organizations_path(org_id: @user.user_custom_organization), class: 'btn btn-primary btn-add pull-left', remote: true
+                = button_to 'Delete', organization_path(org_id: @user.user_custom_organization), data: { confirm: 'Are you sure want to delete this custom organization?' }, class: 'btn btn-danger btn-delete left-right-space', remote: true, method: :delete
             - if @user.lab_attributes
               #lab.col-md-6
                 %h4 Lab/group
                 %ul
                   - @user.lab_attributes.each do |key, val|
                     %li= [key.split('_').last.capitalize, val].join(': ')
-                = button_to 'Add', labgroups_path(lab_id: @user.user_custom_labgroup), class: 'btn btn-info btn-add pull-left', remote: true
-                = button_to 'Delete', labgroups_path(lab_id: @user.user_custom_labgroup), data: { confirm: 'Are you sure want to delete this custom labgroup?' }, class: 'btn btn-primary btn-delete', remote: true, method: :delete
+                = button_to 'Add', lab_groups_path(lab_id: @user.user_custom_labgroup), class: 'btn btn-primary btn-add pull-left', remote: true
+                = button_to 'Delete', lab_groups_path(lab_id: @user.user_custom_labgroup), data: { confirm: 'Are you sure want to delete this custom labgroup?' }, class: 'btn btn-danger btn-delete left-right-space', remote: true, method: :delete

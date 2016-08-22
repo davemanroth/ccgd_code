@@ -4,7 +4,7 @@
   .row
     .col-md-10
       %h2 Administration
-      #pending.panel.panel-default
+      #pending.panel.panel-admin
         .panel-heading
           %h3.panel-title Pending statuses
         .panel-body
@@ -14,14 +14,14 @@
               %ul
                 - pending_users.each do |u|
                   %li= link_to u.username, edit_user_path(u)
-            =link_to "View all users", users_path, class: 'btn btn-success'
+            =link_to "View all users", users_path, class: 'btn btn-warning'
           .col-md-6
             %h4 Pending proposals
             - if pending_proposals = Proposal.pending
               %ul
                 - pending_proposals.each do |p|
                   %li= link_to p.name, edit_proposal_path(p)
-            =link_to "View all proposals", proposals_path, class: 'btn btn-success'
+            =link_to "View all proposals", proposals_path, class: 'btn btn-warning'
 .user-info.section
   %h2 User information
   %ul.no-list

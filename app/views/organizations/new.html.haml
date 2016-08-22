@@ -2,6 +2,4 @@
   %h1 Create a new organization
 = form_for(@organization) do |f|
   = render 'organization_fields', f: f
-  = f.submit "Create new organization", class: 'btn btn-info btn-lg'
-
-
+  = f.submit "Create new organization", class: 'btn btn-primary btn-lg'

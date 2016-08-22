@@ -3,7 +3,7 @@
 %p Use this page to Create, update, and delete website components
 %p Select a component below to create, update, or delete
 = select_tag "Configuration options", options_for_select( hash_options(@model_hash) ), prompt: "-Select a component-", class: "form-control input-lg", id: "config-options"
-= link_to "Create a new", "#", id: 'create-btn', class: 'btn btn-info btn-lg'
+= link_to "Create a new", "#", id: 'create-btn', class: 'btn btn-primary btn-lg top-bottom-space'
 #config-table
   .loading
     %p Page is loading, please wait

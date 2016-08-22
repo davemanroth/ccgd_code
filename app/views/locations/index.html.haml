@@ -1,6 +1,6 @@
 .page-header
   %h1 Locations
-%table#admin-table.table.table-hover.table-striped.table-responsive.locations-table
+%table#admin-table.table.table-hover.table-striped.table-responsive.location-table
   %thead
     %tr
       %th.street Building
@@ -14,5 +14,5 @@
         %td= loc.room
         %td= loc.address.full_address if loc.address
         %td.location-admin-actions
-          = link_to 'Edit', edit_location_path(loc), class: 'btn btn-default pull-left'
-          = link_to 'Delete', location_path(loc), data: { confirm: 'Are you sure you want to delete this location?' }, class: 'btn btn-primary', remote: true, method: :delete
+          = link_to 'Edit', edit_location_path(loc), class: 'btn btn-primary'
+          = link_to 'Delete', location_path(loc), data: { confirm: 'Are you sure you want to delete this location?' }, class: 'btn btn-danger', remote: true, method: :delete

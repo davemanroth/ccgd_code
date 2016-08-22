@@ -4,7 +4,10 @@
 $dark-blue: #004272;
 $turquoise: #56B4D8;
 $brown: #d4a671;
+$yellow: #FFC563;
+$light-yellow: #FFF6DF;
 $red: #ab002c;
+$dark-red: #630808;
 $dark-red: #5E0927;
 $primary: #225d8e;
 $primary-dk: #0d3252;
@@ -96,6 +99,12 @@ h3 {
   color: $red;
 }
 
+h4 {
+  font-weight: 600;
+  color: #999;
+  font-size: 0.9em;
+}
+
 a {
   color: $turquoise;
 }
@@ -108,6 +117,18 @@ a:hover {
   border-bottom: $dark-blue 1px solid;
   padding-bottom: 0;
   margin: 0 0 60px 0;
+}
+
+.panel-admin {
+  border-color: $yellow;
+  .panel-heading {
+    color: $red;
+    background: $light-yellow;
+    border-color: $yellow;
+    h3.panel-title {
+      font-size: 1.1em;
+    }
+  }
 }
 
 .panel-info {
@@ -151,6 +172,8 @@ a:hover {
   background: $primary;
 }
 
+.btn-primary:focus,
+.btn-primary:active,
 .btn-primary:hover {
   background: $primary-dk;
 }
@@ -167,6 +190,26 @@ a:hover {
   background: $danger;
 }
 
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger:hover {
+  background: $dark-red;
+}
+
+.btn-warning {
+  background: $yellow;
+  border-color: $yellow;
+  color: $red;
+}
+
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning:hover {
+  background: $light-yellow;
+  border-color: $yellow;
+  color: $red;
+}
+
 .section {
   margin-bottom: 40px;
 }
@@ -174,6 +217,18 @@ a:hover {
 .no-list {
   list-style: none;
   padding-left: 0;
+}
+
+.proposal-info {
+  li {
+    margin-bottom: 15px;
+  }
+}
+
+.ccgd-terms-frame {
+  height: 400px;
+  overflow: scroll;
+  padding: 0 15px;
 }
 
 .add-success {
@@ -219,6 +274,60 @@ a:hover {
 
 .small-text-field {
   width: 100px;
+}
+
+.top-bottom-space {
+  margin: 20px 0;
+}
+
+.left-right-space {
+  margin: 0 12px;
+}
+
+.form-control {
+  height: 53px;
+  padding: 14px 16px;
+  font-size: 17px;
+  line-height: 1.3em;
+  border-radius: 6px;
+}
+
+// Data tables
+
+#admin-table {
+  font-size: 0.80em;
+  .btn {
+    font-size: 0.95em;
+    margin: 5px 0;
+  }
+}
+
+.address-table,
+.organization-table,
+.labgroup-table,
+.location-table {
+  th.actions {
+    width: 17% !important;
+  }
+}
+
+.proposal-table {
+  td:nth-of-type(3) {
+    word-break: break-all;
+  }
+  th.username {
+    width: 20% !important;
+  }
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  border: none;
+  padding: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: none;
+  border: none;
 }
 
 footer {

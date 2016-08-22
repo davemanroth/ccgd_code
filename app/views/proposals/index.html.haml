@@ -1,6 +1,6 @@
 .page-header
   %h1 Proposal administration
-= link_to 'Show inactive', '#', id: 'admin-table-toggle-show', class: 'btn btn-default', data: { show_inactive: 0 }
+= link_to 'Show inactive', '#', id: 'admin-table-toggle-show', class: 'btn btn-primary btn-lg top-bottom-space', data: { show_inactive: 0 }
 %table#admin-table.table.table-hover.table-striped.table-responsive.proposal-table
   %thead
     %tr
@@ -33,7 +33,7 @@
           = prop.proposal_status.name
         %td.proposal-admin-actions
           - if can? :manage, Proposal
-            = link_to 'Edit', edit_proposal_path(prop), class: 'proposal-edit btn btn-default pull-left'
+            = link_to 'Edit', edit_proposal_path(prop), class: 'proposal-edit btn btn-primary pull-left'
             - if prop.committee
               = link_to 'Edit committee', edit_proposal_committee_path(prop, prop.committee), class: 'proposal-edit btn btn-warning pull-left'
             - else

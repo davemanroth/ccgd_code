@@ -1,10 +1,10 @@
 .page-header
   %h1 Platforms
-%table#admin-table.table.table-hover.table-striped.table-responsive.platforms-table
+%table#admin-table.table.table-hover.table-striped.table-responsive.platform-table
   %thead
     %tr
-      %th.street Name
-      %th.city Code
+      %th.name Name
+      %th.code Code
       %th.actions Actions
   %tbody
     - @platforms.each do |plat|
@@ -12,5 +12,5 @@
         %td= plat.name
         %td= plat.code
         %td.location-admin-actions
-          = link_to 'Edit', edit_platform_path(plat), class: 'btn btn-default pull-left'
-          = link_to 'Delete', platform_path(plat), data: { confirm: 'Are you sure you want to delete this location?' }, class: 'btn btn-primary', remote: true, method: :delete
+          = link_to 'Edit', edit_platform_path(plat), class: 'btn btn-primary'
+          = link_to 'Delete', platform_path(plat), data: { confirm: 'Are you sure you want to delete this location?' }, class: 'btn btn-danger', remote: true, method: :delete

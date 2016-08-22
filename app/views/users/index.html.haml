@@ -1,6 +1,6 @@
 .page-header
   %h1 User administration
-= link_to 'Show inactive', '#', id: 'admin-table-toggle-show', class: 'btn btn-default', data: { show_inactive: 0 }
+= link_to 'Show inactive', '#', id: 'admin-table-toggle-show', class: 'btn btn-primary btn-lg top-bottom-space', data: { show_inactive: 0 }
 %table#admin-table.table.table-hover.table-striped.table-responsive.user-admin-table
   %thead
     %tr
@@ -21,11 +21,11 @@
       %td.user-status= user.status_name
       - if can? :manage, @user
         %td.user-actions
-          = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-default'
+          = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-primary'
           - if user.is_active?
             = link_to 'Deactivate', [user_path(user), 'status', 'I'].join('/'), class: 'user-deactivate btn btn-warning', remote: true, method: :patch
           - elsif user.is_inactive?
             = link_to 'Reactivate', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
           - else
             = link_to 'Approve', [user_path(user), 'status', 'A'].join('/'), class: 'user-approve btn btn-success', remote: true, method: :patch
-            = link_to 'Delete', user_path(user), data: { confirm: 'Are you sure you want to delete this user?' }, class: 'user-delete btn btn-primary', remote: true, method: :delete
+            = link_to 'Delete', user_path(user), data: { confirm: 'Are you sure you want to delete this user?' }, class: 'user-delete btn btn-danger', remote: true, method: :delete
