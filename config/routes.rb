@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'organizations_controller/create'
-
   root 'sessions#new'
 
   post 'login'    => 'sessions#create'
