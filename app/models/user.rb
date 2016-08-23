@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   before_create :initialize_user
+  after_destroy :remove_associations
 
   # Returns ActiveRecord hash of User objects ordered by last name which have role specified
   # by id parameter
@@ -121,5 +122,14 @@ class User < ActiveRecord::Base
   def is_inactive?
     self.status == 'I'
   end
+
+  private
+    def remove_associations
+      Privilege.find_by(user_id: self.id).destroy
+      if labgroups = Membership.find_by(user_id: self.id)
+        labgroups.destroy
+      end
+    end
+
 
 end
