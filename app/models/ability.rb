@@ -19,7 +19,7 @@ class Ability
     can :create, User
 
     # Submitter
-    if user.has_role?(5)
+    if user.has_role?(5) && user.is_active?
       can [:read, :update], User, id: user.id
       can :crud, Proposal, user_id: user.id
     end

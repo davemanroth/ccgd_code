@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def is_active?
-    self.status == 'A'
+    self.status == 'A' && self.roles.count > 0
   end
 
   def is_pending?

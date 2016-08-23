@@ -36,8 +36,7 @@ class UsersController < ApplicationController
       #Rails.logger.debug(@user)
       AdminMailer.new_user(@user).deliver_now
       flash[:success] = "An email has been sent to the CCGD admin. You will receive login information shortly"
-      log_in(@user)
-      redirect_to @user
+      redirect_to root_url
     else
       flash[:error] = "There was a problem with your form submission. See errors below"
       render 'new'

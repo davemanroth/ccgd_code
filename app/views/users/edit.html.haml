@@ -8,6 +8,11 @@
     .col-md-9
       - if can? :manage, :all
         %h2 Administrator area
+        .panel.panel-admin
+          .panel-heading
+            %h3.panel-title Delete bogus user
+          .panel-body
+            = link_to 'Delete this user', user_path(@user), data: { confirm: 'Are you sure you want to delete this user?' }, class: 'user-delete btn btn-danger btn-lg', method: :delete
         #roles-and-privileges.panel.panel-admin
           .panel-heading
             %h3.panel-title Assign status and roles

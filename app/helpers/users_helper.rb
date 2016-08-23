@@ -16,7 +16,8 @@ module UsersHelper
   end
 
   def add_roles(user, roles)
-    to_add = roles - user.role_ids
+    role_ids = user.role_ids || [];
+    to_add = roles - role_ids
     if !to_add.empty?
       to_add.each do |t|
         role = Role.find(t)
