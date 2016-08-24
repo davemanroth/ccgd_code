@@ -49,11 +49,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if !lab_group_params.nil?
+    if lab_group_params
       add_lab_groups(@user)
     end
 
-    if !admin_update_params.nil?
+    if admin_update_params
       apply_admin_updates(@user)
     end
 
@@ -105,6 +105,9 @@ class UsersController < ApplicationController
           :custom_country, :state_id
         ]
       )
+    end
+
+    def user_custom_org_params
     end
 
     # Separate out labgroups array
