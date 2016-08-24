@@ -60,13 +60,9 @@ class OrganizationsController < ApplicationController
   end
 
   def destroy
-    if org_params[:org_id]
-      UserCustomOrganization.find(org_params[:org_id]).destroy
-    else
-      Organization.find(params[:id]).destroy
-      respond_to do |f|
-        f.html { redirect_to configurations_path, status: 303 }
-      end
+    Organization.find(params[:id]).destroy
+    respond_to do |f|
+      f.html { redirect_to configurations_path, status: 303 }
     end
   end
 

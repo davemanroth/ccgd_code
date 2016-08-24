@@ -58,13 +58,9 @@ class LabGroupsController < ApplicationController
   end
 
   def destroy
-    if lab_params[:lab_id]
-      UserCustomLabgroup.find(lab_params[:lab_id]).destroy
-    else
-      LabGroup.find(params[:id]).destroy
-      respond_to do |f|
-        f.html { redirect_to configurations_path, status: 303 }
-      end
+    LabGroup.find(params[:id]).destroy
+    respond_to do |f|
+      f.html { redirect_to configurations_path, status: 303 }
     end
   end
 

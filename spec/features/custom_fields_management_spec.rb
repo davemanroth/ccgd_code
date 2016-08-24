@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Admin add org and labgroups", :type => :feature do
+RSpec.feature "Custom fields management", :type => :feature do
   let(:admin) { create(:admin) }
   let(:cf_user) { create(:custom_fields_user) }
   before :each do
@@ -48,7 +48,7 @@ RSpec.feature "Admin add org and labgroups", :type => :feature do
       }.to change(UserCustomLabgroup, :count).by(-1)
     end
     cf_user.reload
-    expect(cf_user.user_custom_lab_groups).to be_nil
+    expect(cf_user.user_custom_labgroup).to be_nil
     expect(cf_user.lab_groups.count).to be 0
   end
 
