@@ -7,6 +7,7 @@
   if('<%= params[:org_id] %>' != null && '<%= params[:org_id] %>' > 0) {
     if('<%= params[:action] %>' == 'destroy') {
       confirm_action('Organization successfully deleted', '#org');
+      clear_fields('#custom-org');
     }
     else {
       confirm_action('Organization successfully added', '#org');
@@ -14,8 +15,8 @@
   }
   else if('<%= params[:lab_id] %>' != null && '<%= params[:lab_id] %>' > 0) {
     if('<%= params[:action] %>' == 'destroy') {
-      console.log('Test');
       confirm_action('Labgroup successfully deleted', '#lab');
+      clear_fields('#custom-labgroup');
     }
     else {
       confirm_action('Labgroup successfully added', '#lab');
@@ -31,6 +32,13 @@
     add.find('.add-success').append('<p class="text-success centered">' + text + '</p>').hide();
     add.find('.add-success').fadeIn(400, function() {
       $(this).find('p').show();
+    });
+  }
+
+  function clear_fields(id) {
+    var inputs = $(id).find('input[type="text"]');
+    inputs.each(function() {
+      $(this).val('');
     });
   }
 
