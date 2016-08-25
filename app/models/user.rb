@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   belongs_to :organization
   has_one :user_custom_labgroup
   has_one :user_custom_organization
-  accepts_nested_attributes_for :user_custom_organization, allow_destroy: true, reject_if: :all_blank
-  accepts_nested_attributes_for :user_custom_labgroup, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :user_custom_organization, allow_destroy: true, reject_if: proc { |attrs| attrs[:custom_org_name].blank? }
+  accepts_nested_attributes_for :user_custom_labgroup, allow_destroy: true, reject_if: proc { |attrs| attrs[:custom_labgroup_name].blank? }
   has_many :memberships
   has_many :lab_groups, through: :memberships
   has_many :privileges
