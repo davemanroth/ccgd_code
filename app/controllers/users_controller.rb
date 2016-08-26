@@ -59,6 +59,11 @@ class UsersController < ApplicationController
     end
 
     if @user.update_attributes(user_params)
+      # This is a stupid but necessary hack to reassign an "Active" status to
+      # the user because for some reason the user's status gets randomly nulled
+      # out as soon as the update_atributes method is executed. Bizarre.
+      @user.status ||= 'A'
+      @user.save
       flash[:success] = "Profile successfully updated"
       redirect_to @user
     else
@@ -93,7 +98,7 @@ class UsersController < ApplicationController
         :firstname, :lastname, 
         :email, :phone, :username, 
         :password, :password_confirmation,
-        :organization_id, :ccgd_policy,
+        :organization_id, :ccgd_policy, :status
       ]
 
       # Check to see if anything entered in the custom org form, if so, add to
