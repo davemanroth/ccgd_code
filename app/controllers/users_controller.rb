@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
     if lab_group_params
       add_lab_groups(@user)
     end
@@ -88,26 +89,34 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(
+      params_array = [
         :firstname, :lastname, 
         :email, :phone, :username, 
         :password, :password_confirmation,
         :organization_id, :ccgd_policy,
-        user_custom_organization_attributes: [
+      ]
+
+      # Check to see if anything entered in the custom org form, if so, add to
+      # array
+      if !params[:user][:user_custom_organization_attributes][:custom_org_name].empty?
+        params_array <<  { user_custom_organization_attributes: [
           :id, :custom_org_name, :custom_org_phone,
           :custom_org_email, :custom_street,
           :custom_city, :custom_country, :state_id
-        ],
-        user_custom_labgroup_attributes: [
+        ] }
+      end
+      
+      # Check to see if anything entered in the custom org form, if so, add to
+      # array
+      if !params[:user][:user_custom_labgroup_attributes][:custom_labgroup_name].empty?
+        params_array << { user_custom_labgroup_attributes: [
           :id, :custom_labgroup_name, :custom_labgroup_code,
           :custom_labgroup_building, :custom_labgroup_room,
           :custom_street, :custom_city, 
           :custom_country, :state_id
-        ]
-      )
-    end
-
-    def user_custom_org_params
+        ] }
+      end
+      params.require(:user).permit(params_array)
     end
 
     # Separate out labgroups array
