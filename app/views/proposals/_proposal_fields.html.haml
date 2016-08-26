@@ -25,19 +25,19 @@
         = st.text_field :name, class: 'form-control', placeholder: 'New sample type'
     .form-group
       = f.label :objectives, "Objectives"
-      = f.text_area :objectives, class: 'form-control', required: true
+      = f.text_area :objectives, class: 'form-control'
     .form-group
       = f.label :background, "Background"
-      = f.text_area :background, class: 'form-control', required: true
+      = f.text_area :background, class: 'form-control'
     .form-group
       = f.label :design_details, "Design details"
-      = f.text_area :design_details, class: 'form-control', required: true
+      = f.text_area :design_details, class: 'form-control'
     .form-group
       = f.label :sample_availability, "Sample availability"
-      = f.text_area :sample_availability, class: 'form-control', required: true
+      = f.text_area :sample_availability, class: 'form-control'
     .form-group
       = f.label :contributions, "Contributions"
-      = f.text_area :contributions, class: 'form-control', required: true
+      = f.text_area :contributions, class: 'form-control'
     .form-group
       = f.label :comments, "Comments"
       = f.text_area :comments, class: 'form-control'
@@ -45,3 +45,7 @@
     = render 'ccgd_policy_modal'
     = f.submit "Save draft", name: 'save_draft', class: 'btn btn-info btn-lg'
     = f.submit "Submit proposal", name: 'submit_proposal', class: 'btn btn-primary btn-lg'
+    - if @proposal.id
+      = link_to "Delete proposal", proposal_path(@proposal), method: 'delete', data: { confirm: "Are you sure you want to delete this proposal?" }, class: 'btn btn-danger btn-lg'
+    - else
+      = link_to "Cancel", user_path(current_user), method: 'get', data: { confirm: "Are you sure you want to cancel this proposal?" }, class: 'btn btn-warning btn-lg'

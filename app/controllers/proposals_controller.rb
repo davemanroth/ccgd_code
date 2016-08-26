@@ -69,7 +69,12 @@ class ProposalsController < ApplicationController
   end
 
   def destroy
-    Proposal.find(params[:id]).destroy
+    @proposal = Proposal.find(params[:id])
+    Proposal.find(@proposal).destroy
+    respond_to do |f|
+      f.html { redirect_to user_path(@proposal.user_id) }
+      flash[:success] = "Proposal successfully deleted"
+    end
   end
 
   def proposal_status_update

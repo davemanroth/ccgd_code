@@ -13,11 +13,11 @@ class Proposal < ActiveRecord::Base
   has_many :proposal_platforms
   has_many :platforms, :through => :proposal_platforms
   accepts_nested_attributes_for :sample_types, allow_destroy: true
-  validates :name, presence: true 
-  validates :objectives, presence: true 
-  validates :design_details, presence: true 
-  validates :user_id, presence: true 
-  validates :lab_group_id, presence: true 
+  validates :name, presence: true, :if => :submitted? 
+  validates :objectives, presence: true, :if => :submitted? 
+  validates :design_details, presence: true, :if => :submitted? 
+  validates :user_id, presence: true, :if => :submitted? 
+  validates :lab_group_id, presence: true, :if => :submitted?
   validates :ccgd_policy_approval, presence: true, :if => :should_policy_be_accepted?, inclusion: { in: [true, false], message: 'You must accept the CCGD policy' }
   attr_accessor :policy_should_be_accepted
 
