@@ -13,33 +13,34 @@
       %th.status Status
       - if can? :manage, Proposal or can? :vote, Proposal 
         %th.actions Actions
-  - @proposals.each do |prop|
-    - rowclass = ''
-    - rowclass = 'warning' if prop.is_pending?
-    - rowclass = 'info' if prop.is_non_active?
-    %tr(class="#{rowclass}")
-      %td= prop.code || ""
-      %td= link_to prop.name, proposal_path(prop)
-      %td= prop.user.username
-      %td= prop.lab_group.name
-      %td= prop.platforms.first.name
-      %td= prop.updated_at.strftime("%m/%d/%Y")
-      %td.proposal-admin-actions
+  %tbody
+    - @proposals.each do |prop|
+      - rowclass = ''
+      - rowclass = 'warning' if prop.is_pending?
+      - rowclass = 'info' if prop.is_non_active?
+      %tr(class="#{rowclass}")
+        %td= prop.code || ""
+        %td= link_to prop.name, proposal_path(prop)
+        %td= prop.user.username
+        %td= prop.lab_group.name
+        %td= prop.platforms.first.name
+        %td= prop.updated_at.strftime("%m/%d/%Y")
         - if can? :manage, @proposal
-          #proposal-status-update
+          %td#proposal-status-update
             = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "code", prop.proposal_status.id), class: 'form-control pull-left'
             = button_to "Update", [proposal_path(prop), 'status', prop.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
         -else
-          = prop.proposal_status.name
-        %td.proposal-admin-actions
-          - if can? :manage, Proposal
-            = link_to 'Edit', edit_proposal_path(prop), class: 'proposal-edit btn btn-primary pull-left'
-            - if prop.committee
-              = link_to 'Edit committee', edit_proposal_committee_path(prop, prop.committee), class: 'proposal-edit btn btn-warning pull-left'
-            - else
-              = link_to 'Form committee', new_proposal_committee_path(prop), class: 'proposal-edit btn btn-info pull-left'
-          - if can? :vote, Proposal and prop.committee and !current_user.is_admin?
-            - if voted?(prop)
-              = link_to 'Edit vote', edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop)), class: 'proposal-edit btn btn-success'
-            - else
-              = link_to 'Vote', new_proposal_committee_member_vote_path(prop, prop.committee), class: 'proposal-edit btn btn-success'
+          %td= prop.proposal_status.name
+        - if can? :manage, Proposal or can? :vote, Proposal
+          %td.proposal-admin-actions
+            - if can? :manage, :all
+              = link_to 'Edit', edit_proposal_path(prop), class: 'proposal-edit btn btn-primary pull-left'
+              - if prop.committee
+                = link_to 'Edit committee', edit_proposal_committee_path(prop, prop.committee), class: 'proposal-edit btn btn-warning pull-left'
+              - else
+                = link_to 'Form committee', new_proposal_committee_path(prop), class: 'proposal-edit btn btn-info pull-left'
+            - if can? :vote, Proposal and prop.committee and !current_user.is_admin?
+              - if voted?(prop)
+                = link_to 'Edit vote', edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop)), class: 'proposal-edit btn btn-success'
+              - else
+                = link_to 'Vote', new_proposal_committee_member_vote_path(prop, prop.committee), class: 'proposal-edit btn btn-success'

@@ -24,6 +24,11 @@ class Ability
       can :crud, Proposal, user_id: user.id
     end
 
+    if user.has_role?(3)
+      can :read, User
+      can :read, Proposal
+    end
+
     # Faculty and Advisors
     if user.has_role?(2) || user.has_role?(4)
       can :vote, Proposal
