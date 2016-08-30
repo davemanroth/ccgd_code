@@ -34,7 +34,7 @@ class ProposalsController < ApplicationController
     end
 
     if @proposal.save
-      if params[:submit_proposal] and @proposal.errors.length == 0
+      if params[:submit_proposal]
         @proposal.proposal_status = ProposalStatus.find(2)
         AdminMailer.new_proposal(@proposal).deliver_now
       end
@@ -58,11 +58,13 @@ class ProposalsController < ApplicationController
     if params[:submit_proposal]
       @proposal.submitted = true
       @proposal.policy_should_be_accepted = true
-      @proposal.proposal_status = ProposalStatus.find(2)
-      AdminMailer.new_proposal(@proposal).deliver_now
     end
 
     if @proposal.update_attributes(proposal_params)
+      if params[:submit_proposal]
+        @proposal.proposal_status = ProposalStatus.find(2)
+        AdminMailer.new_proposal(@proposal).deliver_now
+      end
       flash[:success] = "Proposal saved"
       redirect_to user_path(@proposal.user_id)
     else
