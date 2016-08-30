@@ -38,6 +38,7 @@ module UsersHelper
 
   # Add labgroup records to user object
   def add_lab_groups(user)
+    user.lab_groups.clear if !user.lab_groups.empty?
     vals = lab_group_params.values.first
     if !vals.nil?
       vals.each do |id|
