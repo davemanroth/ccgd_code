@@ -24,7 +24,6 @@ FactoryGirl.define do
       after(:create) do |user|
         user.roles << Role.find(1)
       end
-      status 'A'
     end
 
     factory :faculty do

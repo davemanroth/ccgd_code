@@ -124,7 +124,7 @@ RSpec.feature "MemberVotings", :type => :feature do
     # Make sure the member vote object recorded and saved the Approve vote
     mv.reload
 
-    db_mv = MemberVote.find(mv)
+    db_mv = MemberVote.find(mv.id)
     expect(db_mv.comment).to eq(mv.comment)
     expect(db_mv.vote.name).to eq("Approve")
 
