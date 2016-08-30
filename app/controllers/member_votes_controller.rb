@@ -54,7 +54,9 @@ class MemberVotesController < ApplicationController
 
     if @member_vote.update!(vote: vote, comment: comment)
       flash[:success] = "Vote successfully cast"
-      redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote)
+      respond_to do |f|
+        f.html { redirect_to edit_proposal_committee_member_vote_path(@proposal, @committee, @member_vote), status: 303 }
+      end
     else
       flash[:error] = "Error casting vote"
       render "new"
