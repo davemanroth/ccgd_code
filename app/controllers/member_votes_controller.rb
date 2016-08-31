@@ -10,27 +10,27 @@ class MemberVotesController < ApplicationController
   def new
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
-    @member_vote = MemberVote.find_by(user_id: current_user.id)
+    @member_vote = MemberVote.find(params[:id])
     check_member_vote(@committee, @member_vote)
   end
 
   def create
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
-    @member_vote = MemberVote.find_by(user_id: current_user.id)
+    @member_vote = MemberVote.find(params[:id])
   end
 
   def edit
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
-    @member_vote = MemberVote.find_by(user_id: current_user.id)
+    @member_vote = MemberVote.find(params[:id])
     check_member_vote(@committee, @member_vote)
   end
 
   def update
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
-    @member_vote = MemberVote.find_by(user_id: current_user.id)
+    @member_vote = MemberVote.find(params[:id])
 
     # Check if this vote is being updated by an admin or the currently logged
     # in committee member
