@@ -25,8 +25,8 @@ class Ability
     end
 
     if user.has_role?(3)
-      can :read, User
-      can :read, Proposal
+      can :review, User
+      can :review, Proposal
     end
 
     # Faculty and Advisors

@@ -11,9 +11,9 @@
           %li= link_to "Home", root_url, class: item_class(root_url)
           -if logged_in?
             %li= link_to "My profile", user_path(current_user), class: item_class(user_path(current_user))
-            -if can? :read, User
+            -if can? :review, User
               %li= link_to "Users", users_path, class: item_class(users_path)
-            -if can? :vote, Proposal or can? :read, Proposal
+            -if can? :vote, Proposal or can? :review, Proposal
               %li= link_to "Proposals", proposals_path, class: item_class(proposals_path)
             -if can? :manage, :all
               %li= link_to "Committees", committees_path, class: item_class(committees_path)

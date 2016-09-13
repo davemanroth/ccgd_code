@@ -8,7 +8,7 @@
       %th.first-name First name
       %th.org Organization
       %th.status Status
-      - if can? :manage, @user
+      - if can? :manage, :all
         %th.actions Actions
   %tbody
     - @users.each do |user|
@@ -20,7 +20,7 @@
         %td= link_to user.firstname, user_path(user)
         %td= user.organization.name unless user.organization.nil?
         %td.user-status= user.status_name
-        - if can? :manage, @user
+        - if can? :manage, :all
           %td.user-actions
             = link_to 'Edit', edit_user_path(user), class: 'user-edit btn btn-primary'
             - if user.is_active?
