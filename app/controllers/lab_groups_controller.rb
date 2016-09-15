@@ -18,7 +18,7 @@ class LabGroupsController < ApplicationController
         flash[:success] = "New labgroup successfully added"
         redirect_to configurations_path
       else
-        flash[:error] = "Error saving labgroup"
+        flash[:error] = "Error saving Labgroup using admin controls"
         render "new"
       end
     else
@@ -32,7 +32,7 @@ class LabGroupsController < ApplicationController
           user.save
           ucl.destroy
         else
-          flash[:error] = 'An error occurred'
+          flash[:error] = 'Failed to save Labgroup'
         end
       end
       respond_to do |format|

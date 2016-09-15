@@ -40,7 +40,7 @@ RSpec.feature "Custom fields management", :type => :feature do
     cf_user.reload
 =end
     click_on('Add a new organization')
-    fill_in "Organization name", with: 'Test organization'
+    fill_in "Organization phone", with: '555-555-5555'
     click_on('Update user information')
     expect(cf_user.user_custom_organization).to be_nil
     expect(cf_user.lab_groups.count).to be 0
