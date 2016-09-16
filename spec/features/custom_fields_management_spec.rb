@@ -30,7 +30,7 @@ RSpec.feature "Custom fields management", :type => :feature do
     expect(cf_user.lab_groups.count).to be > 0
   end
 
-  scenario "Admin deletes an organization based on user's custom fields" do
+  scenario "User attempts to add a new custom organization but only fills out the phone number field" do
 =begin
     within '#labs_and_orgs' do
       expect {
