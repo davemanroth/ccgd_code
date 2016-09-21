@@ -59,6 +59,7 @@ class UsersController < ApplicationController
       apply_admin_updates(@user)
     end
 
+
     if @user.update_attributes(user_params)
       # This is a stupid but necessary hack to reassign an "Active" status to
       # the user because for some reason the user's status gets randomly nulled
