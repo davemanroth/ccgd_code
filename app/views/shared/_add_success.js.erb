@@ -3,8 +3,10 @@
   add_container += '<button type="button" class="close" data-dismiss="alert"><span>x</span></button>';
   add_container += '</div>';
   var labs_orgs = $('#labs_and_orgs');
+  var org_id = '<%= params[:org_id] %>';
+  var lab_id = '<%= params[:lab_id] %>';
 
-  if('<%= params[:org_id] %>' != null && '<%= params[:org_id] %>' > 0) {
+  if(org_id != null && org_id > 0) {
     if('<%= params[:action] %>' == 'destroy') {
       confirm_action('Organization successfully deleted', '#org');
     }

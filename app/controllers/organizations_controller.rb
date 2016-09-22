@@ -41,6 +41,7 @@ class OrganizationsController < ApplicationController
         format.js { render partial: 'shared/add_success' }
         format.html
       end
+      binding.pry
     end
   end
 
