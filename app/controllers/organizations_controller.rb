@@ -28,20 +28,21 @@ class OrganizationsController < ApplicationController
       user = User.find(uco.user_id)
       if !uco.nil?
         address = add_address(uco)
-        org = load_org(uco, address.id)
-        if org.save
+        @organization = load_org(uco, address.id)
+        if @organization.save
           flash[:success] = 'Organization added'
-          user.update(organization: org)
+          user.update(organization: @organization)
           uco.destroy
         else
           flash[:error] = 'An error occurred'
         end
+=begin
+=end
       end
       respond_to do |format|
         format.js { render partial: 'shared/add_success' }
         format.html
       end
-      binding.pry
     end
   end
 

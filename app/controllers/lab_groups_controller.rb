@@ -25,10 +25,10 @@ class LabGroupsController < ApplicationController
       ucl = UserCustomLabgroup.find(lab_params[:lab_id])
       user = User.find(ucl.user_id)
       if !ucl.nil?
-        lab = load_lab(ucl)
-        if lab.save
+        @labgroup = load_lab(ucl)
+        if @labgroup.save
           flash[:success] = 'Lab/group added'
-          user.lab_groups << lab
+          user.lab_groups << @labgroup
           user.save
           ucl.destroy
         else

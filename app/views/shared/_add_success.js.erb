@@ -12,6 +12,8 @@
     }
     else {
       confirm_action('Organization successfully added', '#org');
+      option = create_option('<%= @organization.id if @organization %>', '<%= @organization.name if @organization %>');
+      append_and_select( $('#user_organization_id'), option );
     }
     clear_fields('#custom-org');
   }
@@ -21,6 +23,9 @@
     }
     else {
       confirm_action('Labgroup successfully added', '#lab');
+      console.log('This should only appear when labgroup is added');
+      option = create_option('<%= @labgroup.id if @labgroup %>', '<%= @labgroup.name if @labgroup %>');
+      append_and_select( $('#user_lab_groups'), option);
     }
     clear_fields('#custom-labgroup');
   }
@@ -43,6 +48,14 @@
       $(this).val('');
     });
     $(id).find('select').val(null);
+  }
+
+  function append_and_select(select, option) {
+    select.append(option).val( $(option).val() );
+  }
+
+  function create_option(id, name) {
+    return "<option value='" + id + "'>" + name + "</option>";
   }
 
 })();
