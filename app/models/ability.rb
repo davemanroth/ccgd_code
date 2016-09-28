@@ -32,8 +32,8 @@ class Ability
 
     # Lab staff
     if user.has_role?(3)
-      can :review, User
-      can :review, Proposal
+      can [:read, :review], User
+      can [:read, :review], Proposal
     end
 
     # Admin
