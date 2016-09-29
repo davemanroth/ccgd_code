@@ -39,7 +39,7 @@
         - semi = i == @user.lab_groups.size ? '; ' : '' 
         = lg.name_code + semi
       </li>
-  - if current_user == @user
+  - if can? :manage, :all or current_user == @user
     %p= link_to "Update user information", edit_user_path(@user), class: "btn btn-primary btn-lg" 
 .proposal-info.section
   %h2 Proposals
