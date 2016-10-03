@@ -18,7 +18,7 @@ class Proposal < ActiveRecord::Base
   validates :design_details, presence: true, :if => :submitted? 
   validates :user_id, presence: true, :if => :submitted? 
   validates :lab_group_id, presence: true, :if => :submitted?
-  validates :ccgd_policy_approval, presence: true, :if => :should_policy_be_accepted?, inclusion: { in: [true, false], message: 'You must accept the CCGD policy' }
+  validates :ccgd_policy_approval, inclusion: { in: [true, false] }, :if => :should_policy_be_accepted?
   attr_accessor :policy_should_be_accepted
 
 # 1 - Draft/private proposal,draft
