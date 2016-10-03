@@ -33,13 +33,6 @@ RSpec.feature 'User creation', :type=> :feature do
       click_on 'Create user account'
     }.to change(User, :count).by(+1)
 
-    # Verify submitted location, organization, and labgroup display correctly
-    within '.user-info' do
-      expect(page).to have_content 'Pending'
-      expect(page).to have_content 'Beckman Coulter'
-      expect(page).to have_content '15th floor, Meyerson'
-      expect(page).to have_content 'Beckman, Beckman'
-    end
 =begin
 =end
   end

@@ -28,14 +28,16 @@ class OrganizationsController < ApplicationController
       user = User.find(uco.user_id)
       if !uco.nil?
         address = add_address(uco)
-        org = load_org(uco, address.id)
-        if org.save
+        @organization = load_org(uco, address.id)
+        if @organization.save
           flash[:success] = 'Organization added'
-          user.update(organization: org)
+          user.update(organization: @organization)
           uco.destroy
         else
           flash[:error] = 'An error occurred'
         end
+=begin
+=end
       end
       respond_to do |format|
         format.js { render partial: 'shared/add_success' }
@@ -60,13 +62,9 @@ class OrganizationsController < ApplicationController
   end
 
   def destroy
-    if org_params[:org_id]
-      UserCustomOrganization.find(org_params[:org_id]).destroy
-    else
-      Organization.find(params[:id]).destroy
-      respond_to do |f|
-        f.html { redirect_to configurations_path, status: 303 }
-      end
+    Organization.find(params[:id]).destroy
+    respond_to do |f|
+      f.html { redirect_to configurations_path, status: 303 }
     end
   end
 

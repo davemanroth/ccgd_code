@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   get 'configurations'  => 'configurations#index'
 
+  delete 'user_custom_labgroups/destroy'
+
+  delete 'user_custom_organizations/destroy'
+
   resources :addresses
 
   resources :locations

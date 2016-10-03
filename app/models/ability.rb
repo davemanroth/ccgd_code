@@ -30,6 +30,12 @@ class Ability
       can :crud, MemberVote, user_id: user.id
     end
 
+    # Lab staff
+    if user.has_role?(3)
+      can [:read, :review], User
+      can [:read, :review], Proposal
+    end
+
     # Admin
     if user.has_role?(1)
       can :manage, :all

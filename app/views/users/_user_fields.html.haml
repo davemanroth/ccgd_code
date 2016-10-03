@@ -27,7 +27,7 @@
     -# Organizations
     .form-group
       = f.label :organizations, "Select your organization"
-      = f.select :organization_id, Organization.all.order(name: :asc).collect { |org| [org.name, org.id] }, { include_blank: '-Organization-' }, { class: 'form-control' }
+      = f.select :organization_id, Organization.all.order(name: :asc).collect { |org| [org.name, org.id] }, { include_blank: '-Organization-', selected: @user.organization_id }, { class: 'form-control' }
     .panel.panel-info
       .panel-body
         %p.text-info Can't find your organization?
@@ -40,7 +40,8 @@
     -# LabGroups
     .form-group
       = f.label :labgroups, "Select your lab or group"
-      = f.select :lab_groups, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Lab or group-' }, { multiple: true, class: 'form-control' }
+      = f.collection_select :lab_groups, LabGroup.all.order(name: :asc), :id, :name_code, { include_blank: '-Lab or group-', selected: @user.lab_group_ids }, multiple: true, class: 'form-control'
+      -#= f.select :lab_groups, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Lab or group-' }, { checked: @user.lab_group_ids, multiple: true, class: 'form-control' }
     .panel.panel-info
       .panel-body
         %p.text-info Can't find your lab or group?

@@ -3,7 +3,6 @@ class Address < ActiveRecord::Base
   has_one :location
   has_many :organizations
   validates :street, presence: true
-  validates :city, presence: true
 
   def full_address
     address = [street, city]

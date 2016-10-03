@@ -1,5 +1,7 @@
 module FeatureLoginHelper
   def login(user)
+    user.status = 'A'
+    user.save
     visit root_url
     fill_in 'Username', with: user.username
     fill_in 'Password', with: user.password
@@ -8,7 +10,9 @@ module FeatureLoginHelper
 
   def logout(user)
     visit root_url
-    click_link 'Log out'
+    within '#main-nav' do
+      click_link 'Log out'
+    end
   end
 end
 

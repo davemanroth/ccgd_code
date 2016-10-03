@@ -2,7 +2,7 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if can? :manage, Proposal
+    if can? :manage, Proposal or can? :review, Proposal
       @proposals = Proposal.non_draft
     elsif can? :vote, Proposal
       @proposals = Proposal.joins(committee: :member_votes).where(member_votes: { user_id: current_user })
@@ -30,11 +30,14 @@ class ProposalsController < ApplicationController
 
     if params[:submit_proposal]
       @proposal.policy_should_be_accepted = true
-      @proposal.proposal_status = ProposalStatus.find(2)
-      AdminMailer.new_proposal(@proposal).deliver_now
+      @proposal.submitted = true
     end
 
     if @proposal.save
+      if params[:submit_proposal]
+        @proposal.proposal_status = ProposalStatus.find(2)
+        AdminMailer.new_proposal(@proposal).deliver_now
+      end
       flash[:success] = "Proposal saved"
       redirect_to user_path(@proposal.user_id)
     else
@@ -55,11 +58,13 @@ class ProposalsController < ApplicationController
     if params[:submit_proposal]
       @proposal.submitted = true
       @proposal.policy_should_be_accepted = true
-      @proposal.proposal_status = ProposalStatus.find(2)
-      AdminMailer.new_proposal(@proposal).deliver_now
     end
 
     if @proposal.update_attributes(proposal_params)
+      if params[:submit_proposal]
+        @proposal.proposal_status = ProposalStatus.find(2)
+        AdminMailer.new_proposal(@proposal).deliver_now
+      end
       flash[:success] = "Proposal saved"
       redirect_to user_path(@proposal.user_id)
     else
@@ -69,7 +74,12 @@ class ProposalsController < ApplicationController
   end
 
   def destroy
-    Proposal.find(params[:id]).destroy
+    @proposal = Proposal.find(params[:id])
+    Proposal.find(@proposal).destroy
+    respond_to do |f|
+      f.html { redirect_to user_path(@proposal.user_id) }
+      flash[:success] = "Proposal successfully deleted"
+    end
   end
 
   def proposal_status_update

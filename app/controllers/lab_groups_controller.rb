@@ -18,21 +18,21 @@ class LabGroupsController < ApplicationController
         flash[:success] = "New labgroup successfully added"
         redirect_to configurations_path
       else
-        flash[:error] = "Error saving labgroup"
+        flash[:error] = "Error saving Labgroup using admin controls"
         render "new"
       end
     else
       ucl = UserCustomLabgroup.find(lab_params[:lab_id])
       user = User.find(ucl.user_id)
       if !ucl.nil?
-        lab = load_lab(ucl)
-        if lab.save
+        @labgroup = load_lab(ucl)
+        if @labgroup.save
           flash[:success] = 'Lab/group added'
-          user.lab_groups << lab
+          user.lab_groups << @labgroup
           user.save
           ucl.destroy
         else
-          flash[:error] = 'An error occurred'
+          flash[:error] = 'Failed to save Labgroup'
         end
       end
       respond_to do |format|
@@ -58,13 +58,9 @@ class LabGroupsController < ApplicationController
   end
 
   def destroy
-    if lab_params[:lab_id]
-      UserCustomLabgroup.find(lab_params[:lab_id]).destroy
-    else
-      LabGroup.find(params[:id]).destroy
-      respond_to do |f|
-        f.html { redirect_to configurations_path, status: 303 }
-      end
+    LabGroup.find(params[:id]).destroy
+    respond_to do |f|
+      f.html { redirect_to configurations_path, status: 303 }
     end
   end
 
