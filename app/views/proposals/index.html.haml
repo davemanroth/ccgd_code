@@ -20,7 +20,10 @@
       - rowclass = 'info' if prop.is_non_active?
       %tr(class="#{rowclass}")
         %td= prop.code || ""
-        %td= link_to prop.name, proposal_path(prop)
+        - if can? :vote, prop 
+          %td= link_to prop.name, edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop))
+        - else
+          %td= link_to prop.name, proposal_path(prop)
         %td= prop.user.username
         %td= prop.lab_group.name
         %td= prop.platforms.first.name
