@@ -9,6 +9,8 @@
       %dd= proposal.lab_group.name
       %dt Platform(s)
       %dd= proposal.platforms.pluck(:name).join(', ')
+      %dt Sample type(s)
+      %dd= proposal.sample_types.pluck(:name).join(', ')
       %dt Background
       %dd= proposal.background
       %dt Objectives

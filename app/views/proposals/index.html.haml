@@ -40,7 +40,5 @@
               - else
                 = link_to 'Form committee', new_proposal_committee_path(prop), class: 'proposal-edit btn btn-info pull-left'
             - if can? :vote, Proposal and prop.committee and !current_user.is_admin?
-              - if voted?(prop)
-                = link_to 'Edit vote', edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop)), class: 'proposal-edit btn btn-success'
-              - else
-                = link_to 'Vote', new_proposal_committee_member_vote_path(prop, prop.committee), class: 'proposal-edit btn btn-success'
+              - button_text = voted?(prop) ? 'Edit vote' : 'Vote'
+              = link_to button_text, edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop)), class: 'proposal-edit btn btn-success'
