@@ -1,7 +1,9 @@
 module ProposalsHelper
 
   def voted?(proposal)
-    member_vote = MemberVote.find(vote_id(proposal))
+    if id = vote_id(proposal)
+      member_vote = MemberVote.find(id)
+    end
     #binding.pry
     !member_vote.nil? and !member_vote.vote_id.nil?
   end

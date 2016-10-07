@@ -20,10 +20,11 @@
       - rowclass = 'info' if prop.is_non_active?
       %tr(class="#{rowclass}")
         %td= prop.code || ""
-        - if can? :vote, prop 
+        -# if can? :vote, prop and ( current_user.has_role?(2) or current_user.has_role?(4) )
           %td= link_to prop.name, edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop))
-        - else
+        -# else
           %td= link_to prop.name, proposal_path(prop)
+        %td= link_to prop.name, proposal_path(prop)
         %td= prop.user.username
         %td= prop.lab_group.name
         %td= prop.platforms.first.name
@@ -42,6 +43,6 @@
                 = link_to 'Edit committee', edit_proposal_committee_path(prop, prop.committee), class: 'proposal-edit btn btn-warning pull-left'
               - else
                 = link_to 'Form committee', new_proposal_committee_path(prop), class: 'proposal-edit btn btn-info pull-left'
-            - if can? :vote, Proposal and prop.committee and !current_user.is_admin?
+            - if can? :vote, Proposal and prop.committee and vote_id(prop) and !current_user.is_admin?
               - button_text = voted?(prop) ? 'Edit vote' : 'Vote'
               = link_to button_text, edit_proposal_committee_member_vote_path(prop, prop.committee, vote_id(prop)), class: 'proposal-edit btn btn-success'
