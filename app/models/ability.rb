@@ -25,19 +25,25 @@ class Ability
     end
 
     # Faculty and Advisors
-    if user.has_role?(2) || user.has_role?(4)
+    if user.is_only_faculty_or_advisor?
       can :vote, Proposal
       can :crud, MemberVote, user_id: user.id
     end
 
     # Lab staff
-    if user.has_role?(3)
+    if user.is_staff?
       can [:read, :review], User
       can [:read, :review], Proposal
     end
 
+    if user.has_multiple_roles?
+      can [:read, :review], User
+      can [:read, :review, :vote], Proposal
+      can :crud, MemberVote, user_id: user.id
+    end
+
     # Admin
-    if user.has_role?(1)
+    if user.is_admin?
       can :manage, :all
     end
 

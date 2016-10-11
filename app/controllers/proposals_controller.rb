@@ -2,9 +2,9 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if can? :manage, Proposal or can? :review, Proposal
+    if current_user.has_multiple_roles? or current_user.is_admin? or current_user.is_staff?
       @proposals = Proposal.non_draft
-    elsif can? :vote, Proposal
+    elsif current_user.is_only_faculty_or_staff?
       @proposals = Proposal.joins(committee: :member_votes).where(member_votes: { user_id: current_user })
     else
     end
