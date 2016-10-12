@@ -4,7 +4,7 @@ class ProposalsController < ApplicationController
   def index
     if current_user.has_multiple_roles? or current_user.is_admin? or current_user.is_staff?
       @proposals = Proposal.non_draft
-    elsif current_user.is_only_faculty_or_staff?
+    elsif current_user.is_only_faculty_or_advisor?
       @proposals = Proposal.joins(committee: :member_votes).where(member_votes: { user_id: current_user })
     else
     end
