@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def is_faculty_or_advisor?
-    has_role?(2) or has_role(4)
+    has_role?(2) or has_role?(4)
   end
 
   def has_multiple_roles?

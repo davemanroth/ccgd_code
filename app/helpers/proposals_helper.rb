@@ -1,14 +1,13 @@
 module ProposalsHelper
 
-  def voted?(proposal)
-    if id = vote_id(proposal)
-      member_vote = MemberVote.find(id)
+  def on_committee?(prop)
+    if prop.committee
+      prop.committee.member_votes.where(user_id: current_user).pluck(:id).first
     end
-    #binding.pry
-    !member_vote.nil? and !member_vote.vote_id.nil?
   end
 
-  def vote_id(proposal)
-    proposal.committee.member_votes.where(user_id: current_user).pluck(:id).first
+  def voted?(vote_id)
+    member_vote = MemberVote.find(vote_id) if vote_id
+    !member_vote.nil? and !member_vote.vote_id.nil?
   end
 end
