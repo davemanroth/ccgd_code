@@ -28,7 +28,7 @@
         btn_stat: 'A',
         btn_type: 'success',
         btn_text: 'Reactivate',
-        row_style: 'info'
+        row_style: 'info hidden'
       },
       reject: {
         type: 'reject',
@@ -56,7 +56,7 @@
       if (action != undefined) {
         if( action.remove ) {
           //$(this).remove();
-          console.log('Are you sure you want to ' + action.type + ' this user?');
+          //console.log('Are you sure you want to ' + action.type + ' this user?');
         }
         else {
           var button = generate_button(href + action.btn_stat, action.btn_type, action.btn_text);

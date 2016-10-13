@@ -96,6 +96,27 @@ class User < ActiveRecord::Base
     has_role?(1)
   end
 
+  def is_staff?
+    has_role?(3)
+  end
+
+  def is_only_faculty_or_advisor?
+    if ids = self.role_ids.select { |id| id != 5 }
+      is_faculty_or_advisor? and ids.length == 1
+    else
+      false
+    end
+  end
+
+  def is_faculty_or_advisor?
+    has_role?(2) or has_role?(4)
+  end
+
+  def has_multiple_roles?
+   ( is_admin? and is_faculty_or_advisor? ) or
+   ( is_staff? and is_faculty_or_advisor? )
+  end
+    
   def initialize_user
     self.status = 'P'
     if Role.count > 0

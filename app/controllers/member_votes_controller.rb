@@ -7,6 +7,7 @@ class MemberVotesController < ApplicationController
     @member_votes = MemberVote.where(committee_id: @committee)
   end
 
+=begin
   def new
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])
@@ -19,6 +20,7 @@ class MemberVotesController < ApplicationController
     @committee = Committee.find(params[:committee_id])
     @member_vote = MemberVote.find(params[:id])
   end
+=end
 
   def edit
     @proposal = Proposal.find(params[:proposal_id])

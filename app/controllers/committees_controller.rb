@@ -87,13 +87,15 @@ class CommitteesController < ApplicationController
       comm.member_votes.clear
       members = { 2 => faculty, 4 => advisors }
       members.each do |role_id, group|
-        group.each do |user_id|
-          mv = MemberVote.create(
-            user: User.find(user_id),
-            member_role: role_id,
-            committee: comm
-          )
-          comm.member_votes << mv
+        unless group.nil?
+          group.each do |user_id|
+            mv = MemberVote.create(
+              user: User.find(user_id),
+              member_role: role_id,
+              committee: comm
+            )
+            comm.member_votes << mv
+          end
         end
       end
       #binding.pry

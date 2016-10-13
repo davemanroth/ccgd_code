@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "ccgd@research.dfci.harvard.edu"
+  default from: "ccgd@partners.org"
   layout 'mailer'
 end

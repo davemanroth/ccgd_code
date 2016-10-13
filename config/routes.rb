@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
   resources :proposals do
     resources :committees do
-      resources :member_votes
+      resources :member_votes, except: [:new, :create]
     end
   end
 

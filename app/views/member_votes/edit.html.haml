@@ -1,6 +1,21 @@
 .page-header
-  %h1 Edit committee vote
+  - title = voted?(@proposal) ? 'Edit' : 'New'
+  - button_text = voted?(@proposal) ? 'Update' : 'Cast'
+  %h1 #{title} committee vote
 = render 'shared/proposal_static_data', proposal: @proposal
 = form_for [@proposal, @committee, @member_vote] do |f|
-  = render 'voting_fields', f: f
-  = f.submit "Update vote", class: 'btn btn-primary btn-lg'
+  .form-inline
+    .form-group
+      = f.radio_button :vote, 1, checked: @member_vote.vote_id == 1, class: "form-control"
+      = f.label :vote, "Approve"
+    .form-group
+      = f.radio_button :vote, 2, checked: @member_vote.vote_id == 2, class: "form-control"
+      = f.label :vote, "Reject"
+    .form-group
+      = f.radio_button :vote, 3, checked: @member_vote.vote_id == 3, class: "form-control"
+      = f.label :vote, "Request revision"
+  .comments.clearfix
+    .form-group
+      = f.label :comment, "Comments"
+      = f.text_area :comment, class: 'form-control'
+  = f.submit "#{button_text} vote", class: 'btn btn-primary btn-lg'

@@ -7,13 +7,15 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
 =begin
 =end
   before(:each) do
+    user.status = 'A'
+    user.save
     login(user)
   end
 
   scenario "User fills out new proposal form and saves a draft" do
     click_on 'Submit a new proposal'
 
-    within "h1" do
+    within ".page-header" do
       expect(page).to have_content('Create a new proposal')
     end
 
@@ -43,7 +45,7 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
   scenario "User fills out new proposal form and adds a new sample type" do
     click_on 'Submit a new proposal'
 
-    within "h1" do
+    within ".page-header" do
       expect(page).to have_content('Create a new proposal')
     end
 
@@ -65,7 +67,7 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
   scenario "User fills out new proposal form, submits the proposal but does not agree to ccgd policy terms" do
     click_on 'Submit a new proposal'
   
-    within "h1" do
+    within ".page-header" do
       expect(page).to have_content('Create a new proposal')
     end
 
@@ -125,7 +127,7 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
 
     visit edit_proposal_path(prop_draft)
 
-    within "h1" do
+    within ".page-header" do
       expect(page).to have_content("Update #{prop_draft.name} proposal")
     end
     unselect "Sequenom Genotyping", from: "proposal_platforms"
@@ -147,7 +149,7 @@ RSpec.feature "Saving, editing, and submitting proposals", :type => :feature do
 
     click_on 'Submit a new proposal'
 
-    within "h1" do
+    within ".page-header" do
       expect(page).to have_content('Create a new proposal')
     end
     proposal.ccgd_policy_approval = true

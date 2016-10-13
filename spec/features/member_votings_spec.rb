@@ -13,7 +13,7 @@ RSpec.feature "MemberVotings", :type => :feature do
   scenario "Faculty votes on proposal" do
    
     # Make sure we're on the right page
-    visit new_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
+    visit edit_proposal_committee_member_vote_path(three_member.proposal, three_member, mv)
     within 'h1' do
       expect(page).to have_content('Committee vote')
     end

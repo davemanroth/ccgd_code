@@ -2,9 +2,9 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if can? :manage, Proposal or can? :review, Proposal
+    if current_user.has_multiple_roles? or current_user.is_admin? or current_user.is_staff?
       @proposals = Proposal.non_draft
-    elsif can? :vote, Proposal
+    elsif current_user.is_only_faculty_or_advisor?
       @proposals = Proposal.joins(committee: :member_votes).where(member_votes: { user_id: current_user })
     else
     end
@@ -35,10 +35,12 @@ class ProposalsController < ApplicationController
 
     if @proposal.save
       if params[:submit_proposal]
-        @proposal.proposal_status = ProposalStatus.find(2)
+        @proposal.update( proposal_status: ProposalStatus.find(2) )
         AdminMailer.new_proposal(@proposal).deliver_now
+        flash[:success] = "Proposal submitted"
+      else
+        flash[:success] = "Proposal saved"
       end
-      flash[:success] = "Proposal saved"
       redirect_to user_path(@proposal.user_id)
     else
       flash[:error] = "Error saving proposal"
@@ -62,7 +64,7 @@ class ProposalsController < ApplicationController
 
     if @proposal.update_attributes(proposal_params)
       if params[:submit_proposal]
-        @proposal.proposal_status = ProposalStatus.find(2)
+        @proposal.update( proposal_status: ProposalStatus.find(2) )
         AdminMailer.new_proposal(@proposal).deliver_now
       end
       flash[:success] = "Proposal saved"

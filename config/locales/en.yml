@@ -20,4 +20,17 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    models:
+      proposal:
+    attributes:
+      proposal:
+        ccgd_policy_approval: ""
+        lab_group_id: "Principle investigator"
+    errors:
+      models:
+        proposal:
+          attributes:
+            ccgd_policy_approval:
+              inclusion: "You must accept the CCGD policy"
   hello: "Hello world"

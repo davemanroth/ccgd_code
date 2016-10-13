@@ -41,13 +41,6 @@
       });
     });
 
-    /*
-    create.on('click', function(e) {
-      var path = pathSetup.getPath();
-      path = [path, 'new'].join('/');
-    });
-    */
-
     function singularize(text) {
       if( text.slice(-3) == 'ses' ) {
         return text.slice(0, -2);
