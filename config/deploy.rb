@@ -26,7 +26,7 @@ set :keep_releases, 5
 # Any ssh password prompts appear in terminal
 # default_run_options[:pty] = true
 
-set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -49,3 +49,4 @@ set :linked_files, %w{config/database.yml config/application.yml}
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+#
