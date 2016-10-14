@@ -2,7 +2,7 @@
 lock "3.6.1"
 
 set :application, "ccgd"
-set :repo_url, "git@bitbucket.com:hccadmin/ccgd.git"
+set :repo_url, "git@bitbucket.org:hccadmin/ccgd.git"
 set :stage, :production
 
 # Default branch is :master
