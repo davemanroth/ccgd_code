@@ -29,11 +29,26 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
+
+  # Delivery method
+  config.action_mailer.delivery_method = :sendmail
+
+  # whether or not to perform email delivery
+  config.action_mailer.perform_deliveries = true
+
+  # Show delivery errors
+  config.action_mailer.raise_delivery_errors = true
+
+  # reroute Action Mailer previews to spec diretory
+  # config.action_mailer.preview_path = "#{ Rails.root } /spec/mailers/previews"
+
+  config.action_mailer.default_url_options  = { host: "ccgd.hccstaging.com" }
+
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
