@@ -47,7 +47,7 @@ Rails.application.configure do
   # reroute Action Mailer previews to spec diretory
   # config.action_mailer.preview_path = "#{ Rails.root } /spec/mailers/previews"
 
-  config.action_mailer.default_url_options  = { host: "ccgd.hccstaging.com" }
+  config.action_mailer.default_url_options  = { host: "ccgd.dfci.harvard.edu" }
 
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
