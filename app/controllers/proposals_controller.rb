@@ -25,7 +25,6 @@ class ProposalsController < ApplicationController
 =begin
 =end
 
-    @proposal.user_id = current_user.id
     @proposal.proposal_status = ProposalStatus.find(1)
 
     if params[:submit_proposal]
@@ -66,9 +65,15 @@ class ProposalsController < ApplicationController
       if params[:submit_proposal]
         @proposal.update( proposal_status: ProposalStatus.find(2) )
         AdminMailer.new_proposal(@proposal).deliver_now
+        flash[:success] = "Proposal submitted"
+        redirect_to user_path(@proposal.user_id)
+      elsif params[:update_proposal]
+        flash[:success] = "Proposal updated"
+        redirect_to proposals_path
+      else
+        flash[:success] = "Proposal saved"
+        redirect_to user_path(@proposal.user_id)
       end
-      flash[:success] = "Proposal saved"
-      redirect_to user_path(@proposal.user_id)
     else
       flash[:error] = "Error saving proposal"
       render 'edit'
@@ -108,7 +113,7 @@ class ProposalsController < ApplicationController
   private
     def proposal_params
       params.require(:proposal).permit(
-        :name, :objectives, :background,
+        :name, :user_id, :objectives, :background,
         :design_details, :sample_availability,
         :contributions, :comments, :lab_group_id, 
         :ccgd_policy_approval
