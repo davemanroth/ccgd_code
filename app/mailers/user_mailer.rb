@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: @user.email, subject: "Password reset"
   end
+
+  def account_approved(user)
+    @user = user
+    mail to: @user.email, subject: "CCGD account approved"
+  end
 end
