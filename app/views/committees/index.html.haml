@@ -12,21 +12,22 @@
       %th.actions Actions
   %tbody
     - @committees.each do |comm|
-      - rowclass = ''
-      -# rowclass = 'warning' if comm.is_pending?
-      -# rowclass = 'info' if prop.is_complete?
-      %tr(class="#{rowclass}")
-        %td= comm.proposal.name
-        %td= comm.created_at.strftime("%m/%d/%Y")
-        %td= comm.deadline.strftime("%m/%d/%Y")
-        %td #{members_that_voted(comm.member_votes)} of #{comm.member_votes.count} votes cast
-        -#%td= comm.proposal.proposal_status.name
-        %td.committee-admin-actions
-          - if can? :manage, Committee
-            #proposal-status-update
-              = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", comm.proposal.proposal_status.id), class: 'form-control pull-left'
-              = button_to "Update", [proposal_path(comm.proposal), 'status', comm.proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
-        %td.committee-admin-actions
-          = link_to 'Edit committee', edit_proposal_committee_path(comm.proposal, comm), class: 'proposal-edit btn btn-warning pull-left'
-          - if comm.member_votes
-            = link_to 'View committee votes', proposal_committee_member_votes_path(comm.proposal, comm), class: 'proposal-edit btn btn-info pull-left'
+      - if comm.proposal
+        - rowclass = ''
+        -# rowclass = 'warning' if comm.is_pending?
+        -# rowclass = 'info' if prop.is_complete?
+        %tr(class="#{rowclass}")
+          %td= comm.proposal.name
+          %td= comm.created_at.strftime("%m/%d/%Y")
+          %td= comm.deadline.strftime("%m/%d/%Y")
+          %td #{members_that_voted(comm.member_votes)} of #{comm.member_votes.count} votes cast
+          -#%td= comm.proposal.proposal_status.name
+          %td.committee-admin-actions
+            - if can? :manage, Committee
+              #proposal-status-update
+                = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", comm.proposal.proposal_status.id), class: 'form-control pull-left'
+                = button_to "Update", [proposal_path(comm.proposal), 'status', comm.proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success pull-left', id: 'submit-update', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
+          %td.committee-admin-actions
+            = link_to 'Edit committee', edit_proposal_committee_path(comm.proposal, comm), class: 'proposal-edit btn btn-warning pull-left'
+            - if comm.member_votes
+              = link_to 'View committee votes', proposal_committee_member_votes_path(comm.proposal, comm), class: 'proposal-edit btn btn-info pull-left'
