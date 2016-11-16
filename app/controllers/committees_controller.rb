@@ -2,7 +2,12 @@ class CommitteesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @committees = Committee.all
+    @committees = []
+    if Committee.all.count == 1
+      @committees << Committee.all
+    else
+      @committees = Committee.all
+    end
   end
 
   def new
