@@ -50,6 +50,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    new_status = user_params[:status]
 
     if lab_group_params
       add_lab_groups(@user)
@@ -64,6 +65,9 @@ class UsersController < ApplicationController
       # This is a stupid but necessary hack to reassign an "Active" status to
       # the user because for some reason the user's status gets randomly nulled
       # out as soon as the update_atributes method is executed. Bizarre.
+      if @user.is_pending? && new_status == 'A'
+        send_approve_email(@user)
+      end
       @user.status ||= 'A'
       @user.save
       flash[:success] = "Profile successfully updated"
@@ -85,13 +89,21 @@ class UsersController < ApplicationController
 
   def user_status_update
     @user = User.find(params[:id])
-    @user.status = params[:status]
+    new_status = params[:status]
+    @user.status = new_status
     if @user.save
+      if @user.is_pending? && new_status == 'A'
+        send_approve_email(@user)
+      end
       respond_to do |f|
         f.html
       end
     end
     authorize! :status_update, @user
+  end
+
+  def send_approve_email(user)
+    UserMailer.account_approved(user).deliver_now
   end
 
   private

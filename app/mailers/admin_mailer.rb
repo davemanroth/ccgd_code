@@ -1,6 +1,6 @@
 class AdminMailer < ApplicationMailer
 
-  default to: 'ccgd@partners.org'
+  default to: 'aaron_thorner@dfci.harvard.edu'
 
   def new_user(user)
     @user = user
