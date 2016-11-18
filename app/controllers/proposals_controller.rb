@@ -96,7 +96,9 @@ class ProposalsController < ApplicationController
 
     # Generate the proposal code if the proposal was submitted by the user 
     # and approved by the admin
-    if old_status == 2 and new_status == 3 and @proposal.code.nil?
+    if old_status == 2 and 
+    @proposal.code.nil? and 
+    ( new_status == 3 or new_status == 4 ) 
       @proposal.generate_code
     end
 
