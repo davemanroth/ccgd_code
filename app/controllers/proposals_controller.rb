@@ -35,7 +35,7 @@ class ProposalsController < ApplicationController
     if @proposal.save
       if params[:submit_proposal]
         @proposal.update( proposal_status: ProposalStatus.find(2) )
-        AdminMailer.new_proposal(@proposal).deliver_now
+        #AdminMailer.new_proposal(@proposal).deliver_now
         flash[:success] = "Proposal submitted"
       else
         flash[:success] = "Proposal saved"
@@ -64,7 +64,7 @@ class ProposalsController < ApplicationController
     if @proposal.update_attributes(proposal_params)
       if params[:submit_proposal]
         @proposal.update( proposal_status: ProposalStatus.find(2) )
-        AdminMailer.new_proposal(@proposal).deliver_now
+        #AdminMailer.new_proposal(@proposal).deliver_now
         flash[:success] = "Proposal submitted"
         redirect_to user_path(@proposal.user_id)
       elsif params[:update_proposal]
@@ -96,7 +96,7 @@ class ProposalsController < ApplicationController
 
     # Generate the proposal code if the proposal was submitted by the user 
     # and approved by the admin
-    if ( old_status == 2 or old_status == 3 ) and new_status == 4 and @proposal.code.nil?
+    if should_generate_code?(old_status, new_status, @proposal)
       @proposal.generate_code
     end
 
@@ -133,6 +133,15 @@ class ProposalsController < ApplicationController
       params.require(:proposal).permit(
         sample_type: [:name]
       )
+    end
+
+    def is_legit_status?(status)
+      statuses = [2, 3, 5, 6, 8]
+      statuses.include?(status)
+    end
+
+    def should_generate_code?(old_status, new_status, proposal)
+      is_legit_status?(old_status) and new_status == 4 and proposal.code.nil?
     end
 =begin
 =end
