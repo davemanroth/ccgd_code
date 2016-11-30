@@ -25,7 +25,7 @@
         - else
           %td= link_to prop.name, proposal_path(prop) if prop.name
         %td= prop.user.username
-        %td= prop.lab_group.name if !prop.lab_group.empty?
+        %td= prop.lab_group.name if prop.lab_group
         %td= prop.platforms.first.name if !prop.platforms.empty?
         %td= prop.updated_at.strftime("%m/%d/%Y")
         - if can? :manage, :all
