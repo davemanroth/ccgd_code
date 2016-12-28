@@ -39,6 +39,10 @@ class Proposal < ActiveRecord::Base
     self.proposal_status.id == 2
   end
 
+  def is_under_review?
+    self.proposal_status.id == 3
+  end
+
   def is_complete?
     self.proposal_status.id == 7
   end
