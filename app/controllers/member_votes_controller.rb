@@ -22,6 +22,13 @@ class MemberVotesController < ApplicationController
   end
 =end
 
+  def show
+    @proposal = Proposal.find(params[:proposal_id])
+    @committee = Committee.find(params[:committee_id])
+    @member_vote = MemberVote.find(params[:id])
+    check_member_vote(@committee, @member_vote)
+  end
+
   def edit
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:committee_id])

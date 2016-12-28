@@ -2,7 +2,9 @@
   - title = voted?(@proposal) ? 'Edit' : 'New'
   - button_text = voted?(@proposal) ? 'Update' : 'Cast'
   %h1 #{title} committee vote
+%h2 Proposal information
 = render 'shared/proposal_static_data', proposal: @proposal
+%h2 Your vote
 = form_for [@proposal, @committee, @member_vote] do |f|
   .form-inline
     .form-group
