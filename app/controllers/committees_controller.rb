@@ -26,7 +26,9 @@ class CommitteesController < ApplicationController
     @committee = Committee.new(committee_params)
     @proposal = Proposal.find(params[:proposal_id])
     @committee.proposal = @proposal
-    update_status(@proposal, status_params[:status])
+
+# Force a proposal status updated to "Under committee review" when a committee is formed
+    update_status(@proposal, ProposalStatus.find(3))
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.save
@@ -52,7 +54,10 @@ class CommitteesController < ApplicationController
   def update
     @proposal = Proposal.find(params[:proposal_id])
     @committee = Committee.find(params[:id])
-    update_status(@proposal, status_params[:status])
+    status = status_params[:status]
+    update_status(@proposal, status)
+    if status == 8
+      
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.update_attributes(committee_params)

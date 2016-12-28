@@ -102,6 +102,10 @@ class ProposalsController < ApplicationController
 
     # Update the proposal status regardless
     @proposal.proposal_status = ProposalStatus.find(new_status)
+    if new_status == 8
+      remove_committee_and_votes(@proposal)
+    end
+
     if @proposal.save
       # do something
     else
@@ -140,11 +144,19 @@ class ProposalsController < ApplicationController
       statuses.include?(status)
     end
 
+    def remove_committee_and_votes(prop)
+      if prop.committee
+        prop.committee.member_votes.each do |mv|
+          mv.destroy
+        end
+        prop.committee.destroy
+      end
+    end
+
     def should_generate_code?(old_status, new_status, proposal)
       is_legit_status?(old_status) and new_status == 4 and proposal.code.nil?
     end
-=begin
-=end
+
     def add_sample_types_to_proposal(prop, sample_types)
       sample_types.each do |st|
         prop.sample_types << SampleType.find(st)
