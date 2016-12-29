@@ -46,5 +46,5 @@
               - if prop.is_under_review?
                 - button_text = voted?(vote) ? 'Edit vote' : 'Vote'
                 = link_to button_text, edit_proposal_committee_member_vote_path(prop, prop.committee, vote), class: 'proposal-edit btn btn-success'
-              - elsif vote and !vote.vote_id.nil?
+              - elsif vote
                 = link_to 'View vote', proposal_committee_member_vote_path(prop, prop.committee, vote), class: 'proposal-edit btn btn-primary pull-left'

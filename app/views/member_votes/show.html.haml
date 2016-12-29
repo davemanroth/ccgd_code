@@ -4,4 +4,4 @@
 = render 'shared/proposal_static_data', proposal: @proposal
 %h2 Your vote
 %p <strong>You voted to:</strong> #{@member_vote.vote.name}
-%p <strong>Comments</strong><br /> #{@member_vote.comment ? "None" : @member_cote.comment}
+%p <strong>Comments</strong><br /> #{@member_vote.comment || "None"}

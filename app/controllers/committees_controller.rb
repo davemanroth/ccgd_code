@@ -2,12 +2,7 @@ class CommitteesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @committees = []
-    if Committee.all.count == 1
-      @committees << Committee.all
-    else
-      @committees = Committee.all
-    end
+    @committees = Committee.all
   end
 
   def new
@@ -56,7 +51,7 @@ class CommitteesController < ApplicationController
     @committee = Committee.find(params[:id])
     status = status_params[:status]
     update_status(@proposal, status)
-    if status == 8
+    #if status == 8
       
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 

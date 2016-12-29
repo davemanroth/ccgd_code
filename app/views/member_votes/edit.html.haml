@@ -1,6 +1,6 @@
 .page-header
-  - title = voted?(@proposal) ? 'Edit' : 'New'
-  - button_text = voted?(@proposal) ? 'Update' : 'Cast'
+  - title = voted?(@member_vote) ? 'Edit' : 'New'
+  - button_text = voted?(@member_vote) ? 'Update' : 'Cast'
   %h1 #{title} committee vote
 %h2 Proposal information
 = render 'shared/proposal_static_data', proposal: @proposal
