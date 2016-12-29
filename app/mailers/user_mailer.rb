@@ -14,4 +14,14 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: @user.email, subject: "CCGD account approved"
   end
+
+  def committee_member(committee)
+    @proposal = committee.proposal
+    @committee = committee
+    @committee.member_votes.each do |vote|
+      @vote = vote
+      @user = vote.user
+      mail to: @user.email, subject: "You have been added to a new proposal review committee"
+    end
+  end
 end

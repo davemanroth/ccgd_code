@@ -21,7 +21,10 @@
       %tr(class="#{rowclass}")
         %td= prop.code || ""
         - if can? :vote, prop and vote = on_committee?(prop)
-          %td= link_to prop.name, edit_proposal_committee_member_vote_path(prop, prop.committee, vote)
+          - if prop.is_under_review?
+            %td= link_to prop.name, edit_proposal_committee_member_vote_path(prop, prop.committee, vote)
+          - else
+            %td= link_to prop.name, proposal_committee_member_vote_path(prop, prop.committee, vote)
         - else
           %td= link_to prop.name, proposal_path(prop) if prop.name
         %td= prop.user.username

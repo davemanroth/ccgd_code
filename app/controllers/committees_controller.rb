@@ -23,10 +23,11 @@ class CommitteesController < ApplicationController
     @committee.proposal = @proposal
 
 # Force a proposal status updated to "Under committee review" when a committee is formed
-    update_status(@proposal, ProposalStatus.find(3))
+    update_status(@proposal, 3)
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.save
+      UserMailer.committee_member(@committee).deliver_now
       flash[:success] = "Committee saved"
       redirect_to edit_proposal_committee_path(@proposal, @committee)
     else

@@ -144,13 +144,6 @@ class ProposalsController < ApplicationController
       statuses.include?(status)
     end
 
-    def remove_committee_and_votes(prop)
-      if prop.committee
-        prop.committee.member_votes.clear
-        prop.committee.destroy
-      end
-    end
-
     def should_generate_code?(old_status, new_status, proposal)
       is_legit_status?(old_status) and new_status == 4 and proposal.code.nil?
     end
