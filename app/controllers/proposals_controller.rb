@@ -146,9 +146,7 @@ class ProposalsController < ApplicationController
 
     def remove_committee_and_votes(prop)
       if prop.committee
-        prop.committee.member_votes.each do |mv|
-          mv.destroy
-        end
+        prop.committee.member_votes.clear
         prop.committee.destroy
       end
     end

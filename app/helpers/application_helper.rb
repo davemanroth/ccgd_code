@@ -14,4 +14,12 @@ module ApplicationHelper
     }
     messages[key]
   end
+
+  def remove_committee_and_votes(prop)
+    if prop.committee
+      prop.committee.member_votes.clear
+      prop.committee.destroy
+    end
+  end
+
 end

@@ -12,4 +12,6 @@
       = label_tag "status", "Select a proposal status"
       .form-inline
         = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", @proposal.proposal_status.id), class: 'form-control pull-left'
-        = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success btn-lg left-right-space', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
+        = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success btn-lg left-right-space pull-left', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
+        - if @proposal.is_pending?
+          = link_to 'Form committee', new_proposal_committee_path(@proposal), class: 'proposal-edit btn btn-info btn-lg pull-left'

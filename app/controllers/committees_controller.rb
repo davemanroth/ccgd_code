@@ -86,6 +86,9 @@ class CommitteesController < ApplicationController
     def update_status(prop, status_id)
       status = ProposalStatus.find(status_id) 
       prop.update(proposal_status: status)
+      if status_id == 8
+        remove_committee_and_votes(@proposal)
+      end
     end
 
     def load_committee_members(comm, faculty, advisors)
