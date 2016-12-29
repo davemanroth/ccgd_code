@@ -12,35 +12,33 @@
       = select_tag "Status", options_from_collection_for_select(ProposalStatus.all, "id", "name", @proposal.proposal_status.id), class: 'form-control pull-left'
       = button_to "Update", [proposal_path(@proposal), 'status', @proposal.proposal_status.id].join('/') , remote: true, method: :patch, class: 'btn btn-success btn-lg left-right-space', data: { toggle: 'modal', target: "#app-modal", message: message(:proposal_status_update) }
 %h2 Committee votes
-%table.table.table-hover.table-striped.table-responsive.member-vote-table
+%table#member-vote-table.table.table-hover.table-striped.table-responsive.member-vote-table
   %thead
     %tr
-      %th.username Member username
-      %th.vote Vote
-      %th.comments Comments
+      %th Member username
+      %th Vote
+      %th Comments
       %th.actions Actions
   %tbody
-    - @member_votes.each do |mv|
+    - @member_votes.each_with_index do |mv, idx|
       %tr
         = form_for(mv, url: proposal_committee_member_vote_path(@proposal, @committee, mv, submitter: current_user), remote: true, method: :patch) do |f|
-          %td= mv.user.username
-          %td
-            .form-inline
-              .form-group
-                .radio
-                  = f.radio_button "vote_#{mv.id}", 1, checked: mv.vote_id == 1
-                  = f.label :vote, "Approve"
-              .form-group
-                .radio
-                  = f.radio_button "vote_#{mv.id}", 2, checked: mv.vote_id == 2
-                  = f.label :vote, "Reject"
-              .form-group
-                .radio
-                  = f.radio_button "vote_#{mv.id}", 3, checked: mv.vote_id == 3
-                  = f.label :vote, "Request revision"
+          %td.username= mv.user.username
+          %td.votes
+            .radio
+              = f.radio_button "vote_#{mv.id}", 1, checked: mv.vote_id == 1
+              = f.label :vote, "Approve"
+            .radio
+              = f.radio_button "vote_#{mv.id}", 2, checked: mv.vote_id == 2
+              = f.label :vote, "Reject"
+            .radio
+              = f.radio_button "vote_#{mv.id}", 3, checked: mv.vote_id == 3
+              = f.label :vote, "Request revision"
+            -# id = "clear-votes-#{ idx }"
+            -#%button.btn.btn-warning{ id: id }  Clear votes
+            %button#clear-votes.btn.btn-warning  Clear votes
 
-          -#%td= mv.comment if mv.comment
-          %td
+          %td.comments
             .form-group
               = f.text_area :comment, class: 'form-control'
           %td
@@ -48,7 +46,20 @@
               = f.submit "Update", class: 'btn btn-success modal-confirm', data: { toggle: 'modal', target: "#app-modal", message: message(:vote_update) }
             - else
               = f.submit "Vote", class: 'btn btn-success modal-confirm', data: { toggle: 'modal', target: "#app-modal", message: message(:vote_cast) }
-
--#= form_for [@proposal, @committee, @member_vote] do |f|
-  = render 'voting_fields', f: f
-  = f.submit "Cast vote", class: 'btn btn-info btn-lg'
+:javascript
+  $(document).ready(function() {
+    $('#member-vote-table').on('click', function (e) {
+      if (e.target.id === 'clear-votes') {
+        e.preventDefault();
+        var td = $(e.target).closest('td');
+        td.find('input[type="radio"]').map( function () {
+          $(this).attr("checked", false);
+        });
+      }
+      /*
+      $('#votes input[type="radio"]').map( function () {
+        $(this).attr('checked', false);
+      });
+      */
+    });
+  });

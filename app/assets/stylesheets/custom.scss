@@ -330,6 +330,25 @@ a:hover {
   border: none;
 }
 
+.member-vote-table {
+  .username {
+    width: 220px;
+    word-break: break-all;
+    padding-right: 30px;
+  }
+  .votes {
+    width: 220px;
+    .radio input[type="radio"] {
+      margin-left: 0;
+    }
+  }
+  .comments {
+    width: 60%;
+    textarea {
+      height: 200px;
+    }
+  }
+}
 footer {
   border-top: $turquoise 5px solid;
 }
