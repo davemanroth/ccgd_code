@@ -7,7 +7,7 @@ class Proposal < ActiveRecord::Base
   belongs_to :state
   belongs_to :proposal_status
   belongs_to :lab_group
-  has_one :committee
+  has_one :committee, dependent: :destroy
   has_many :proposal_sample_types
   has_many :sample_types, :through => :proposal_sample_types
   has_many :proposal_platforms
@@ -16,6 +16,8 @@ class Proposal < ActiveRecord::Base
   validates :name, presence: true, :if => :submitted? 
   validates :objectives, presence: true, :if => :submitted? 
   validates :design_details, presence: true, :if => :submitted? 
+  validates :platforms, presence: true, :if => :submitted? 
+  validates :sample_types, presence: true, :if => :submitted? 
   validates :user_id, presence: true, :if => :submitted? 
   validates :lab_group_id, presence: true, :if => :submitted?
   validates :ccgd_policy_approval, inclusion: { in: [true, false] }, :if => :should_policy_be_accepted?
