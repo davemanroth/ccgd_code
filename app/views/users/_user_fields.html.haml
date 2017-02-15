@@ -2,26 +2,27 @@
   =render 'shared/errors', errors: @user.errors
 .row
   .col-md-6
+    %p An asterisk (<span class="warning-red">*</span>) denotes a required field
     .form-group
-      = f.label :firstname, "First name"
+      = f.label :firstname, "First name", class: 'required'
       = f.text_field :firstname, class: 'form-control', placeholder: 'First name', required: true
     .form-group
-      = f.label :lastname, "Last name"
+      = f.label :lastname, "Last name", class: 'required'
       = f.text_field :lastname, class: 'form-control', placeholder: 'Last name', required: true
     .form-group
-      = f.label :email
+      = f.label :email, class: 'required'
       = f.text_field :email, class: 'form-control', placeholder: 'Email address', required: true
     .form-group
       = f.label :phone
       = f.text_field :phone, class: 'form-control', placeholder: 'Phone number'
     .form-group
-      = f.label :username, "Enter your desired username"
+      = f.label :username, "Enter your desired username", class: 'required'
       = f.text_field :username, class: 'form-control', placeholder: 'Username', required: true
     .form-group
-      = f.label :password
+      = f.label :password, class: 'required'
       = f.password_field :password, class: 'form-control'
     .form-group
-      = f.label :password_confirmation, "Password confirmation"
+      = f.label :password_confirmation, "Password confirmation", class: 'required'
       = f.password_field :password_confirmation, class: 'form-control'
   #select-lists.col-md-6
     -# Organizations

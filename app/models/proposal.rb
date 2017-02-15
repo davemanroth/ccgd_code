@@ -15,6 +15,7 @@ class Proposal < ActiveRecord::Base
   accepts_nested_attributes_for :sample_types, allow_destroy: true
   validates :name, presence: true, :if => :submitted? 
   validates :objectives, presence: true, :if => :submitted? 
+  validates :background, presence: true, :if => :submitted? 
   validates :design_details, presence: true, :if => :submitted? 
   validates :platforms, presence: true, :if => :submitted? 
   validates :sample_types, presence: true, :if => :submitted? 
