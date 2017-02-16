@@ -45,7 +45,7 @@
       = f.label :comments, "Comments"
       = f.text_area :comments, class: 'form-control'
     = f.hidden_field :ccgd_policy_approval, value: nil, id: "ccgd-policy-value"
-    - if can? :manage, :all and @proposal.valid?
+    - if can? :manage, :all and @proposal.submitted and @proposal.valid?
       = f.submit "Update proposal", name: 'update_proposal', class: 'btn btn-info btn-lg'
     - else
       - if !@proposal.ccgd_policy_approval
