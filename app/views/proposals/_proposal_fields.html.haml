@@ -2,37 +2,38 @@
   =render 'shared/errors', errors: @proposal.errors
 .row
   .col-md-9
+    %p An asterisk (<span class="warning-red">*</span>) denotes a required field
     %h2 Proposal information
     .form-group
-      = f.label :name, "Name of proposed project"
+      = f.label :name, "Name of proposed project", class: 'required'
       = f.text_field :name, class: 'form-control', placeholder: 'Proposal name', required: true
     - if can? :manage, Proposal
       .form-group
-        = f.label :user_id, "Submitting user"
+        = f.label :user_id, "Submitting user", class: 'required'
         = f.select :user_id, User.approved.order(lastname: :asc).collect { |u| [u.full_name, u.id] }, { include_blank: '-Select user-', selected: @proposal.user_id }, { class: 'form-control' }
     - else
       = f.hidden_field :user_id, value: current_user.id
     .form-group
-      = f.label :lab_group_id, "Principal Investigator"
+      = f.label :lab_group_id, "Principal Investigator", class: 'required'
       = f.select :lab_group_id, LabGroup.all.order(name: :asc).collect { |lg| [lg.name_code, lg.id] }, { include_blank: '-Select lab/group-' }, { class: 'form-control' }
     .form-group
-      = f.label :platforms, "Platform(s)"
+      = f.label :platforms, "Platform(s)", class: 'required'
       = f.collection_select :platforms, Platform.all, :id, :name, { include_blank: '-platforms-', selected: @proposal.platform_ids }, { multiple: true, class: 'form-control' }
     .form-group
-      = f.label :sample_types, "Sample type(s)"
+      = f.label :sample_types, "Sample type(s)", class: 'required'
       = f.collection_select :sample_types, SampleType.all, :id, :name, { include_blank: '-sample types-', selected: @proposal.sample_type_ids }, { multiple: true, class: 'form-control' }
     =f.fields_for :sample_type do |st|
       .form-group
         = st.label :name, "Other sample type if not listed above"
         = st.text_field :name, class: 'form-control', placeholder: 'New sample type'
     .form-group
-      = f.label :objectives, "Objectives"
+      = f.label :objectives, "Objectives", class: 'required'
       = f.text_area :objectives, class: 'form-control'
     .form-group
-      = f.label :background, "Background"
+      = f.label :background, "Background", class: 'required'
       = f.text_area :background, class: 'form-control'
     .form-group
-      = f.label :design_details, "Design details"
+      = f.label :design_details, "Design details", class: 'required'
       = f.text_area :design_details, class: 'form-control'
     .form-group
       = f.label :sample_availability, "Sample availability"
@@ -44,10 +45,11 @@
       = f.label :comments, "Comments"
       = f.text_area :comments, class: 'form-control'
     = f.hidden_field :ccgd_policy_approval, value: nil, id: "ccgd-policy-value"
-    - if can? :manage, :all and @proposal.submitted
+    - if can? :manage, :all and @proposal.submitted and @proposal.valid?
       = f.submit "Update proposal", name: 'update_proposal', class: 'btn btn-info btn-lg'
     - else
-      = render 'ccgd_policy_modal'
+      - if !@proposal.ccgd_policy_approval
+        = render 'ccgd_policy_modal'
       = f.submit "Save draft", name: 'save_draft', class: 'btn btn-info btn-lg'
       = f.submit "Submit proposal", name: 'submit_proposal', class: 'btn btn-primary btn-lg'
     - if @proposal.id
