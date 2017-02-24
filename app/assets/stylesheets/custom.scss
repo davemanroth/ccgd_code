@@ -7,6 +7,7 @@ $brown: #d4a671;
 $yellow: #FFC563;
 $light-yellow: #FFF6DF;
 $red: #ab002c;
+$warning-red: #ff5555;
 $dark-red: #630808;
 $dark-red: #5E0927;
 $primary: #225d8e;
@@ -349,6 +350,16 @@ a:hover {
     }
   }
 }
+
+.required:before {
+  content: "* ";
+  color: $warning-red;
+}
+
+.warning-red {
+  color: $warning-red;
+}
+
 footer {
   border-top: $turquoise 5px solid;
 }

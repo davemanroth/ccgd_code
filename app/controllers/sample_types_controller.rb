@@ -42,7 +42,7 @@ class SampleTypesController < ApplicationController
   def destroy
     SampleType.find(params[:id]).destroy
     respond_to do |f|
-      f.html { redirect_to configurations_path, status: 303 }
+      f.html
     end
   end
 
