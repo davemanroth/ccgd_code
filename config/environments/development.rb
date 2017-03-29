@@ -32,9 +32,10 @@ Rails.application.configure do
   config.assets.digest = true
 
   # Delivery method
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
 
-  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+  # config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
 
   # whether or not to perform email delivery
   config.action_mailer.perform_deliveries = true

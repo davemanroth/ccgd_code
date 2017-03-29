@@ -5,7 +5,6 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.password_reset.subject
   #
-  default to: 'aaron_thorner@dfci.harvard.edu'
 
   def password_reset(user)
     @user = user
@@ -21,8 +20,8 @@ class UserMailer < ApplicationMailer
     @proposal = committee.proposal
     @committee = committee
     users = @committee.member_votes.map(&:user)
-    emails = users.map(&:email).uniq
-    mail bcc: emails, subject: "You have been added to a new proposal review committee"
+    emails = users.map(&:email).uniq.join(",")
+    mail to: 'dave_rothfarb@dfci.harvard.edu', bcc: emails, subject: "You have been added to a new proposal review committee"
 =begin
 =end
   end
