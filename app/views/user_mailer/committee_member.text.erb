@@ -1,8 +1,8 @@
 New committee formed
 
-<%= @user.firstname %>,
+Greetings,
 
-You have been added to the committee to evaluate the proposal, "<%= @proposal.name %>.." Please go to the <%= link_to "CCGD proposal website", edit_proposal_committee_member_vote_url(@proposal, @committee, @vote) %> to review the proposal and cast your vote.
+You have been added to the committee to evaluate the proposal, "<%= @proposal.name %>.." Please go to the <%= link_to "CCGD proposal website", proposals_path %> to review the proposal and cast your vote.
 
 Thank you,
 - CCGD Administrator

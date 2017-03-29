@@ -57,6 +57,7 @@ class CommitteesController < ApplicationController
     load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
 
     if @committee.update_attributes(committee_params)
+      UserMailer.committee_member(@committee).deliver_now
       flash[:success] = "Committee successfully updated"
       redirect_to edit_proposal_committee_path(@proposal, @committee)
     else
