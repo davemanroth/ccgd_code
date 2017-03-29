@@ -19,8 +19,13 @@ class UserMailer < ApplicationMailer
   def committee_member(committee)
     @proposal = committee.proposal
     @committee = committee
-    users = @committee.member_votes.map(&:user)
-    emails = users.map(&:email).uniq.join(",")
+    emails = []
+    if @committee.member_votes.count == 1
+      emails = @committee.member_votes.first.user.email
+    else
+      users = @committee.member_votes.map(&:user)
+      emails = users.map(&:email).uniq.join(",")
+    end
     mail to: 'dave_rothfarb@dfci.harvard.edu', bcc: emails, subject: "You have been added to a new proposal review committee"
 =begin
 =end
