@@ -26,7 +26,7 @@ class UserMailer < ApplicationMailer
       users = @committee.member_votes.map(&:user)
       emails = users.map(&:email).uniq.join(",")
     end
-    mail to: 'dave_rothfarb@dfci.harvard.edu', bcc: emails, subject: "You have been added to a new proposal review committee"
+    mail to: 'aaron_thorner@dfci.harvard.edu', bcc: emails, subject: "You have been added to a new proposal review committee"
 =begin
 =end
   end
