@@ -27,7 +27,6 @@ class UserMailer < ApplicationMailer
       emails = users.map(&:email).uniq.join(",")
     end
     mail to: 'aaron_thorner@dfci.harvard.edu', bcc: emails, subject: "You have been added to a new proposal review committee"
-=begin
-=end
+    # mail to: 'dave_rothfarb@dfci.harvard.edu', bcc: emails, subject: "You have been added to a new proposal review committee"
   end
 end

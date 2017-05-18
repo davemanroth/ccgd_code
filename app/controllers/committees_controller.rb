@@ -52,12 +52,11 @@ class CommitteesController < ApplicationController
     @committee = Committee.find(params[:id])
     status = status_params[:status]
     update_status(@proposal, status)
-    #if status == 8
-      
-    load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
+    should_email =  member_votes_changed?(@committee, member_params)
 
+    load_committee_members(@committee, member_params[:faculty], member_params[:advisors])
     if @committee.update_attributes(committee_params)
-      # UserMailer.committee_member(@committee).deliver_now
+      UserMailer.committee_member(@committee).deliver_now if should_email
       flash[:success] = "Committee successfully updated"
       redirect_to edit_proposal_committee_path(@proposal, @committee)
     else
@@ -109,5 +108,11 @@ class CommitteesController < ApplicationController
         end
       end
       #binding.pry
+    end
+
+    def member_votes_changed?(comm, mem_params)
+      old_member_votes = comm.member_votes.ids.sort
+      new_member_votes = mem_params.fetch_values("faculty", "advisors").flatten.map!{ |val| val.to_i }.sort
+      !(old_member_votes == new_member_votes)
     end
 end
