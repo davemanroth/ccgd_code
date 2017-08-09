@@ -34,8 +34,8 @@ class ProposalsController < ApplicationController
       if params[:submit_proposal]
         @proposal.update( proposal_status: ProposalStatus.find(2) )
 =begin
-        AdminMailer.new_proposal(@proposal).deliver_now
 =end
+        AdminMailer.new_proposal(@proposal).deliver_now
         flash[:success] = "Proposal submitted"
       else
         flash[:success] = "Proposal saved"
@@ -65,8 +65,8 @@ class ProposalsController < ApplicationController
       if params[:submit_proposal]
         @proposal.update( proposal_status: ProposalStatus.find(2) )
 =begin
-        AdminMailer.new_proposal(@proposal).deliver_now
 =end
+        AdminMailer.new_proposal(@proposal).deliver_now
         flash[:success] = "Proposal submitted"
         redirect_to user_path(@proposal.user_id)
       elsif params[:update_proposal]
